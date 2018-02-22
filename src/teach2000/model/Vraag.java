@@ -1,5 +1,9 @@
 package teach2000.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * @author Kristof Buts
  * @version 1.0 22/02/18 01:24
@@ -20,32 +24,47 @@ public class Vraag {
 		return question;
 	}
 
-	public String getAnswer() {
+	private String getAnswer() {
 		return answer;
 	}
 
-	public String[] getAlternatives() {
+	private String[] getAlternatives() {
 		return alternatives;
+	}
+
+	public ArrayList<String> getPossibilities() {
+		// build list starting from alternative answers
+		ArrayList<String> possibilities = new ArrayList<String>(Arrays.asList(this.getAlternatives()));
+		possibilities.add(this.getAnswer());
+		Collections.shuffle(possibilities);
+
+		return possibilities;
 	}
 
 	public int getScore() {
 		return this.score;
 	}
 
-	public void correctAnswer() {
+	private void correctAnswer() {
 		++this.score;
 	}
 
-	public void wrongAnswer() {
+	private void wrongAnswer() {
 		--this.score;
 	}
 
 	public boolean processAnswer(String a) {
-		return false;
+		if (this.getAnswer().equals(a)) {
+			this.correctAnswer();
+			return true;
+		} else {
+			this.wrongAnswer();
+			return false;
+		}
 	}
 
 	public boolean questionShouldBeShown() {
-		return this.score != 3; // this.score == 3 ? false : true
+		return this.score <= 3; // this.score == 3 ? false : true
 	}
 
 	@Override
