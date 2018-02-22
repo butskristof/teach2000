@@ -14,15 +14,14 @@ public class AntwoordInvullen extends Overhoring {
 		System.out.printf("Enter your choice: ");
 		String input = keyboard.nextLine();
 
-		if (v.getAnswer().equals(input)) {
-			v.correctAnswer();
+		// forward choice to question which will handle score updates etc
+
+		if ( v.processAnswer(input) ) {
 			System.out.printf("Correct! Score: %d%n", v.getScore());
 			return true;
 		} else {
-			v.wrongAnswer();
 			System.out.printf("Nope, dumbass. Score: %d%n", v.getScore());
 			return false;
 		}
-
 	}
 }
