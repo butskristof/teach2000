@@ -16,7 +16,7 @@ public class MultipleChoice extends Overhoring {
 	}
 
 	@Override
-	public void presentAnswer(Vraag v) {
+	public boolean presentAnswer(Vraag v) {
 			ArrayList<String> possibilities = new ArrayList<String>(Arrays.asList(v.getAlternatives()));
 			possibilities.add(v.getAnswer());
 			Collections.shuffle(possibilities);
@@ -30,9 +30,11 @@ public class MultipleChoice extends Overhoring {
 			if (v.getAnswer().equals(possibilities.get(choice))) {
 				v.correctAnswer();
 				System.out.printf("Correct! Score: %d%n", v.getScore());
+				return true;
 			} else {
 				v.wrongAnswer();
 				System.out.printf("Nope, dumbass. Score: %d%n", v.getScore());
+				return false;
 			}
 	}
 }

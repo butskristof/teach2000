@@ -30,12 +30,18 @@ public abstract class Overhoring {
 		Vraag v = this.list.getQuestion();
 		while (v != null) {
 			System.out.println(v.getQuestion());
-			this.presentAnswer(v);
+			if ( this.presentAnswer(v) ) {
+				this.score += 5;
+			} else {
+				--this.score;
+			}
 
 			v = this.list.getQuestion();
 		}
 
+		System.out.printf("Total score: %d", this.score);
+
 	}
 
-	public abstract void presentAnswer(Vraag v);
+	public abstract boolean presentAnswer(Vraag v);
 }

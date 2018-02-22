@@ -14,7 +14,6 @@ public class Test {
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 //		MultipleChoice mc = new MultipleChoice();
-//
 //		mc.test();
 //
 //		AntwoordInvullen ai = new AntwoordInvullen();
@@ -34,13 +33,15 @@ public class Test {
 		System.out.printf("\t0: multiple choice%n\t1: antwoord invullen%n");
 		System.out.print("Kies een type overhoring: ");
 		choice = keyboard.nextInt();
+		Overhoring ov;
 		if (choice == 0) {
-			MultipleChoice mc = new MultipleChoice(l);
-			mc.test();
+			ov= new MultipleChoice(l);
 		} else if (choice == 1) {
-			AntwoordInvullen ai = new AntwoordInvullen(l);
-			ai.test();
+			ov= new AntwoordInvullen(l);
+		} else {
+			return;
 		}
+		ov.test();
 	}
 
 	private static void setup(User u) {
