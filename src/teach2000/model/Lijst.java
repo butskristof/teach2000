@@ -30,9 +30,12 @@ public class Lijst {
 	public Vraag getQuestion() {
 		// returns null if all questions have a score of 3
 
+		// make sure the questions are returned at random
 		Collections.shuffle(vragen);
 
+		// iterate through questions until we have one that hasn't reached it's maximum score
 		for (Vraag v : vragen) {
+			System.out.println(v.questionShouldBeShown());
 			if (v.questionShouldBeShown()) {
 				return v;
 			}

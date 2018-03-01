@@ -16,23 +16,25 @@ public class MultipleChoice extends Overhoring {
 	}
 
 	@Override
-	public void presentAnswer(Vraag v) {
-			ArrayList<String> possibilities = new ArrayList<String>(Arrays.asList(v.getAlternatives()));
-			possibilities.add(v.getAnswer());
-			Collections.shuffle(possibilities);
+	public boolean presentAnswer(Vraag v) {
+			ArrayList<String> possibilities = v.getPossibilities();
+			// print out possibilities with their index
 			for (int i = 0; i < possibilities.size(); ++i) {
 				System.out.printf("\t%d: %s", i, possibilities.get(i));
 			}
 			System.out.printf("%n");
+			// get index from user
 			System.out.printf("Enter your choice: ");
 			int choice = keyboard.nextInt();
 
-			if (v.getAnswer().equals(possibilities.get(choice))) {
-				v.correctAnswer();
+			// forward choice to question which will handle score updates etc
+
+			if ( v.processAnswer(possibilities.get(choice)) ) {
 				System.out.printf("Correct! Score: %d%n", v.getScore());
+				return true;
 			} else {
-				v.wrongAnswer();
 				System.out.printf("Nope, dumbass. Score: %d%n", v.getScore());
+				return false;
 			}
 	}
 }

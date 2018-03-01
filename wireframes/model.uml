@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>teach2000.model</OriginalElement>
+  <nodes>
+    <node x="36.5" y="832.0">teach2000.model.MultipleChoice</node>
+    <node x="591.4895833333335" y="618.5">teach2000.model.User</node>
+    <node x="553.0" y="976.0">teach2000.model.Test</node>
+    <node x="325.4895833333335" y="832.0">teach2000.model.AntwoordInvullen</node>
+    <node x="186.66765873015873" y="0.0">teach2000.model.Vraag</node>
+    <node x="496.3888888888889" y="321.0">teach2000.model.Lijst</node>
+    <node x="177.0" y="597.0">teach2000.model.Overhoring</node>
+    <node x="871.9895833333335" y="0.0">teach2000.model.Teach2000Model</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="teach2000.model.Overhoring" target="teach2000.model.Vraag">
+      <point x="-104.0" y="-92.5" />
+      <point x="203.0" y="527.0" />
+      <point x="222.41765873015873" y="527.0" />
+      <point x="222.41765873015873" y="291.0" />
+      <point x="276.04265873015873" y="291.0" />
+      <point x="-53.625" y="125.5" />
+    </edge>
+    <edge source="teach2000.model.MultipleChoice" target="teach2000.model.Lijst">
+      <point x="-32.49999999999994" y="-37.0" />
+      <point x="134.00000000000006" y="807.0" />
+      <point x="122.63888888888897" y="807.0" />
+      <point x="122.63888888888897" y="537.0" />
+      <point x="508.6666666666667" y="537.0" />
+      <point x="-98.22222222222223" y="93.0" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.User">
+      <point x="20.4444444444444" y="-36.5" />
+      <point x="665.4444444444445" y="956.0" />
+      <point x="679.7787698412698" y="956.0" />
+      <point x="679.7787698412698" y="807.0" />
+      <point x="732.4895833333335" y="807.0" />
+      <point x="46.99999999999997" y="71.0" />
+    </edge>
+    <edge source="teach2000.model.MultipleChoice" target="teach2000.model.Overhoring">
+      <point x="97.50000000000006" y="-37.0" />
+      <point x="264.00000000000006" y="807.0" />
+      <point x="255.0" y="807.0" />
+      <point x="-52.0" y="92.5" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.AntwoordInvullen">
+      <point x="-20.444444444444514" y="-36.5" />
+      <point x="624.5555555555555" y="926.0" />
+      <point x="455.4895833333335" y="926.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.Lijst">
+      <point x="61.33333333333326" y="-36.5" />
+      <point x="706.3333333333333" y="946.0" />
+      <point x="800.9895833333335" y="946.0" />
+      <point x="800.9895833333335" y="557.0" />
+      <point x="705.1111111111111" y="557.0" />
+      <point x="98.22222222222217" y="93.0" />
+    </edge>
+    <edge source="teach2000.model.User" target="teach2000.model.Lijst">
+      <point x="-47.0" y="-71.0" />
+      <point x="638.4895833333335" y="577.0" />
+      <point x="631.4444444444445" y="577.0" />
+      <point x="24.555555555555543" y="93.0" />
+    </edge>
+    <edge source="teach2000.model.AntwoordInvullen" target="teach2000.model.Vraag">
+      <point x="32.5" y="-37.0" />
+      <point x="487.9895833333335" y="807.0" />
+      <point x="480.0" y="807.0" />
+      <point x="480.0" y="301.0" />
+      <point x="347.54265873015873" y="301.0" />
+      <point x="17.875" y="125.5" />
+    </edge>
+    <edge source="teach2000.model.Overhoring" target="teach2000.model.Lijst">
+      <point x="104.0" y="-92.5" />
+      <point x="411.0" y="567.0" />
+      <point x="582.3333333333334" y="567.0" />
+      <point x="-24.555555555555543" y="93.0" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.MultipleChoice">
+      <point x="-61.33333333333337" y="-36.5" />
+      <point x="583.6666666666667" y="946.0" />
+      <point x="166.5" y="946.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.Overhoring">
+      <point x="-40.88888888888897" y="-36.5" />
+      <point x="604.1111111111111" y="936.0" />
+      <point x="307.0" y="936.0" />
+      <point x="0.0" y="92.5" />
+    </edge>
+    <edge source="teach2000.model.Lijst" target="teach2000.model.Vraag">
+      <point x="55.25" y="-93.0" />
+      <point x="662.1388888888889" y="281.0" />
+      <point x="419.04265873015873" y="281.0" />
+      <point x="89.375" y="125.5" />
+    </edge>
+    <edge source="teach2000.model.MultipleChoice" target="teach2000.model.Vraag">
+      <point x="-97.49999999999994" y="-37.0" />
+      <point x="69.00000000000006" y="807.0" />
+      <point x="94.91765873015879" y="807.0" />
+      <point x="94.91765873015879" y="281.0" />
+      <point x="240.29265873015873" y="281.0" />
+      <point x="-89.375" y="125.5" />
+    </edge>
+    <edge source="teach2000.model.AntwoordInvullen" target="teach2000.model.Lijst">
+      <point x="97.5" y="-37.0" />
+      <point x="552.9895833333335" y="807.0" />
+      <point x="580.9895833333335" y="807.0" />
+      <point x="580.9895833333335" y="577.0" />
+      <point x="606.8888888888889" y="577.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="teach2000.model.AntwoordInvullen" target="teach2000.model.Overhoring">
+      <point x="-32.5" y="-37.0" />
+      <point x="422.9895833333335" y="807.0" />
+      <point x="411.0" y="807.0" />
+      <point x="104.0" y="92.5" />
+    </edge>
+    <edge source="teach2000.model.Test" target="teach2000.model.Vraag">
+      <point x="-81.77777777777783" y="-36.5" />
+      <point x="563.2222222222222" y="956.0" />
+      <point x="26.0" y="956.0" />
+      <point x="26.0" y="271.0" />
+      <point x="204.54265873015873" y="271.0" />
+      <point x="-125.125" y="125.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6604303086997194" x="513.0" y="524.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

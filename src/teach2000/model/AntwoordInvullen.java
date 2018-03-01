@@ -10,17 +10,18 @@ public class AntwoordInvullen extends Overhoring {
 	}
 
 	@Override
-	public void presentAnswer(Vraag v) {
+	public boolean presentAnswer(Vraag v) {
 		System.out.printf("Enter your choice: ");
 		String input = keyboard.nextLine();
 
-		if (v.getAnswer().equals(input)) {
-			v.correctAnswer();
-			System.out.printf("Correct! Score: %d%n", v.getScore());
-		} else {
-			v.wrongAnswer();
-			System.out.printf("Nope, dumbass. Score: %d%n", v.getScore());
-		}
+		// forward choice to question which will handle score updates etc
 
+		if ( v.processAnswer(input) ) {
+			System.out.printf("Correct! Score: %d%n", v.getScore());
+			return true;
+		} else {
+			System.out.printf("Nope, dumbass. Score: %d%n", v.getScore());
+			return false;
+		}
 	}
 }
