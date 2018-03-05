@@ -8,11 +8,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import teach2000.model.Login;
 import teach2000.model.Teach2000Model;
+import teach2000.model.User;
+import teach2000.model.UserList;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 import teach2000.view.Teach2000Presenter;
 import teach2000.view.Teach2000View;
 import teach2000.view.mainMenu.MainMenuView;
+import teach2000.view.mcTest.McView;
 import teach2000.view.register.RegisterView;
 import teach2000.view.writeTest.WriteView;
 
@@ -28,13 +31,16 @@ public class Main extends Application {
 		menuBar.getMenus().addAll(menuFile,menuEdit,menuView);
         ((VBox) scene.getRoot()).getChildren().addAll(menuBar);*/
 
+        Login model = new Login();
         LoginView view = new LoginView();
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
-        primaryStage.setTitle("Teach2000");
         primaryStage.setScene(new Scene(view));
+		primaryStage.setTitle("Teach2000");
         primaryStage.setHeight(400);
         primaryStage.setWidth(800);
         primaryStage.setResizable(true);
+		presenter.addWindowEventHandlers();
         view.getStylesheets().add("css/main.css");
         primaryStage.show();
     }

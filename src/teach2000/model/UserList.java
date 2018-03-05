@@ -9,14 +9,20 @@ import java.util.ArrayList;
  * @project teach20002
  */
 public class UserList {
-    private String user;
+//    private String user;
+    private ArrayList<User> users = new ArrayList<>();
 
-    public UserList(String user) {
-        this.user = user;
+    public void addUser(User u) {
+        this.users.add(u);
     }
 
-    public String getUser() {
-        return user;
-    }
+	public ArrayList<User> getUsers() {
+		return this.users;
+	}
+
+	public User getUser(String id) {
+    	// get user
+		return null;
+	}
 
 }

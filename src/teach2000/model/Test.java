@@ -19,7 +19,7 @@ public class Test {
 //		AntwoordInvullen ai = new AntwoordInvullen();
 //		ai.test();
 
-		User buts = new User("Buts");
+		User buts = new User("0", "Buts");
 		Test.setup(buts);
 
 		for (int i = 0; i < buts.getLijsten().size(); ++i) {

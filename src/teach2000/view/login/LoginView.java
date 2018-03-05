@@ -12,6 +12,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import teach2000.model.UserList;
 
 /**
  * @author demacryx on 25.02.2018.
@@ -24,11 +25,11 @@ public class LoginView extends GridPane {
     private Label explanationLabel;
 
     ///////////////////Getters/////////////////////
-    public Button getLoginButton() {
+	Button getLoginButton() {
         return loginButton;
     }
 
-    public Button getRegisterButton() {
+    Button getRegisterButton() {
         return registerButton;
     }
     ///////////////////Constructor/////////////////////
@@ -36,16 +37,22 @@ public class LoginView extends GridPane {
         this.initializeNodes();
         this.layoutNodes();
     }
-    ///////////////////Initializer/////////////////////
+
+	ComboBox<String> getUsers() {
+		return users;
+	}
+
+	///////////////////Initializer/////////////////////
     private void initializeNodes() {
         this.users = new ComboBox<>();
-        ObservableList<String> names = FXCollections.observableArrayList("Default");
-        this.users.setItems(names);
-        this.users.getSelectionModel().select(0);
+//        ObservableList<String> names = FXCollections.observableArrayList("Default");
+//        this.users.setItems(names);
+//        this.users.getSelectionModel().select(0);
         this.loginButton = new Button("Login");
         this.registerButton = new Button("Register");
         this.explanationLabel = new Label("To add a new user press the Register button");
     }
+
     ///////////////////Layout/////////////////////
     private void layoutNodes() {
         ///////////////////Grid Settings/////////////////////
