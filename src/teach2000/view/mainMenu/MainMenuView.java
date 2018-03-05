@@ -57,10 +57,12 @@ public class MainMenuView extends GridPane {
         return score;
     }
 
-    ///////////////////Constructor/////////////////////
+	public MenuItem getAfsluiten() {
+		return afsluiten;
+	}
+
+	///////////////////Constructor/////////////////////
     public MainMenuView() {
-        this.afsluiten = new
-                MenuItem("Afsluiten");
         this.initializeNodes();
         this.layoutNodes();
     }
@@ -83,24 +85,28 @@ public class MainMenuView extends GridPane {
                 Label("Extra");
         score = new
                 Label("Score");
+
+        this.afsluiten = new
+                MenuItem("Exit");
     }
 
     ///////////////////Layout/////////////////////
     private void layoutNodes() {
         //Menu
         final Menu bestandMenu = new
-                Menu("Bestand");
-        final Menu editMenu = new
-                Menu("Edit");
-        final Menu helpMenu = new
-                Menu("Help");
+                Menu("File");
+//        final Menu editMenu = new
+//                Menu("Edit");
+//        final Menu helpMenu = new
+//                Menu("Help");
         final Menu aboutMenu = new
                 Menu("About");
         bestandMenu.getItems().add(this.afsluiten);
 
         //MenuBar
         final MenuBar menuBar = new
-                MenuBar(bestandMenu, editMenu, helpMenu, aboutMenu);
+//                MenuBar(bestandMenu, editMenu, helpMenu, aboutMenu);
+				MenuBar(bestandMenu, aboutMenu);
         this.add(menuBar, 0, 0, 5, 1);
 
 

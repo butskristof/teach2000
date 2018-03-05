@@ -65,6 +65,7 @@ public class LoginPresenter {
     private void updateView() {
     	// fill list in login view with users in model
 		ArrayList<User> users = this.model.getUsers().getUsers();
+		// build list to display
 		ObservableList<String> choices = FXCollections.observableArrayList();
 		for (User u: users) {
 			String t = String.format("%s (%s)", u.getName(), u.getId());
@@ -81,8 +82,8 @@ public class LoginPresenter {
 			@Override
 			public void handle(WindowEvent event) {
 				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-				alert.setHeaderText("Ben je zeker?");
-				alert.setContentText("Ben je zeker dat je Teach2000 wil afsluiten?");
+				alert.setHeaderText("Are you sure?");
+				alert.setContentText("Are you sure you want to stop Teach2000?");
 				Optional<ButtonType> choice = alert.showAndWait();
 				if (choice.get().getButtonData().isCancelButton()) {
 					event.consume();

@@ -51,6 +51,6 @@ public class RegisterPresenter {
 	}
 
 	private void updateView() {
-
+		// not applicable here
 	}
 }
