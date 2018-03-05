@@ -12,6 +12,8 @@ import teach2000.model.User;
 import teach2000.model.UserList;
 import teach2000.view.mainMenu.MainMenuPresenter;
 import teach2000.view.mainMenu.MainMenuView;
+import teach2000.view.register.RegisterPresenter;
+import teach2000.view.register.RegisterView;
 
 import javax.swing.*;
 import javax.swing.text.html.Option;
@@ -34,10 +36,11 @@ public class LoginPresenter {
     }
 
     private void addEventHandlers() {
+    	// login handler
         view.getLoginButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	// eerst nieuw model opbouwen
+            	// eerst nieuw model opbouwen gebaseerd op selectie
 
                 MainMenuView mainMenuView = new MainMenuView();
                 MainMenuPresenter mainMenuPresenter =
@@ -46,6 +49,17 @@ public class LoginPresenter {
                 mainMenuView.getScene().getWindow().sizeToScene();
             }
         });
+
+        // register handler
+		view.getRegisterButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				RegisterView registerView = new RegisterView();
+				RegisterPresenter registerPresenter = new RegisterPresenter(model, registerView);
+				view.getScene().setRoot(registerView);
+//				registerView.getScene().getWindow().sizeToScene();
+			}
+		});
     }
 
     private void updateView() {

@@ -31,6 +31,7 @@ public class Main extends Application {
 		menuBar.getMenus().addAll(menuFile,menuEdit,menuView);
         ((VBox) scene.getRoot()).getChildren().addAll(menuBar);*/
 
+		// we start by building the login screen
         Login model = new Login();
         LoginView view = new LoginView();
         LoginPresenter presenter = new LoginPresenter(model, view);
@@ -41,7 +42,8 @@ public class Main extends Application {
         primaryStage.setWidth(800);
         primaryStage.setResizable(true);
 		presenter.addWindowEventHandlers();
-        view.getStylesheets().add("css/main.css");
+		// stylesheet not found
+//        view.getStylesheets().add("css/main.css");
         primaryStage.show();
     }
 

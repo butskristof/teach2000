@@ -24,6 +24,12 @@ public class LoginView extends GridPane {
     private Button loginButton, registerButton;
     private Label explanationLabel;
 
+	///////////////////Constructor/////////////////////
+	public LoginView() {
+		this.initializeNodes();
+		this.layoutNodes();
+	}
+
     ///////////////////Getters/////////////////////
 	Button getLoginButton() {
         return loginButton;
@@ -32,11 +38,6 @@ public class LoginView extends GridPane {
     Button getRegisterButton() {
         return registerButton;
     }
-    ///////////////////Constructor/////////////////////
-    public LoginView() {
-        this.initializeNodes();
-        this.layoutNodes();
-    }
 
 	ComboBox<String> getUsers() {
 		return users;
@@ -44,10 +45,7 @@ public class LoginView extends GridPane {
 
 	///////////////////Initializer/////////////////////
     private void initializeNodes() {
-        this.users = new ComboBox<>();
-//        ObservableList<String> names = FXCollections.observableArrayList("Default");
-//        this.users.setItems(names);
-//        this.users.getSelectionModel().select(0);
+        this.users = new ComboBox<>(); // will be filled by presenter
         this.loginButton = new Button("Login");
         this.registerButton = new Button("Register");
         this.explanationLabel = new Label("To add a new user press the Register button");

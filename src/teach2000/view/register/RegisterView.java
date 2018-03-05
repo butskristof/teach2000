@@ -18,8 +18,8 @@ import javafx.scene.layout.RowConstraints;
  * @author demacryx on 25.02.2018 6:09 PM.
  * @project teach20002
  */
-public class RegisterView extends GridPane{
-    private Button confirm,cancel;
+public class RegisterView extends GridPane {
+    private Button confirm, cancel;
     private TextField addName;
 
 
@@ -28,10 +28,22 @@ public class RegisterView extends GridPane{
         this.layoutNodes();
     }
 
+    Button getConfirm() {
+        return confirm;
+    }
+
+    Button getCancel() {
+        return cancel;
+    }
+
+    TextField getAddName() {
+        return addName;
+    }
+
     private void initializeNodes() {
-        this.confirm=new Button("OK");
-        this.cancel=new Button("Cancel");
-        this.addName=new TextField("Voer naam in");
+        this.confirm = new Button("OK");
+        this.cancel = new Button("Cancel");
+        this.addName = new TextField("Voer naam in");
     }
 
     private void layoutNodes() {
