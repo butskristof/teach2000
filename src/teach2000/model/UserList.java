@@ -1,6 +1,5 @@
 package teach2000.model;
 
-
 import java.io.*;
 import java.util.ArrayList;
 

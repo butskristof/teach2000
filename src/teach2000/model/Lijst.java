@@ -15,6 +15,7 @@ public class Lijst {
 	private String id;
 	private String lang_from;
 	private String lang_to;
+	private String name;
 
 	public Lijst(String lang_from, String lang_to) {
 		this(RandomGenerator.getRandomId(), lang_from, lang_to);
@@ -44,6 +45,10 @@ public class Lijst {
 
 	public String getTitle() {
 		return String.format("%s - %s", this.lang_from, this.lang_to);
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void addVraag(Vraag v) {
