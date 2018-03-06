@@ -26,7 +26,7 @@ public class MainMenuPresenter {
 
     private void addEventHandlers() {
         // exit from menu
-		view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
+		/*view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -41,7 +41,7 @@ public class MainMenuPresenter {
 					Platform.exit();
 				}
 			}
-		});
+		});*/
     }
 
     private void updateView() {

@@ -4,10 +4,13 @@ import teach2000.model.Lijst;
 import teach2000.model.Vraag;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.stream.Stream;
 
 /**
  * @author Kristof Buts

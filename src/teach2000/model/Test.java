@@ -21,11 +21,9 @@ public class Test {
 //		AntwoordInvullen ai = new AntwoordInvullen();
 //		ai.test();
 
-//		UserList users = new UserList();
 //		User buts = new User("Buts");
 //		Test.setup(buts);
-//		users.addUser(buts);
-//////
+//
 //		LijstIO.writeList(buts.getId(), buts.getLijst(0));
 //		ArrayList<Lijst> lists = LijstIO.readAllLists(buts.getId());
 //		for (Lijst l: lists) {
