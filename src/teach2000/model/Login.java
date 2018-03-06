@@ -1,5 +1,6 @@
 package teach2000.model;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -11,24 +12,12 @@ public class Login {
 	// offering them in an accessible format for the presenter
 	private UserList users = new UserList();
 
-	public Login() {
-		this.initialiseLoginModel();
-	}
-
 	public UserList getUsers() {
 		return users;
 	}
 
-	private void initialiseLoginModel() {
-		// test code, should be replaced with reading users from file
-		User jos = new User("0", "Jos");
-		User buts = new User("1", "Buts");
-		users.addUser(jos);
-		users.addUser(buts);
-	}
-
 	public void addUser(String name) {
-		User newUser = new User("a", name);
+		User newUser = new User( name);
 		users.addUser(newUser);
 	}
 }
