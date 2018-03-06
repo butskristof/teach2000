@@ -63,9 +63,9 @@ public class UserList {
 			ex.printStackTrace();
 		}
 
-		System.out.println("Added users");
-		for (User u: this.getUsers()) {
-			System.out.printf("%s\t%s%n", u.getId(), u.getName());
-		}
+//		System.out.println("Added users");
+//		for (User u: this.getUsers()) {
+//			System.out.printf("%s\t%s%n", u.getId(), u.getName());
+//		}
 	}
 }

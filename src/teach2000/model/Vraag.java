@@ -25,12 +25,12 @@ public class Vraag {
 	}
 
 	// outsiders shouldn't have access to correct answer, use getPossibilities and processAnswer instead
-	private String getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
 
 	// outsiders shouldn't have access to correct answer, use getPossibilities and processAnswer instead
-	private String[] getAlternatives() {
+	public String[] getAlternatives() {
 		return alternatives;
 	}
 
@@ -75,11 +75,16 @@ public class Vraag {
 		return this.score < 3; // this.score == 3 ? false : true
 	}
 
-	// temporary
-//	@Override
-//	public String toString() {
-//		return "Vraag{" +
-//				"question='" + question + '\'' +
-//				'}';
-//	}
+	@Override
+	public String toString() {
+		StringBuilder ret = new StringBuilder();
+
+		System.out.printf("%s\t%s\t%d\t", this.getQuestion(), this.getAnswer(), this.getAlternatives().length);
+		for (String s: this.getAlternatives()) {
+			System.out.printf("%s\t", s);
+		}
+		System.out.printf("%n");
+
+		return ret.toString();
+	}
 }

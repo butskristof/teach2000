@@ -41,6 +41,8 @@ public class LoginPresenter {
             @Override
             public void handle(ActionEvent event) {
             	// eerst nieuw model opbouwen gebaseerd op selectie
+				int userchosen = view.getUsers().getSelectionModel().getSelectedIndex();
+				User u = model.getUsers().getUsers().get(userchosen);
 
                 MainMenuView mainMenuView = new MainMenuView();
                 MainMenuPresenter mainMenuPresenter =
