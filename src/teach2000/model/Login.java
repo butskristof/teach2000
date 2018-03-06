@@ -17,6 +17,7 @@ public class Login {
 	}
 
 	public void addUser(String name) {
+		// create new user and add to user list
 		User newUser = new User( name);
 		users.addUser(newUser);
 	}

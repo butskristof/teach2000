@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @project teach20002
  */
 public class UserList {
+	// this class will initialise a list for the users and read the already existing ones from the users file
 	private static final String FILE = "resources/users.bin";
     private ArrayList<User> users = new ArrayList<>();
 
@@ -25,6 +26,7 @@ public class UserList {
 		// add new user and write to file
 		this.users.add(newuser);
 
+		// write users to file
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(FILE)))) {
 			for (User u: users) {
 				os.writeUTF(u.getId());
@@ -41,6 +43,7 @@ public class UserList {
 
 	public User getUser(String id) {
     	// get specific user
+		// by index of ArrayList
 		User ret = null;
 
 		for (User u: users) {
@@ -63,6 +66,7 @@ public class UserList {
 			ex.printStackTrace();
 		}
 
+		// print imported users for testing purposes
 //		System.out.println("Added users");
 //		for (User u: this.getUsers()) {
 //			System.out.printf("%s\t%s%n", u.getId(), u.getName());

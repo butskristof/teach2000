@@ -20,6 +20,8 @@ public class Vraag {
 		this.alternatives = alternatives;
 	}
 
+	// getters
+
 	public String getQuestion() {
 		return question;
 	}
@@ -49,6 +51,8 @@ public class Vraag {
 		return this.score;
 	}
 
+	// business logic
+
 	// outsiders shouldn't be able to affect score, use processAnswer instead
 	private void correctAnswer() {
 		// dedicated function for easy alterations
@@ -74,6 +78,8 @@ public class Vraag {
 	public boolean questionShouldBeShown() {
 		return this.score < 3; // this.score == 3 ? false : true
 	}
+
+	// presentation
 
 	@Override
 	public String toString() {

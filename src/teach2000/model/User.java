@@ -12,22 +12,21 @@ public class User {
     private String id;
     private String name;
     private ArrayList<Lijst> lijsten = new ArrayList<>();
-    private static final String userlistfile_prefix = "resources/lists/";
 
     public User(String name) {
+    	// used for creating new users that do not yet have an ID
         this(RandomGenerator.getRandomId(), name);
     }
 
     public User(String id, String name) {
+    	// used for importing users that already have an ID
     	this.id = id;
     	this.name = name;
 
     	this.importLijsten();
 	}
 
-    public void addLijst(Lijst l) {
-        this.lijsten.add(l);
-    }
+	// getters
 
 	public String getId() {
 		return id;
@@ -45,7 +44,16 @@ public class User {
         return lijsten.get(index);
     }
 
+    // business logic
+
+	public void addLijst(Lijst l) {
+    	// add new list to user
+		// TODO should be extended with functionality to write to file
+		this.lijsten.add(l);
+	}
+
     public void importLijsten() {
+    	// import user's lists from files
 		this.lijsten = LijstIO.readAllLists(this.getId());
 	}
 }

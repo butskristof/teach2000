@@ -26,6 +26,8 @@ public class Lijst {
 		this.lang_to = lang_to;
 	}
 
+	// getters
+
 	public String getId() {
 		return id;
 	}
@@ -66,6 +68,10 @@ public class Lijst {
 
 		return null;
 	}
+
+	// business logic
+
+	// presentation
 
 	@Override
 	public String toString() {
