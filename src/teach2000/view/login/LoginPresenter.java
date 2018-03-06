@@ -7,13 +7,14 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
+import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
 import teach2000.model.UserList;
-import teach2000.view.mainMenu.MainMenuPresenter;
-import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.register.RegisterPresenter;
 import teach2000.view.register.RegisterView;
+import teach2000.view.writeTest.WritePresenter;
+import teach2000.view.writeTest.WriteView;
 
 import javax.swing.*;
 import javax.swing.text.html.Option;
@@ -44,11 +45,20 @@ public class LoginPresenter {
 				int userChosen = view.getUsers().getSelectionModel().getSelectedIndex();
 				User u = model.getUsers().getUsers().get(userChosen);
 
-                MainMenuView mainMenuView = new MainMenuView();
-                MainMenuPresenter mainMenuPresenter =
-                        new MainMenuPresenter(model,mainMenuView);
-                view.getScene().setRoot(mainMenuView);
-                mainMenuView.getScene().getWindow().sizeToScene();
+				try {
+					AntwoordInvullen ai = new AntwoordInvullen(u.getLijst(0));
+
+					WriteView writeView = new WriteView();
+					WritePresenter presenter = new WritePresenter(ai, writeView);
+					view.getScene().setRoot(writeView);
+					writeView.getScene().getWindow().sizeToScene();
+				} catch (IndexOutOfBoundsException ex) {
+					System.out.println("No lists found.");
+				}
+
+//                MainMenuView mainMenuView = new MainMenuView();
+//                MainMenuPresenter mainMenuPresenter =
+//                        new MainMenuPresenter(model,mainMenuView);
             }
         });
 

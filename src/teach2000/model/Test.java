@@ -21,10 +21,12 @@ public class Test {
 //		AntwoordInvullen ai = new AntwoordInvullen();
 //		ai.test();
 
-//		User buts = new User("Buts");
-//		Test.setup(buts);
+		User buts = new User("Buts");
+		Test.setup(buts);
+		UserList users = new UserList();
+		users.addUser(buts);
 //
-//		LijstIO.writeList(buts.getId(), buts.getLijst(0));
+		LijstIO.writeList(buts.getId(), buts.getLijst(0));
 //		ArrayList<Lijst> lists = LijstIO.readAllLists(buts.getId());
 //		for (Lijst l: lists) {
 //			System.out.println(l);

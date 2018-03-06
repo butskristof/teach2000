@@ -46,6 +46,6 @@ public class User {
     }
 
     public void importLijsten() {
-		LijstIO.readAllLists(this.getId());
+		this.lijsten = LijstIO.readAllLists(this.getId());
 	}
 }

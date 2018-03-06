@@ -27,6 +27,10 @@ public abstract class Overhoring {
 		this.list = list;
 	}
 
+	public Lijst getList() {
+		return list;
+	}
+
 	private void correctAnswer() {
 		// dedicated function for easy alterations
 		this.score += 5;
