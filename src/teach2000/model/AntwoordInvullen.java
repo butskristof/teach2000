@@ -1,13 +1,13 @@
 package teach2000.model;
 
-import teach2000.model.lijsten.Lijst;
+import teach2000.model.lists.List;
 
 /**
  * @author Kristof Buts
  */
 public class AntwoordInvullen extends Overhoring {
 
-	public AntwoordInvullen(Lijst list) {
+	public AntwoordInvullen(List list) {
 		super(list);
 	}
 

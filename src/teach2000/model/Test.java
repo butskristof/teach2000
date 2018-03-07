@@ -1,9 +1,9 @@
 package teach2000.model;
 
 
-import teach2000.model.lijsten.Lijst;
-import teach2000.model.lijsten.LijstIO;
-import teach2000.model.vragen.Vraag;
+import teach2000.model.lists.List;
+import teach2000.model.lists.ListIO;
+import teach2000.model.questions.Question;
 
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ public class Test {
 		UserList users = new UserList();
 		users.addUser(buts);
 //
-		LijstIO.writeList(buts.getId(), buts.getLijst(0));
+		ListIO.writeList(buts.getId(), buts.getList(0));
 //		ArrayList<Lijst> lists = LijstIO.readAllLists(buts.getId());
 //		for (Lijst l: lists) {
 //			System.out.println(l);
@@ -57,12 +57,12 @@ public class Test {
 	}
 
 	private static void setup(User u) {
-		Vraag v = new Vraag("tafel", "table", new String[]{"tabel", "taple"});
-		Vraag v2 = new Vraag("toetsenbord", "keyboard", new String[]{"typboard", "kyboard"});
-		Lijst list;
-		list = new Lijst("NL", "EN");
-		list.addVraag(v);
-		list.addVraag(v2);
-		u.addLijst(list);
+		Question v = new Question("tafel", "table", new String[]{"tabel", "taple"});
+		Question v2 = new Question("toetsenbord", "keyboard", new String[]{"typboard", "kyboard"});
+		List list;
+		list = new List("NL", "EN");
+		list.addQuestion(v);
+		list.addQuestion(v2);
+		u.addList(list);
 	}
 }

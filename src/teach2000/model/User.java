@@ -1,7 +1,7 @@
 package teach2000.model;
 
-import teach2000.model.lijsten.Lijst;
-import teach2000.model.lijsten.LijstIO;
+import teach2000.model.lists.List;
+import teach2000.model.lists.ListIO;
 import teach2000.model.utilities.RandomGenerator;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class User {
     private String id;
     private String name;
-    private ArrayList<Lijst> lijsten = new ArrayList<>();
+    private ArrayList<List> lists = new ArrayList<>();
 
     // CONSTRUCTORS
 
@@ -26,7 +26,7 @@ public class User {
     	this.id = id;
     	this.name = name;
 
-    	this.importLijsten();
+    	this.importLists();
 	}
 
 	// GETTERS
@@ -39,24 +39,24 @@ public class User {
 		return name;
 	}
 
-	public ArrayList<Lijst> getLijsten() {
-        return lijsten;
+	public ArrayList<List> getLists() {
+        return this.lists;
     }
 
-    public Lijst getLijst(int index) {
-        return lijsten.get(index);
+    public List getList(int index) {
+        return this.lists.get(index);
     }
 
     // BUSINESS LOGIC
 
-	public void addLijst(Lijst l) {
+	public void addList(List l) {
     	// add new list to user and write it to a file in the user's folder
-		this.lijsten.add(l);
-		LijstIO.writeList(this.getId(), l);
+		this.lists.add(l);
+		ListIO.writeList(this.getId(), l);
 	}
 
-    public void importLijsten() {
+    public void importLists() {
     	// import user's lists from files
-		this.lijsten = LijstIO.readAllLists(this.getId());
+		this.lists = ListIO.readAllLists(this.getId());
 	}
 }

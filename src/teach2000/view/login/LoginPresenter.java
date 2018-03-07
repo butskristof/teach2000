@@ -46,7 +46,7 @@ public class LoginPresenter {
 				User u = model.getUsers().getUsers().get(userChosen);
 
 				try {
-					AntwoordInvullen ai = new AntwoordInvullen(u.getLijst(0));
+					AntwoordInvullen ai = new AntwoordInvullen(u.getList(0));
 
 					WriteView writeView = new WriteView();
 					WritePresenter presenter = new WritePresenter(ai, writeView);

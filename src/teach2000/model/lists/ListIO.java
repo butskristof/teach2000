@@ -1,7 +1,7 @@
-package teach2000.model.lijsten;
+package teach2000.model.lists;
 
-import teach2000.model.vragen.Vraag;
-import teach2000.model.vragen.VraagIO;
+import teach2000.model.questions.Question;
+import teach2000.model.questions.QuestionIO;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * @author Kristof Buts
  */
-public class LijstIO {
+public class ListIO {
 	/*
 	This class handles the importing and exporting of the user's lists
 	In the resources, there's a folder which contains a directory for each user
@@ -28,7 +28,7 @@ public class LijstIO {
 	// each user has a folder with its id as name that contains all his lists
 	private static final String userlistfile_prefix = "resources/lists";
 
-	public static ArrayList<Lijst> readAllLists(String userid) {
+	public static ArrayList<List> readAllLists(String userid) {
 		// function to read all the lists in the user's folder and return them as an ArrayList
 
 		// generate path to user's folder
@@ -48,7 +48,7 @@ public class LijstIO {
 		File[] files = new File(userfolder.toString()).listFiles();
 
 		// initialise return variable
-		ArrayList<Lijst> ret = new ArrayList<>();
+		ArrayList<List> ret = new ArrayList<>();
 
 		// loop over all files and read them
 		// TODO add exception handling
@@ -63,10 +63,10 @@ public class LijstIO {
 		return ret;
 	}
 
-	public static Lijst readList(String userid, String listid) {
+	public static List readList(String userid, String listid) {
 		// Read in a list and return it to the calling function
 		// TODO exception handling
-		Lijst ret = null; // initialise return variable
+		List ret = null; // initialise return variable
 		// Generate path to file
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
 		Path file = userfolder.resolve(listid);
@@ -75,7 +75,7 @@ public class LijstIO {
 		try (DataInputStream is = new DataInputStream(new BufferedInputStream(new FileInputStream(file.toString())))) {
 			// create new list
 			// read languages from and to
-			ret = new Lijst(is.readUTF(), is.readUTF());
+			ret = new List(is.readUTF(), is.readUTF());
 			// read number of questions stored
 			int no_questions = is.readInt();
 			// loop over all questions
@@ -89,8 +89,8 @@ public class LijstIO {
 					alternatives[j] = is.readUTF();
 				}
 
-				Vraag v = new Vraag(question, answer, alternatives);
-				ret.addVraag(v);
+				Question v = new Question(question, answer, alternatives);
+				ret.addQuestion(v);
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -99,7 +99,7 @@ public class LijstIO {
 		return ret;
 	}
 
-	public static void writeList(String userid, Lijst list) {
+	public static void writeList(String userid, List list) {
 		// write list to file in user's folder
 		// generate path to user's folder
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
@@ -116,7 +116,7 @@ public class LijstIO {
 		Path file = userfolder.resolve(list.getId()); // path to specific file
 
 		// Get questions
-		ArrayList<Vraag> vragen = list.getVragen();
+		ArrayList<Question> vragen = list.getVragen();
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.toString())))) {
 			// write meta information
 			os.writeUTF(list.getLang_from());
@@ -124,9 +124,9 @@ public class LijstIO {
 			os.writeInt(vragen.size());
 
 			// write away each question
-			for (Vraag v: vragen) {
+			for (Question v: vragen) {
 				// writing the question is handled by a separate class for security reasons
-				VraagIO.writeVraag(v, os);
+				QuestionIO.writeQuestion(v, os);
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();

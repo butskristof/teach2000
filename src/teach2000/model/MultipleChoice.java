@@ -1,6 +1,6 @@
 package teach2000.model;
 
-import teach2000.model.lijsten.Lijst;
+import teach2000.model.lists.List;
 
 /**
  * @author Kristof Buts
@@ -8,7 +8,7 @@ import teach2000.model.lijsten.Lijst;
  */
 public class MultipleChoice extends Overhoring {
 
-	public MultipleChoice(Lijst list) {
+	public MultipleChoice(List list) {
 		super(list);
 	}
 

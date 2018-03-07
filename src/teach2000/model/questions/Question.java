@@ -1,4 +1,4 @@
-package teach2000.model.vragen;
+package teach2000.model.questions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.Collections;
  * @author Kristof Buts
  * @version 1.0 22/02/18 01:24
  */
-public class Vraag {
+public class Question {
 
 	/*
 	This class is self-administrating: outsiders only get access to the word that has to be found
@@ -25,7 +25,7 @@ public class Vraag {
 
 	// CONSTRUCTORS
 
-	public Vraag(String question, String answer, String[] alternatives) {
+	public Question(String question, String answer, String[] alternatives) {
 		this.question = question;
 		this.answer = answer;
 		this.alternatives = alternatives;
@@ -58,13 +58,13 @@ public class Vraag {
 	}
 
 	// outsiders shouldn't have access to correct answer, use getPossibilities and processAnswer instead
-	// access is package-private so VraagIO works
+	// access is package-private so QuestionIO works
 	String getAnswer() {
 		return answer;
 	}
 
 	// outsiders shouldn't have access to correct answer, use getPossibilities and processAnswer instead
-	// access is package-private so VraagIO works
+	// access is package-private so QuestionIO works
 	String[] getAlternatives() {
 		return alternatives;
 	}

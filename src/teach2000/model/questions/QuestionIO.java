@@ -1,19 +1,18 @@
-package teach2000.model.vragen;
+package teach2000.model.questions;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 /**
  * @author Kristof Buts
  * @version 1.0 07/03/18 21:35
  */
-public class VraagIO {
+public class QuestionIO {
 	/*
 	This class can write questions.
 	Only this class can read the answer and alternative answers separately, access is package-private
 	 */
-	public static void writeVraag(Vraag v, DataOutputStream os) {
+	public static void writeQuestion(Question v, DataOutputStream os) {
 		int no_alternatives = v.getAlternatives().length;
 		try {
 			os.writeUTF(v.getQuestion());

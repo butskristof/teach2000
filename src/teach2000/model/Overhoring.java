@@ -1,7 +1,7 @@
 package teach2000.model;
 
-import teach2000.model.lijsten.Lijst;
-import teach2000.model.vragen.Vraag;
+import teach2000.model.lists.List;
+import teach2000.model.questions.Question;
 
 /**
  * @author Kristof Buts
@@ -9,13 +9,13 @@ import teach2000.model.vragen.Vraag;
  */
 public abstract class Overhoring {
 	private int score = 0;
-	protected Lijst list;
-	private Vraag currentQuestion;
+	protected List list;
+	private Question currentQuestion;
 	private boolean test_done = false;
 
 	// CONSTRUCTORS
 
-	public Overhoring(Lijst list) {
+	public Overhoring(List list) {
 		// pass in a list which will be used during the test
 		this.list = list;
 		this.initialise();
@@ -23,7 +23,7 @@ public abstract class Overhoring {
 
 	// GETTERS
 
-	public Vraag getCurrentQuestion() {
+	public Question getCurrentQuestion() {
 		return this.currentQuestion;
 	}
 
@@ -42,13 +42,17 @@ public abstract class Overhoring {
 		return this.list.getTitle();
 	}
 
+	public int getScore() {
+		return score;
+	}
+
 	public boolean isTest_done() {
 		return test_done;
 	}
 
 	// BUSINESS LOGIC
 
-	public Vraag setNewQuestion() {
+	public Question setNewQuestion() {
 		// a new question is set by retrieving it from the list
 		this.currentQuestion = this.list.getQuestion();
 		if (this.currentQuestion == null) {
@@ -74,7 +78,6 @@ public abstract class Overhoring {
 		return ret;
 	}
 
-	// these methods are only relevant if we work out the extension
 	private void correctAnswer() {
 		// dedicated function for easy alterations
 		this.score += 5;
