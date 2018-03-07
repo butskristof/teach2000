@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import teach2000.model.AntwoordInvullen;
-import teach2000.model.Login;
 
 import java.util.Optional;
 
@@ -23,6 +22,7 @@ public class WritePresenter {
 		this.model = model;
 		this.view = view;
 		this.addEventHandlers();
+		this.initialiseView();
 		this.updateView();
 	}
 
@@ -44,9 +44,62 @@ public class WritePresenter {
 				}
 			}
 		});
+
+		// okay button is clicked
+		this.view.getOkButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				handleAnswer();
+			}
+		});
+
+		// entered in input field
+		this.view.getInputField().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				handleAnswer();
+			}
+		});
+	}
+
+	private void handleAnswer() {
+		// we take the user's input and pass it down to the model
+		// afterwards, the view is updated
+		boolean result = model.handleAnswer(view.getInputField().getText());
+
+		updateView();
+	}
+
+	private void initialiseView() {
+		// when the view is created, we set the meta information such as
+		// languages, titles, ...
+		// these won't change during the course of the test so shouldn't be
+		// updated constantly
+		this.view.getTaalFrom().setText(this.model.getLangFrom());
+		this.view.getTaalTo().setText(this.model.getLangTo());
+		this.view.getTitle().setText(this.model.getTitle());
 	}
 
 	private void updateView() {
-		this.view.getTitle().setText(model.getList().getTitle());
+		// depending on whether we get a new question
+		// we either update the view with a new question
+		// or go into completing procedures
+
+		if (this.model.isTest_done()) {
+			// handle end of test
+			final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText("Done!");
+			alert.setContentText("Test is done.");
+			alert.showAndWait();
+		} else {
+			this.model.setNewQuestion();
+
+			// set word, current score and clear input field
+			this.view.getWord().setText(this.model.getCurrentQuestion().getQuestion());
+			this.view.getScore().setText(String.format("Score: %d", this.model.getCurrentQuestion().getScore()));
+			this.view.getInputField().clear();
+		}
+
 	}
+
 }

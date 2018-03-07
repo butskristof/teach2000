@@ -1,28 +1,30 @@
-package teach2000.model.utilities;
+package teach2000.model.lijsten;
 
-import teach2000.model.Lijst;
-import teach2000.model.Vraag;
+import teach2000.model.vragen.Vraag;
+import teach2000.model.vragen.VraagIO;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.stream.Stream;
 
 /**
  * @author Kristof Buts
  */
 public class LijstIO {
 	/*
+	This class handles the importing and exporting of the user's lists
+	In the resources, there's a folder which contains a directory for each user
+	 */
+
+	/*
 	format for storing lists:
 	LANG_FROM	LANG_TO
 	NO_OF_QUESTIONS
 	QUESTION	ANSWER	NO_OF_ALTERNATIVES	ALTERNATIVES
 	 */
-	// folder which contains all lists
+
 	// each user has a folder with its id as name that contains all his lists
 	private static final String userlistfile_prefix = "resources/lists";
 
@@ -32,7 +34,7 @@ public class LijstIO {
 		// generate path to user's folder
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
 
-		// check if user's folder exists
+		// Check if user's folder exists and create it if necessary
 		if (!Files.exists(userfolder)) {
 			try {
 				Files.createDirectory(userfolder);
@@ -42,9 +44,10 @@ public class LijstIO {
 				e.printStackTrace();
 			}
 		}
-		// create list of files
+		// Create list of files in user's folder
 		File[] files = new File(userfolder.toString()).listFiles();
 
+		// initialise return variable
 		ArrayList<Lijst> ret = new ArrayList<>();
 
 		// loop over all files and read them
@@ -52,7 +55,7 @@ public class LijstIO {
 		for (File f: files) {
 			// check if it's a file
 			if (f.isFile()) {
-				// read list and add
+				// read list and add to return var
 				ret.add(readList(userid, f.getName()));
 			}
 		}
@@ -61,10 +64,10 @@ public class LijstIO {
 	}
 
 	public static Lijst readList(String userid, String listid) {
-		// read in a list and return it to the calling function
+		// Read in a list and return it to the calling function
 		// TODO exception handling
-		Lijst ret = null;
-		// generate path to file
+		Lijst ret = null; // initialise return variable
+		// Generate path to file
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
 		Path file = userfolder.resolve(listid);
 
@@ -73,11 +76,11 @@ public class LijstIO {
 			// create new list
 			// read languages from and to
 			ret = new Lijst(is.readUTF(), is.readUTF());
-			// read number of words stored
+			// read number of questions stored
 			int no_questions = is.readInt();
-			// loop over all words stored
+			// loop over all questions
 			for (int i = 0; i < no_questions; ++i) {
-				// read data
+				// Read data and build question
 				String question = is.readUTF();
 				String answer = is.readUTF();
 				int no_alternatives = is.readInt();
@@ -100,15 +103,19 @@ public class LijstIO {
 		// write list to file in user's folder
 		// generate path to user's folder
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
-		// create directory
-		try {
-			Files.createDirectories(userfolder);
-		} catch (IOException e) {
-			e.printStackTrace();
+		// Check if user's folder exists and create it if necessary
+		if (!Files.exists(userfolder)) {
+			try {
+				Files.createDirectory(userfolder);
+			} catch (IOException e) {
+				// TODO
+				// should be extended
+				e.printStackTrace();
+			}
 		}
-		Path file = userfolder.resolve(list.getId());
+		Path file = userfolder.resolve(list.getId()); // path to specific file
 
-		// get questions
+		// Get questions
 		ArrayList<Vraag> vragen = list.getVragen();
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.toString())))) {
 			// write meta information
@@ -118,13 +125,8 @@ public class LijstIO {
 
 			// write away each question
 			for (Vraag v: vragen) {
-				int no_alternatives = v.getAlternatives().length;
-				os.writeUTF(v.getQuestion());
-				os.writeUTF(v.getAnswer());
-				os.writeInt(no_alternatives);
-				for (int i = 0; i < no_alternatives; ++i) {
-					os.writeUTF(v.getAlternatives()[i]);
-				}
+				// writing the question is handled by a separate class for security reasons
+				VraagIO.writeVraag(v, os);
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();

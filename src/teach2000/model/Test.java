@@ -1,10 +1,10 @@
 package teach2000.model;
 
 
-import teach2000.model.utilities.LijstIO;
+import teach2000.model.lijsten.Lijst;
+import teach2000.model.lijsten.LijstIO;
+import teach2000.model.vragen.Vraag;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**

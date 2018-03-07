@@ -1,9 +1,7 @@
 package teach2000.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
+import teach2000.model.lijsten.Lijst;
+import teach2000.model.vragen.Vraag;
 
 /**
  * @author Kristof Buts
@@ -12,25 +10,71 @@ import java.util.Scanner;
 public abstract class Overhoring {
 	private int score = 0;
 	protected Lijst list;
-	Scanner keyboard = new Scanner(System.in);
+	private Vraag currentQuestion;
+	private boolean test_done = false;
 
-	public Overhoring() {
-		// for testing purposes
-		Vraag v = new Vraag("tafel", "table", new String[]{"tabel", "taple"});
-		Vraag v2 = new Vraag("toetsenbord", "keyboard", new String[]{"typboard", "kyboard"});
-		this.list = new Lijst("NL", "EN");
-		this.list.addVraag(v);
-		this.list.addVraag(v2);
-	}
+	// CONSTRUCTORS
 
 	public Overhoring(Lijst list) {
+		// pass in a list which will be used during the test
 		this.list = list;
+		this.initialise();
 	}
 
-	public Lijst getList() {
-		return list;
+	// GETTERS
+
+	public Vraag getCurrentQuestion() {
+		return this.currentQuestion;
 	}
 
+	public String getLangFrom() {
+		// we don't open up access to the list, so an intermediate method is necessary
+		return this.list.getLang_from();
+	}
+
+	public String getLangTo() {
+		// we don't open up access to the list, so an intermediate method is necessary
+		return this.list.getLang_to();
+	}
+
+	public String getTitle() {
+		// we don't open up access to the list, so an intermediate method is necessary
+		return this.list.getTitle();
+	}
+
+	public boolean isTest_done() {
+		return test_done;
+	}
+
+	// BUSINESS LOGIC
+
+	public Vraag setNewQuestion() {
+		// a new question is set by retrieving it from the list
+		this.currentQuestion = this.list.getQuestion();
+		if (this.currentQuestion == null) {
+			this.test_done = true;
+		}
+
+		return this.getCurrentQuestion();
+	}
+
+	private void initialise() {
+		// to initialise the test, we set the currentQuestion property to actually contain a question
+		this.setNewQuestion();
+	}
+
+	public boolean handleAnswer(String answer) {
+		// an answer is passed in and processed by the model
+		// the question is self-administrating: we pass the answer to the question
+		// it'll take care of it's score and provide us with the result
+		boolean ret = false; // assume worst case
+		ret = this.currentQuestion.processAnswer(answer); // pass user's answer to question
+		this.setNewQuestion(); // move on from this question
+
+		return ret;
+	}
+
+	// these methods are only relevant if we work out the extension
 	private void correctAnswer() {
 		// dedicated function for easy alterations
 		this.score += 5;
@@ -41,27 +85,4 @@ public abstract class Overhoring {
 		--this.score;
 	}
 
-	public void test() {
-		// method for functionality testing
-
-		Vraag v = this.list.getQuestion();
-		// when all questions have reached their maximum score, Lijst.getQuestion returns null
-		// may be rewritten with for loop
-		while (v != null) {
-			System.out.println(v.getQuestion()); // print word
-			// hand off to specific test presentation: enter answer, multiple choice, ...
-			if ( this.presentAnswer(v) ) {
-				this.correctAnswer();
-			} else {
-				this.wrongAnswer();
-			}
-
-			v = this.list.getQuestion(); // get next
-		}
-
-		System.out.printf("Total score: %d", this.score); // print total score at the end
-
-	}
-
-	public abstract boolean presentAnswer(Vraag v);
 }

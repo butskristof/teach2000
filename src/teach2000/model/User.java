@@ -1,6 +1,7 @@
 package teach2000.model;
 
-import teach2000.model.utilities.LijstIO;
+import teach2000.model.lijsten.Lijst;
+import teach2000.model.lijsten.LijstIO;
 import teach2000.model.utilities.RandomGenerator;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ public class User {
     private String id;
     private String name;
     private ArrayList<Lijst> lijsten = new ArrayList<>();
+
+    // CONSTRUCTORS
 
     public User(String name) {
     	// used for creating new users that do not yet have an ID
@@ -26,7 +29,7 @@ public class User {
     	this.importLijsten();
 	}
 
-	// getters
+	// GETTERS
 
 	public String getId() {
 		return id;
@@ -44,12 +47,12 @@ public class User {
         return lijsten.get(index);
     }
 
-    // business logic
+    // BUSINESS LOGIC
 
 	public void addLijst(Lijst l) {
-    	// add new list to user
-		// TODO should be extended with functionality to write to file
+    	// add new list to user and write it to a file in the user's folder
 		this.lijsten.add(l);
+		LijstIO.writeList(this.getId(), l);
 	}
 
     public void importLijsten() {

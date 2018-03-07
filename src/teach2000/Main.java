@@ -31,7 +31,7 @@ public class Main extends Application {
 		menuBar.getMenus().addAll(menuFile,menuEdit,menuView);
         ((VBox) scene.getRoot()).getChildren().addAll(menuBar);*/
 
-		// we start by building the login screen
+		// We start by building the login screen
         Login model = new Login();
         LoginView view = new LoginView();
         LoginPresenter presenter = new LoginPresenter(model, view);

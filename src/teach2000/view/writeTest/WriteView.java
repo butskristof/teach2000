@@ -71,25 +71,16 @@ public class WriteView extends GridPane {
 
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-        title = new
-                Label("Nederlands - Engels");
-        taalFrom = new
-                Label("Nederlands");
-        taalTo = new
-                Label("Engels");
-        word = new
-                Label("\"huis\"");
-        inputField = new
-                TextField();
-        okButton = new
-                Button("OK");
-        extraText = new
-                Label("Extra");
-        score = new
-                Label("Score");
+        title = new Label();
+        taalFrom = new Label();
+        taalTo = new Label();
+        word = new Label();
+        inputField = new TextField();
+        okButton = new Button("OK");
+        extraText = new Label("Extra");
+        score = new Label("Score");
 
-        this.afsluiten = new
-                MenuItem("Exit");
+        this.afsluiten = new MenuItem("Exit");
     }
 
     ///////////////////Layout/////////////////////

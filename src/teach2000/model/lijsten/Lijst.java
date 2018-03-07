@@ -1,10 +1,10 @@
-package teach2000.model;
+package teach2000.model.lijsten;
 
+import teach2000.model.vragen.Vraag;
 import teach2000.model.utilities.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 /**
  * @author Kristof Buts
@@ -16,17 +16,21 @@ public class Lijst {
 	private String lang_from;
 	private String lang_to;
 
+	// CONSTRUCTORS
+
 	public Lijst(String lang_from, String lang_to) {
+		// used when creating a new list that hasn't got an ID yet
 		this(RandomGenerator.getRandomId(), lang_from, lang_to);
 	}
 
 	public Lijst(String id, String lang_from, String lang_to) {
+		// used when importing a list from file
 		this.id = id;
 		this.lang_from = lang_from;
 		this.lang_to = lang_to;
 	}
 
-	// getters
+	// GETTERS
 
 	public String getId() {
 		return id;
@@ -44,6 +48,7 @@ public class Lijst {
 		return vragen;
 	}
 
+	// Formatted title for uniform presentation
 	public String getTitle() {
 		return String.format("%s - %s", this.lang_from, this.lang_to);
 	}
@@ -52,26 +57,27 @@ public class Lijst {
 		this.vragen.add(v);
 	}
 
-	public Vraag getQuestion() {
-		// returns null if all questions have a score of 3
+	// BUSINESS LOGIC
 
-		// make sure the questions are returned at random
+	// Get a question from the list
+	// When all questions in the list have reached their maximum score, null will be returned
+	public Vraag getQuestion() {
+		// Shuffle questions to make sure they're in random order
 		Collections.shuffle(vragen);
 
-		// iterate through questions until we have one that hasn't reached it's maximum score
+		// Iterate through questions until we have one that hasn't reached it's maximum score
 		for (Vraag v : vragen) {
-			System.out.println(v.questionShouldBeShown());
 			if (v.questionShouldBeShown()) {
 				return v;
 			}
 		}
 
+		// Only reached when all questions have reached their maximum score
 		return null;
 	}
 
-	// business logic
 
-	// presentation
+	// PRESENTATION
 
 	@Override
 	public String toString() {
