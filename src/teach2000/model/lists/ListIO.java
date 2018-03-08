@@ -20,7 +20,7 @@ public class ListIO {
 
 	/*
 	format for storing lists:
-	LANG_FROM	LANG_TO
+	LANG_FROM	LANG_TO		NAME
 	NO_OF_QUESTIONS
 	QUESTION	ANSWER	NO_OF_ALTERNATIVES	ALTERNATIVES
 	 */
@@ -71,11 +71,22 @@ public class ListIO {
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
 		Path file = userfolder.resolve(listid);
 
+		ret = readList(file.toFile());
+
+		return ret;
+	}
+
+	// pass in the result of a FileChooser
+	public static List readList(File file) {
+		// Read in a list and return it to the calling function
+		// TODO exception handling
+		List ret = null; // initialise return variable
+
 		// open buffered input stream to file
 		try (DataInputStream is = new DataInputStream(new BufferedInputStream(new FileInputStream(file.toString())))) {
 			// create new list
 			// read languages from and to
-			ret = new List(is.readUTF(), is.readUTF());
+			ret = new List(is.readUTF(), is.readUTF(), is.readUTF());
 			// read number of questions stored
 			int no_questions = is.readInt();
 			// loop over all questions
@@ -121,6 +132,7 @@ public class ListIO {
 			// write meta information
 			os.writeUTF(list.getLang_from());
 			os.writeUTF(list.getLang_to());
+			os.writeUTF(list.getName());
 			os.writeInt(vragen.size());
 
 			// write away each question

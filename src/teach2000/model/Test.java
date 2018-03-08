@@ -1,10 +1,14 @@
 package teach2000.model;
 
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.model.questions.Question;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -14,19 +18,20 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
-		Scanner keyboard = new Scanner(System.in);
+//		Scanner keyboard = new Scanner(System.in);
 //		MultipleChoice mc = new MultipleChoice();
 //		mc.test();
 //
 //		AntwoordInvullen ai = new AntwoordInvullen();
 //		ai.test();
 
+		// create user and users file
+		UserList users = new UserList();
 		User buts = new User("Buts");
 		Test.setup(buts);
-		UserList users = new UserList();
 		users.addUser(buts);
 //
-		ListIO.writeList(buts.getId(), buts.getList(0));
+//		ListIO.writeList(buts.getId(), buts.getList(0));
 //		ArrayList<Lijst> lists = LijstIO.readAllLists(buts.getId());
 //		for (Lijst l: lists) {
 //			System.out.println(l);
@@ -60,9 +65,10 @@ public class Test {
 		Question v = new Question("tafel", "table", new String[]{"tabel", "taple"});
 		Question v2 = new Question("toetsenbord", "keyboard", new String[]{"typboard", "kyboard"});
 		List list;
-		list = new List("NL", "EN");
+		list = new List("NL", "EN", "Test1");
 		list.addQuestion(v);
 		list.addQuestion(v2);
 		u.addList(list);
 	}
+
 }

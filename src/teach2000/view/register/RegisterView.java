@@ -43,7 +43,8 @@ public class RegisterView extends GridPane {
     private void initializeNodes() {
         this.confirm = new Button("OK");
         this.cancel = new Button("Cancel");
-        this.addName = new TextField("Voer naam in");
+        this.addName = new TextField();
+        this.addName.setPromptText("Enter name");
     }
 
     private void layoutNodes() {

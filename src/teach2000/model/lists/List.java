@@ -15,19 +15,21 @@ public class List {
 	private String id;
 	private String lang_from;
 	private String lang_to;
+	private String name;
 
 	// CONSTRUCTORS
 
-	public List(String lang_from, String lang_to) {
+	public List(String lang_from, String lang_to, String name) {
 		// used when creating a new list that hasn't got an ID yet
-		this(RandomGenerator.getRandomId(), lang_from, lang_to);
+		this(RandomGenerator.getRandomId(), lang_from, lang_to, name);
 	}
 
-	public List(String id, String lang_from, String lang_to) {
+	public List(String id, String lang_from, String lang_to, String name) {
 		// used when importing a list from file
 		this.id = id;
 		this.lang_from = lang_from;
 		this.lang_to = lang_to;
+		this.name = name;
 	}
 
 	// GETTERS
@@ -53,8 +55,17 @@ public class List {
 		return String.format("%s - %s", this.lang_from, this.lang_to);
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void addQuestion(Question v) {
 		this.vragen.add(v);
+	}
+
+	public void removeQuestion(int index) {
+		// TODO exception handling
+		this.vragen.remove(index);
 	}
 
 	// BUSINESS LOGIC

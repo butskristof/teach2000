@@ -2,6 +2,8 @@ package teach2000.model;
 
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -70,6 +72,12 @@ public class UserList {
 	private void readUsers() {
 		// Users are imported from binary file
 		// try to open users file
+
+		// if users file doesn't exist, skip
+		if (!Files.exists(Paths.get(FILE))) {
+			return;
+		}
+
 		try (DataInputStream is = new DataInputStream(new BufferedInputStream(new FileInputStream(FILE)))) {
 			// loop over all entries
 			while (is.available() > 0) {

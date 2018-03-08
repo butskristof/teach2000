@@ -1,5 +1,6 @@
 package teach2000.view.writeTest;
 
+import com.sun.javafx.binding.StringFormatter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -77,7 +78,7 @@ public class WritePresenter {
 		// updated constantly
 		this.view.getTaalFrom().setText(this.model.getLangFrom());
 		this.view.getTaalTo().setText(this.model.getLangTo());
-		this.view.getTitle().setText(this.model.getTitle());
+		this.view.getTitle().setText(this.model.getListName());
 	}
 
 	private void updateView() {
@@ -89,14 +90,18 @@ public class WritePresenter {
 			// handle end of test
 			final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText("Done!");
-			alert.setContentText("Test is done.");
+			alert.setContentText(String.format("Score: %d", this.model.getScore()));
 			alert.showAndWait();
+
+			// return to main menu
+			Platform.exit();
 		} else {
 			this.model.setNewQuestion();
 
 			// set word, current score and clear input field
 			this.view.getWord().setText(this.model.getCurrentQuestion().getQuestion());
-			this.view.getScore().setText(String.format("Score: %d", this.model.getCurrentQuestion().getScore()));
+			this.view.getExtraText().setText(String.format("Score voor deze test: %d", this.model.getScore()));
+			this.view.getScore().setText(String.format("Score voor deze vraag: %d", this.model.getCurrentQuestion().getScore()));
 			this.view.getInputField().clear();
 		}
 

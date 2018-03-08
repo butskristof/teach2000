@@ -112,11 +112,11 @@ public class Question {
 	public String toString() {
 		StringBuilder ret = new StringBuilder();
 
-		System.out.printf("%s\t%s\t%d\t", this.getQuestion(), this.getAnswer(), this.getAlternatives().length);
+		ret.append(String.format("%s\t%s\t%d\t", this.getQuestion(), this.getAnswer(), this.getAlternatives().length));
 		for (String s: this.getAlternatives()) {
-			System.out.printf("%s\t", s);
+			ret.append(String.format("%s\t", s));
 		}
-		System.out.printf("%n");
+		ret.append("\n");
 
 		return ret.toString();
 	}

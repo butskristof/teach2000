@@ -42,6 +42,11 @@ public abstract class Overhoring {
 		return this.list.getTitle();
 	}
 
+	public String getListName() {
+		// we don't open up access to the list, so an intermediate method is necessary
+		return this.list.getName();
+	}
+
 	public int getScore() {
 		return score;
 	}
@@ -73,6 +78,12 @@ public abstract class Overhoring {
 		// it'll take care of it's score and provide us with the result
 		boolean ret = false; // assume worst case
 		ret = this.currentQuestion.processAnswer(answer); // pass user's answer to question
+		// set test score
+		if (ret) {
+			this.correctAnswer();
+		} else {
+			this.wrongAnswer();
+		}
 		this.setNewQuestion(); // move on from this question
 
 		return ret;

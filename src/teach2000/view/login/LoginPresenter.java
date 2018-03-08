@@ -11,6 +11,8 @@ import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
 import teach2000.model.UserList;
+import teach2000.view.mainMenu.MainMenuPresenter;
+import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.register.RegisterPresenter;
 import teach2000.view.register.RegisterView;
 import teach2000.view.writeTest.WritePresenter;
@@ -41,11 +43,12 @@ public class LoginPresenter {
         view.getLoginButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	// eerst nieuw model opbouwen gebaseerd op selectie
+            	// get index of user selected
 				int userChosen = view.getUsers().getSelectionModel().getSelectedIndex();
 				User u = model.getUsers().getUsers().get(userChosen);
 
 				try {
+					// for testing, take first list stored
 					AntwoordInvullen ai = new AntwoordInvullen(u.getList(0));
 
 					WriteView writeView = new WriteView();
@@ -80,8 +83,8 @@ public class LoginPresenter {
 		// build list to display
 		ObservableList<String> choices = FXCollections.observableArrayList();
 		for (User u: users) {
-			String t = String.format("%s (%s)", u.getName(), u.getId());
-			choices.add(t);
+//			String t = String.format("%s (%s)", u.getName(), u.getId());
+			choices.add(u.getName());
 		}
 
 		this.view.getUsers().setItems(choices);
