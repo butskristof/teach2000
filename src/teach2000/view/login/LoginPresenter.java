@@ -18,8 +18,6 @@ import teach2000.view.register.RegisterView;
 import teach2000.view.writeTest.WritePresenter;
 import teach2000.view.writeTest.WriteView;
 
-import javax.swing.*;
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Optional;
 

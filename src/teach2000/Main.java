@@ -2,22 +2,10 @@ package teach2000;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import teach2000.model.Login;
-import teach2000.model.Teach2000Model;
-import teach2000.model.User;
-import teach2000.model.UserList;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
-import teach2000.view.Teach2000Presenter;
-import teach2000.view.Teach2000View;
-import teach2000.view.mainMenu.MainMenuView;
-import teach2000.view.mcTest.McView;
-import teach2000.view.register.RegisterView;
-import teach2000.view.writeTest.WriteView;
 
 public class Main extends Application {
 

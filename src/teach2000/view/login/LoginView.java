@@ -22,7 +22,7 @@ public class LoginView extends GridPane {
     ///////////////////Attributes/////////////////////
     private ComboBox<String> users;
     private Button loginButton, registerButton;
-    private Label explanationLabel;
+    private Label explanationLabel, titleLabel;
 
 	///////////////////Constructor/////////////////////
 	public LoginView() {
@@ -49,6 +49,7 @@ public class LoginView extends GridPane {
         this.loginButton = new Button("Login");
         this.registerButton = new Button("Register");
         this.explanationLabel = new Label("To add a new user press the Register button");
+        this.titleLabel = new Label("Teach2000");
     }
 
     ///////////////////Layout/////////////////////
@@ -73,31 +74,37 @@ public class LoginView extends GridPane {
 
         ///////////////////Elements Layout/////////////////////
 
+		// TITLE
+		this.add(this.titleLabel, 0, 0);
+		this.titleLabel.setStyle("-fx-font-size: 50");
+		GridPane.setConstraints(this.titleLabel, 0, 0, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+
         //Label at Top
-        this.add(explanationLabel, 0, 0);
-        GridPane.setConstraints(explanationLabel, 0, 0, 2, 1,
+        this.add(explanationLabel, 0, 1);
+        GridPane.setConstraints(explanationLabel, 0, 1, 2, 1,
                 HPos.CENTER, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
 
         //BoxList
-        this.add(users, 0, 1);
+        this.add(users, 0, 2);
         users.setPrefWidth(250);
-        GridPane.setConstraints(users, 0, 1, 2, 1,
+        GridPane.setConstraints(users, 0, 2, 2, 1,
                 HPos.CENTER, VPos.CENTER,
                 Priority.ALWAYS, Priority.NEVER);
 
         //Login Button
-        this.add(loginButton, 0, 2);
+        this.add(loginButton, 0, 3);
         loginButton.setPrefWidth(120);
-        GridPane.setConstraints(loginButton, 0, 2, 1, 1,
+        GridPane.setConstraints(loginButton, 0, 3, 1, 1,
                 HPos.RIGHT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
 
         //Register Button
-        this.add(registerButton, 1, 2);
+        this.add(registerButton, 1, 3);
         registerButton.setPrefWidth(120);
-        GridPane.setConstraints(registerButton, 1, 2, 1, 1,
+        GridPane.setConstraints(registerButton, 1, 3, 1, 1,
                 HPos.LEFT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
+
     }
 }

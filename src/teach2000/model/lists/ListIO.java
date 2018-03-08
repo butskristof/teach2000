@@ -1,5 +1,6 @@
 package teach2000.model.lists;
 
+import teach2000.Teach2000Exception;
 import teach2000.model.questions.Question;
 import teach2000.model.questions.QuestionIO;
 
@@ -39,9 +40,9 @@ public class ListIO {
 			try {
 				Files.createDirectory(userfolder);
 			} catch (IOException e) {
-				// TODO
 				// should be extended
-				e.printStackTrace();
+//				e.printStackTrace();
+				throw new Teach2000Exception("Unable to create user list folder");
 			}
 		}
 		// Create list of files in user's folder

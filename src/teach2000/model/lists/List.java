@@ -64,8 +64,12 @@ public class List {
 	}
 
 	public void removeQuestion(int index) {
-		// TODO exception handling
-		this.vragen.remove(index);
+		// check if provided index is in range
+		if ( index >= 0 && (index < (this.vragen.size() - 1)) ) {
+			this.vragen.remove(index);
+		} else {
+			throw new IllegalArgumentException("Provided index out of bounds");
+		}
 	}
 
 	// BUSINESS LOGIC

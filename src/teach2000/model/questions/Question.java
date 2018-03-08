@@ -1,5 +1,7 @@
 package teach2000.model.questions;
 
+import teach2000.Teach2000Exception;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,8 +28,19 @@ public class Question {
 	// CONSTRUCTORS
 
 	public Question(String question, String answer, String[] alternatives) {
-		this.question = question;
-		this.answer = answer;
+
+		if (question != null && !question.equals("")) {
+			this.question = question;
+		} else {
+			throw new IllegalArgumentException("Question shouldn't be empty.");
+		}
+
+		if (answer != null && !answer.equals("")) {
+			this.answer = answer;
+		} else {
+			throw new IllegalArgumentException("Answer shouldn't be empty.");
+		}
+
 		this.alternatives = alternatives;
 	}
 

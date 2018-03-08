@@ -15,7 +15,6 @@ import java.util.Optional;
  * @project teach20002
  */
 public class WritePresenter {
-//	private Login model;
 	private AntwoordInvullen model;
 	private WriteView view;
 
