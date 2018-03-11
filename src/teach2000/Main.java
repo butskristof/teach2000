@@ -3,6 +3,9 @@ package teach2000;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import teach2000.model.Login;
+import teach2000.view.login.LoginPresenter;
+import teach2000.view.login.LoginView;
 import teach2000.view.mainMenu.MainMenuView;
 
 public class Main extends Application {
@@ -11,11 +14,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
 		// We start by building the login screen
-        /*Login model = new Login();
+        Login model = new Login();
         LoginView view = new LoginView();
-        LoginPresenter presenter = new LoginPresenter(model, view);*/
+        LoginPresenter presenter = new LoginPresenter(model, view);
 
-        primaryStage.setScene(new Scene(new MainMenuView()));
+        primaryStage.setScene(new Scene(view));
 		primaryStage.setTitle("Teach2000");
         primaryStage.setHeight(400);
         primaryStage.setWidth(800);

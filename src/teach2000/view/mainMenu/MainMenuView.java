@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import teach2000.model.DataSource;
+import teach2000.model.lists.List;
 
 /**
  * @author demacryx on 25.02.2018 7:11 PM.
@@ -19,7 +20,7 @@ public class MainMenuView extends VBox {
     ///////////////////Attributes/////////////////////
     private Label lijsten;
     private Button toevoegen, verweideren, bewerken;
-    private TableView<DataSource> table;
+    private TableView<List> table;
     private Label label;
 
     ///////////////////Constructor/////////////////////
@@ -29,30 +30,43 @@ public class MainMenuView extends VBox {
     }
 
     ///////////////////Getters/////////////////////
-    public ObservableList<DataSource> getList () {
-        ObservableList<DataSource> lists = FXCollections.observableArrayList();
-        lists.add(new DataSource("example1",251.51,55));
-        return lists;
-    }
+//    public ObservableList<DataSource> getList () {
+//        ObservableList<DataSource> lists = FXCollections.observableArrayList();
+//        lists.add(new DataSource("example1",251.51,55));
+//        return lists;
+//    }
 
-    ///////////////////Initializer/////////////////////
+	public TableView<List> getTable() {
+		return table;
+	}
+
+	///////////////////Initializer/////////////////////
     private void initializeNodes() {
 
-        table = new TableView();
+        table = new TableView<>();
         label = new Label("Lijsten");
-
 
         label.setFont(new Font("Arial", 20));
 
         table.setEditable(true);
 
-        TableColumn<DataSource, String> talenColumn = new TableColumn<>("Talen");
+//        TableColumn<DataSource, String> talenColumn = new TableColumn<>("Talen");
+//
+//        TableColumn titleColumn = new TableColumn("Titel");
+//        TableColumn scoreColumn = new TableColumn("Score");
+//
+//        table.getColumns().addAll(talenColumn, titleColumn, scoreColumn);
 
-        TableColumn titleColumn = new TableColumn("Titel");
-        TableColumn scoreColumn = new TableColumn("Score");
+		TableColumn titlecolumn = new TableColumn("Title");
+		titlecolumn.setCellValueFactory(
+				new PropertyValueFactory<List, String>("title")
+		);
+		TableColumn namecolumn = new TableColumn("Title");
+		namecolumn.setCellValueFactory(
+				new PropertyValueFactory<List, String>("name")
+		);
 
-        table.getColumns().addAll(talenColumn, titleColumn, scoreColumn);
-
+		table.getColumns().addAll(titlecolumn, namecolumn);
 
     }
 

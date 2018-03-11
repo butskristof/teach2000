@@ -1,6 +1,8 @@
 package teach2000.view.mainMenu;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -9,6 +11,7 @@ import teach2000.model.Login;
 import teach2000.model.User;
 import teach2000.model.lists.List;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class MainMenuPresenter {
     private User user;
     private MainMenuView view;
+	private ObservableList<List> lists = FXCollections.observableArrayList();
 
     public MainMenuPresenter(User user, MainMenuView view) {
         this.user = user;
@@ -51,6 +55,13 @@ public class MainMenuPresenter {
     	/*for (List l: this.user.getLists()) {
     		this.view.addLabel(l.getTitle());
 		}*/
+
+		ArrayList<List> userlists = this.user.getLists();
+		for (List l: userlists) {
+			this.lists.add(l);
+		}
+
+		this.view.getTable().setItems(this.lists);
     }
 
     private void updateView() {
