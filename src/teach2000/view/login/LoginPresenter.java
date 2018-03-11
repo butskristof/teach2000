@@ -53,6 +53,8 @@ public class LoginPresenter {
 					WritePresenter presenter = new WritePresenter(ai, writeView);
 					view.getScene().setRoot(writeView);
 					writeView.getScene().getWindow().sizeToScene();
+
+					//Creates a bug, newly registered user Cant Login!!!!!!
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("No lists found.");
 				}

@@ -48,12 +48,13 @@ public class MainMenuPresenter {
     }
 
     private void initialiseView() {
-    	for (List l: this.user.getLists()) {
+    	/*for (List l: this.user.getLists()) {
     		this.view.addLabel(l.getTitle());
-		}
-	}
+		}*/
+    }
 
     private void updateView() {
-    	this.view.updateLabels();
+    /*	this.view.updateLabels();
+    }*/
     }
 }
