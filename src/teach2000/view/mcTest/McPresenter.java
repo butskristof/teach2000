@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
-import teach2000.model.McChoice;
 import teach2000.model.MultipleChoice;
 
 import java.util.ArrayList;

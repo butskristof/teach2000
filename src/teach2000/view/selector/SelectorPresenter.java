@@ -20,8 +20,6 @@ import teach2000.view.writeTest.WriteView;
  * @project teach20002
  */
 public class SelectorPresenter {
-//    private McChoice model1;
-//    private AntwoordInvullen model2;
     private SelectorView view;
     private User selectedUser;
     private int selectedList;

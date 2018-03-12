@@ -15,6 +15,7 @@ import javafx.stage.WindowEvent;
 import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
+import teach2000.model.UserList;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.view.selector.SelectorPresenter;
@@ -32,10 +33,9 @@ import java.util.Optional;
  * @project teach20002
  */
 public class MainMenuPresenter {
-
+	private UserList userList;
     private User user;
     private MainMenuView view;
-	private SelectorView selectorView;
     private ObservableList<List> lists = FXCollections.observableArrayList();
 
     public MainMenuPresenter(User user, MainMenuView view) {
@@ -46,6 +46,15 @@ public class MainMenuPresenter {
     }
 
     private void addEventHandlers() {
+    	view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				//delete user account
+				userList.removeUser(user);
+			}
+		});
+
+
         // exit from menu
         view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
             @Override

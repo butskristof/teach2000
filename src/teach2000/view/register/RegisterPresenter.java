@@ -1,10 +1,15 @@
 package teach2000.view.register;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import teach2000.model.Login;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
+
+import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 6:08 PM.
@@ -36,9 +41,19 @@ public class RegisterPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// add user
-				model.addUser(view.getAddName().getText());
-
-				callbackLogin();
+				//User cannot be added if name field is empty
+				if (view.getAddName().getText().isEmpty()) {
+					final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+					alert.setHeaderText("No Name");
+					alert.setContentText("Please fill in a name!");
+					Optional<ButtonType> choice = alert.showAndWait();
+					if (choice.get().getButtonData().isCancelButton()) {
+						event.consume();
+					}
+				}else {
+					model.addUser(view.getAddName().getText());
+					callbackLogin();
+				}
 			}
 		});
 	}

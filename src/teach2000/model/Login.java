@@ -1,5 +1,7 @@
 package teach2000.model;
 
+import teach2000.view.login.LoginView;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -8,6 +10,10 @@ import java.util.ArrayList;
  * @project teach20002
  */
 public class Login {
+
+    private Login model;
+    private LoginView view;
+
 	// the login model will read the users from the correct files and store them in memory
 	// offering them in an accessible format for the presenter
 	private UserList users = new UserList();

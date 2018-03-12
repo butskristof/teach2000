@@ -69,6 +69,11 @@ public class UserList {
 		}
 	}
 
+	public void removeUser(User user){
+		//remove existing user currently logged in
+		this.users.remove(user);
+	}
+
 	private void readUsers() {
 		// Users are imported from binary file
 		// try to open users file

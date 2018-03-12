@@ -51,7 +51,6 @@ public class LoginPresenter {
 					MainMenuPresenter presenter = new MainMenuPresenter(u, mainMenuView);
 					view.getScene().setRoot(mainMenuView);
 
-					//Creates a bug, newly registered user Cant Login!!!!!!
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("No lists found.");
 				}
