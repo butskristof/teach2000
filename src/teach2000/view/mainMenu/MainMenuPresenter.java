@@ -8,11 +8,14 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
 import teach2000.model.lists.List;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
+import teach2000.view.writeTest.WritePresenter;
+import teach2000.view.writeTest.WriteView;
 
 
 import java.util.ArrayList;
@@ -23,9 +26,12 @@ import java.util.Optional;
  * @project teach20002
  */
 public class MainMenuPresenter {
+
     private User user;
     private MainMenuView view;
+	private SelectorView selectorView;
     private ObservableList<List> lists = FXCollections.observableArrayList();
+
     public MainMenuPresenter(User user, MainMenuView view) {
         this.user = user;
         this.view = view;
@@ -33,8 +39,6 @@ public class MainMenuPresenter {
         initialiseView();
         updateView();
     }
-
-
 
     private void addEventHandlers() {
         // exit from menu
@@ -60,8 +64,16 @@ public class MainMenuPresenter {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2){
+                	// get index of selected row
+					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+					System.out.println(index);
+
+					// make selector view
                     SelectorView selectorView = new SelectorView();
+					SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
                     view.getScene().setRoot(selectorView);
+
                 }
             }
         });

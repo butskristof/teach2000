@@ -21,10 +21,16 @@ public class SelectorView extends GridPane{
     private Label question;
     private final ToggleGroup group = new ToggleGroup();
 
+    private Button multiplechoice, write;
+
+    // CONSTRUCTOR
+
     public SelectorView() {
         this.initializeNodes();
         this.layoutNodes();
     }
+
+    // GETTERS
 
     public RadioButton getMc() {
         return mc;
@@ -38,23 +44,27 @@ public class SelectorView extends GridPane{
         return group;
     }
 
-    private void initializeNodes() {
+	public Button getMultiplechoice() {
+		return multiplechoice;
+	}
 
+	public Button getWrite() {
+		return write;
+	}
 
+	private void initializeNodes() {
         this.mc=new RadioButton("Multiple Choice");
         mc.setToggleGroup(group);
         this.wt=new RadioButton("Write Test");
         wt.setToggleGroup(group);
-        this.question= new Label("Which type of test do you want to do?");
+        this.question= new Label("What type of test do you want to do?");
         question.setFont(new Font("Arial",20));
 
-
+		this.multiplechoice = new Button("Multiple choice");
+		this.write = new Button("Fill in the answer");
     }
 
     private void layoutNodes() {
-
-
-
         ///////////////////Grid Settings/////////////////////
         this.setGridLinesVisible(true);
         this.setAlignment(Pos.CENTER);
@@ -82,15 +92,20 @@ public class SelectorView extends GridPane{
                 Priority.NEVER, Priority.NEVER);
 
         //OK Button
-        this.add(mc, 0, 1);
-        GridPane.setConstraints(mc, 0, 1, 1, 1,
-                HPos.RIGHT, VPos.CENTER,
-                Priority.NEVER, Priority.NEVER);
+//        this.add(mc, 0, 1);
+//        GridPane.setConstraints(mc, 0, 1, 1, 1,
+//                HPos.RIGHT, VPos.CENTER,
+//                Priority.NEVER, Priority.NEVER);
 
         //Cancel Button
-        this.add(wt, 1, 1);
-        GridPane.setConstraints(wt, 1, 1, 1, 1,
-                HPos.LEFT, VPos.CENTER,
-                Priority.NEVER, Priority.NEVER);
+//        this.add(wt, 1, 1);
+//        GridPane.setConstraints(wt, 1, 1, 1, 1,
+//                HPos.LEFT, VPos.CENTER,
+//                Priority.NEVER, Priority.NEVER);
+
+		this.add(multiplechoice, 0, 1);
+		GridPane.setConstraints(multiplechoice, 0, 1, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		this.add(write, 1, 1);
+		GridPane.setConstraints(write, 1, 1, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
     }
 }

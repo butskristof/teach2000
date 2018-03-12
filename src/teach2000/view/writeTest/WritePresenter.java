@@ -99,8 +99,8 @@ public class WritePresenter {
 
 			// set word, current score and clear input field
 			this.view.getWord().setText(this.model.getCurrentQuestion().getQuestion());
-			this.view.getExtraText().setText(String.format("Score voor deze test: %d", this.model.getScore()));
-			this.view.getScore().setText(String.format("Score voor deze vraag: %d", this.model.getCurrentQuestion().getScore()));
+			this.view.getExtraText().setText(String.format("Score for this test: %d", this.model.getScore()));
+			this.view.getScore().setText(String.format("Score for this question: %d", this.model.getCurrentQuestion().getScore()));
 			this.view.getInputField().clear();
 		}
 

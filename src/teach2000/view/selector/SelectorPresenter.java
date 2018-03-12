@@ -9,6 +9,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.input.MouseEvent;
 import teach2000.model.AntwoordInvullen;
 import teach2000.model.McChoice;
+import teach2000.model.User;
 import teach2000.model.WtChoice;
 import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.mcTest.McPresenter;
@@ -22,14 +23,16 @@ import teach2000.view.writeTest.WriteView;
  * @project teach20002
  */
 public class SelectorPresenter {
-    private McChoice model1;
-    private AntwoordInvullen model2;
+//    private McChoice model1;
+//    private AntwoordInvullen model2;
     private SelectorView view;
+    private User selectedUser;
+    private int selectedList;
 
-    public SelectorPresenter(SelectorView view, McChoice model1, AntwoordInvullen model2) {
+    public SelectorPresenter(SelectorView view, User u, int listindex) {
         this.view = view;
-        this.model1=model1;
-        this.model2=model2;
+        this.selectedUser = u;
+        this.selectedList = listindex;
         this.addEventHandlers();
         this.updateView();
     }
@@ -37,30 +40,50 @@ public class SelectorPresenter {
 
 
     private void addEventHandlers() {
-        view.getGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-                // Has selection.
-                if (view.getGroup().getSelectedToggle() != null) {
-                    McView mcView = new McView();
-                    McPresenter mcPresenter = new McPresenter(model1, mcView);
-                    view.getScene().setRoot(mcView);
+//        view.getGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+//                // Has selection.
+//                if (view.getGroup().getSelectedToggle() != null) {
+//                    McView mcView = new McView();
+//                    McPresenter mcPresenter = new McPresenter(model1, mcView);
+//                    view.getScene().setRoot(mcView);
+//
+//                }
+//            }
+//        });
+//
+//        //Multiple Choice Handler
+//
+//
+//        view.getWt().setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                WriteView writeView = new WriteView();
+//                WritePresenter writePresenter = new WritePresenter(model2,writeView);
+//                view.getScene().setRoot(writeView);
+//            }
+//        });
 
-                }
-            }
-        });
+        this.view.getMultiplechoice().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// start mutliple choice test
+			}
+		});
 
-        //Multiple Choice Handler
+        this.view.getWrite().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// start write
+					AntwoordInvullen ai = new AntwoordInvullen(selectedUser.getList(selectedList));
 
-
-        view.getWt().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                WriteView writeView = new WriteView();
-                WritePresenter writePresenter = new WritePresenter(model2,writeView);
-                view.getScene().setRoot(writeView);
-            }
-        });
+					WriteView writeView = new WriteView();
+					WritePresenter presenter = new WritePresenter(ai, writeView);
+					view.getScene().setRoot(writeView);
+					writeView.getScene().getWindow().sizeToScene();
+			}
+		});
     }
 
     private void callbackMainMenu() {
