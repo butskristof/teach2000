@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.input.MouseEvent;
-import teach2000.model.AntwoordInvullen;
-import teach2000.model.McChoice;
-import teach2000.model.User;
-import teach2000.model.WtChoice;
+import teach2000.model.*;
 import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.mcTest.McPresenter;
 import teach2000.view.mcTest.McView;
@@ -40,35 +37,19 @@ public class SelectorPresenter {
 
 
     private void addEventHandlers() {
-//        view.getGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-//                // Has selection.
-//                if (view.getGroup().getSelectedToggle() != null) {
-//                    McView mcView = new McView();
-//                    McPresenter mcPresenter = new McPresenter(model1, mcView);
-//                    view.getScene().setRoot(mcView);
-//
-//                }
-//            }
-//        });
-//
-//        //Multiple Choice Handler
-//
-//
-//        view.getWt().setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                WriteView writeView = new WriteView();
-//                WritePresenter writePresenter = new WritePresenter(model2,writeView);
-//                view.getScene().setRoot(writeView);
-//            }
-//        });
-
         this.view.getMultiplechoice().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// start mutliple choice test
+				// create model with passed in user and list index
+				MultipleChoice mc = new MultipleChoice(selectedUser.getList(selectedList));
+
+				// create view and presenter
+				McView mcView = new McView();
+				McPresenter presenter = new McPresenter(mc, mcView);
+				// replace current view with test window
+				view.getScene().setRoot(mcView);
+				mcView.getScene().getWindow().sizeToScene();
 			}
 		});
 
@@ -88,12 +69,6 @@ public class SelectorPresenter {
 			}
 		});
     }
-
-//    private void callbackMainMenu() {
-//        MainMenuView mainMenuView = new MainMenuView();
-//        view.getScene().setRoot(mainMenuView);
-////		loginview.getScene().getWindow().sizeToScene();
-//    }
 
     private void updateView() {
         // not applicable here

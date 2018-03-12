@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+import java.util.ArrayList;
+
 /**
  * @author demacryx on 25.02.2018 6:33 PM.
  * @project teach20002
@@ -16,9 +18,12 @@ import javafx.scene.layout.RowConstraints;
 public class McView extends GridPane {
     ///////////////////Attributes/////////////////////
     private Label title, taalFrom, taalTo, word, extraText, score;
-    private RadioButton alternative, alternative2, alternative3, antwoord;
+//    private RadioButton alternative, alternative2, alternative3, antwoord;
+	ArrayList<RadioButton> radioButtons = new ArrayList<>();
+	private Button okButton;
     private MenuItem afsluiten;
 
+    private ToggleGroup toggleGroup;
 
     ///////////////////Getters/////////////////////
     public Label getTitle() {
@@ -49,23 +54,15 @@ public class McView extends GridPane {
         return afsluiten;
     }
 
-    public RadioButton getAlternative() {
-        return alternative;
-    }
+	public Button getOkButton() {
+		return okButton;
+	}
 
-    public RadioButton getAlternative2() {
-        return alternative2;
-    }
+	public ToggleGroup getToggleGroup() {
+		return toggleGroup;
+	}
 
-    public RadioButton getAlternative3() {
-        return alternative3;
-    }
-
-    public RadioButton getAntwoord() {
-        return antwoord;
-    }
-
-    ///////////////////Constructor/////////////////////
+	///////////////////Constructor/////////////////////
     public McView() {
         this.initializeNodes();
         this.layoutNodes();
@@ -73,7 +70,7 @@ public class McView extends GridPane {
 
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-        ToggleGroup group = new ToggleGroup();
+//        ToggleGroup group = new ToggleGroup();
 
         title = new Label();
         taalFrom = new Label();
@@ -81,16 +78,9 @@ public class McView extends GridPane {
         word = new Label();
         extraText = new Label("Extra");
         score = new Label("Score");
-        alternative = new RadioButton("Alternative");
-        alternative.setToggleGroup(group);
-        alternative2 = new RadioButton("Alternative2");
-        alternative2.setToggleGroup(group);
-        alternative3 = new RadioButton("Alternative3");
-        alternative3.setToggleGroup(group);
-        antwoord = new RadioButton("Juist Antwoord");
-        antwoord.setToggleGroup(group);
-
         this.afsluiten = new MenuItem("Exit");
+
+        this.okButton = new Button("OK");
     }
 
     ///////////////////Layout/////////////////////
@@ -98,20 +88,13 @@ public class McView extends GridPane {
         //Menu
         final Menu bestandMenu = new
                 Menu("File");
-//        final Menu editMenu = new
-//                Menu("Edit");
-//        final Menu helpMenu = new
-//                Menu("Help");
         final Menu aboutMenu = new
                 Menu("About");
         bestandMenu.getItems().add(this.afsluiten);
 
         //MenuBar
-        final MenuBar menuBar = new
-//                MenuBar(bestandMenu, editMenu, helpMenu, aboutMenu);
-                MenuBar(bestandMenu, aboutMenu);
+        final MenuBar menuBar = new MenuBar(bestandMenu, aboutMenu);
         this.add(menuBar, 0, 0, 5, 1);
-
 
         ///////////////////Grid Settings/////////////////////
         this.setGridLinesVisible(true);
@@ -200,28 +183,41 @@ public class McView extends GridPane {
         this.taalTo.setStyle("-fx-font-size: 20");
         GridPane.setConstraints(taalTo, 1, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
-        //multiple Choice
-        this.add(alternative, 1, 6);
-        GridPane.setConstraints(alternative,1,6,1,1,HPos.LEFT,VPos.CENTER,Priority.NEVER,Priority.NEVER);
-
-        this.add(alternative2, 1, 7);
-        GridPane.setConstraints(alternative2,1,7,1,1,HPos.LEFT,VPos.CENTER,Priority.NEVER,Priority.NEVER);
-
-        this.add(alternative3, 1, 8);
-        GridPane.setConstraints(alternative3,1,8,1,1,HPos.LEFT,VPos.CENTER,Priority.NEVER,Priority.NEVER);
-
-        this.add(antwoord, 1, 9);
-        GridPane.setConstraints(antwoord,1,9,1,1,HPos.LEFT,VPos.CENTER,Priority.NEVER,Priority.NEVER);
+		//OK Button
+		this.add(okButton, 2, 5);
+		this.okButton.setStyle("-fx-font-size: 15");
+		GridPane.setConstraints(okButton, 2, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //Extra Text Label
-        this.add(extraText, 1, 10);
+        this.add(extraText, 3, 3);
         this.extraText.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(extraText, 1, 10, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(extraText, 3, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //Score Label
-        this.add(score, 1, 11);
+        this.add(score, 3, 4);
         this.score.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(score, 1, 11, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(score, 3, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
     }
+
+    public void setRadioButtons(ArrayList<String> possibilities) {
+    	// clear existing radio button from pane
+		this.getChildren().removeAll(this.radioButtons);
+		this.toggleGroup = new ToggleGroup();
+		// clear container for radio buttons
+    	this.radioButtons.clear();
+
+    	// create a new radio button for each possibility and add it to the pane
+    	for (int i = 0; i < possibilities.size(); ++i) {
+    		// create radio button
+    		RadioButton r = new RadioButton(possibilities.get(i));
+    		// add to container for easy removal
+    		this.radioButtons.add(r);
+    		// set toggle group
+    		r.setToggleGroup(this.toggleGroup);
+    		// add to pane
+    		this.add(r, 1, i + 6);
+			GridPane.setConstraints(r, 1, i + 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		}
+	}
 
 }

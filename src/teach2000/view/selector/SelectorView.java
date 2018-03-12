@@ -17,10 +17,7 @@ import javafx.scene.text.Font;
  * @project teach20002
  */
 public class SelectorView extends GridPane{
-    private RadioButton mc,wt;
     private Label question;
-    private final ToggleGroup group = new ToggleGroup();
-
     private Button multiplechoice, write;
 
     // CONSTRUCTOR
@@ -32,17 +29,6 @@ public class SelectorView extends GridPane{
 
     // GETTERS
 
-    public RadioButton getMc() {
-        return mc;
-    }
-
-    public RadioButton getWt() {
-        return wt;
-    }
-
-    public ToggleGroup getGroup() {
-        return group;
-    }
 
 	public Button getMultiplechoice() {
 		return multiplechoice;
@@ -53,10 +39,6 @@ public class SelectorView extends GridPane{
 	}
 
 	private void initializeNodes() {
-        this.mc=new RadioButton("Multiple Choice");
-        mc.setToggleGroup(group);
-        this.wt=new RadioButton("Write Test");
-        wt.setToggleGroup(group);
         this.question= new Label("What type of test do you want to do?");
         question.setFont(new Font("Arial",20));
 
@@ -90,18 +72,6 @@ public class SelectorView extends GridPane{
         GridPane.setConstraints(question, 0, 0, 2, 1,
                 HPos.CENTER, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
-
-        //OK Button
-//        this.add(mc, 0, 1);
-//        GridPane.setConstraints(mc, 0, 1, 1, 1,
-//                HPos.RIGHT, VPos.CENTER,
-//                Priority.NEVER, Priority.NEVER);
-
-        //Cancel Button
-//        this.add(wt, 1, 1);
-//        GridPane.setConstraints(wt, 1, 1, 1, 1,
-//                HPos.LEFT, VPos.CENTER,
-//                Priority.NEVER, Priority.NEVER);
 
 		this.add(multiplechoice, 0, 1);
 		GridPane.setConstraints(multiplechoice, 0, 1, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);

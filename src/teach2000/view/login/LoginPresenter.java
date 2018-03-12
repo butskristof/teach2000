@@ -47,27 +47,15 @@ public class LoginPresenter {
 				User u = model.getUsers().getUsers().get(userChosen);
 
 				try {
-					// for testing, take first list stored
-//					AntwoordInvullen ai = new AntwoordInvullen(u.getList(0));
-
-//					WriteView writeView = new WriteView();
-//					WritePresenter presenter = new WritePresenter(ai, writeView);
-//					view.getScene().setRoot(writeView);
-//					writeView.getScene().getWindow().sizeToScene();
-
 					MainMenuView mainMenuView = new MainMenuView();
 					MainMenuPresenter presenter = new MainMenuPresenter(u, mainMenuView);
 					view.getScene().setRoot(mainMenuView);
-//					mainMenuView.getScene().getWindow().sizeToScene();
 
 					//Creates a bug, newly registered user Cant Login!!!!!!
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("No lists found.");
 				}
 
-//                MainMenuView mainMenuView = new MainMenuView();
-//                MainMenuPresenter mainMenuPresenter =
-//                        new MainMenuPresenter(model,mainMenuView);
             }
         });
 
@@ -78,7 +66,6 @@ public class LoginPresenter {
 				RegisterView registerView = new RegisterView();
 				RegisterPresenter registerPresenter = new RegisterPresenter(model, registerView);
 				view.getScene().setRoot(registerView);
-//				registerView.getScene().getWindow().sizeToScene();
 			}
 		});
     }
