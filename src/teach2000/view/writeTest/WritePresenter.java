@@ -1,13 +1,11 @@
 package teach2000.view.writeTest;
 
-import com.sun.javafx.binding.StringFormatter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import teach2000.model.AntwoordInvullen;
-import teach2000.view.mainMenu.MainMenuView;
 
 import java.util.Optional;
 

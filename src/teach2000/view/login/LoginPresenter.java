@@ -1,6 +1,5 @@
 package teach2000.view.login;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,16 +7,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
-import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
-import teach2000.model.UserList;
 import teach2000.view.mainMenu.MainMenuPresenter;
 import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.register.RegisterPresenter;
 import teach2000.view.register.RegisterView;
-import teach2000.view.writeTest.WritePresenter;
-import teach2000.view.writeTest.WriteView;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -48,7 +43,7 @@ public class LoginPresenter {
 
 				try {
 					MainMenuView mainMenuView = new MainMenuView();
-					MainMenuPresenter presenter = new MainMenuPresenter(u, mainMenuView);
+					MainMenuPresenter presenter = new MainMenuPresenter(model, u, mainMenuView);
 					view.getScene().setRoot(mainMenuView);
 
 				} catch (IndexOutOfBoundsException ex) {

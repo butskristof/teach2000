@@ -18,7 +18,6 @@ public class MainMenuView extends VBox {
     private Label label;
     private MenuItem afsluiten, add, remove, edit, importList, exportList, deleteUser;
 
-
     ///////////////////Constructor/////////////////////
     public MainMenuView() {
         this.initializeNodes();
