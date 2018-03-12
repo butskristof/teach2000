@@ -14,7 +14,6 @@ import teach2000.view.mcTest.McView;
 import teach2000.view.writeTest.WritePresenter;
 import teach2000.view.writeTest.WriteView;
 
-
 /**
  * @author demacryx on 12.03.2018 12:14 AM.
  * @project teach20002
@@ -33,8 +32,6 @@ public class SelectorPresenter {
         this.addEventHandlers();
         this.updateView();
     }
-
-
 
     private void addEventHandlers() {
         this.view.getMultiplechoice().setOnAction(new EventHandler<ActionEvent>() {

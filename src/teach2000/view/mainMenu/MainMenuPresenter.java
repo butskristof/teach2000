@@ -92,6 +92,7 @@ public class MainMenuPresenter {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2){
+                	// TODO ignore if no item is selected
                 	// get index of selected row which is the same as the list index
 					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();

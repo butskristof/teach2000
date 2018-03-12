@@ -127,7 +127,7 @@ public class ListIO {
 				e.printStackTrace();
 			}
 		}
-		Path file = userfolder.resolve(list.getId()); // path to specific file
+		Path file = userfolder.resolve(list.getId() + ".list"); // path to specific file
 
 		// Get questions
 		ArrayList<Question> vragen = list.getVragen();
@@ -174,4 +174,5 @@ public class ListIO {
 			}
 		}
 	}
+
 }

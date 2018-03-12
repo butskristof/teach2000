@@ -76,7 +76,6 @@ public class LoginPresenter {
 		// build list to display
 		ObservableList<String> choices = FXCollections.observableArrayList();
 		for (User u: users) {
-//			String t = String.format("%s (%s)", u.getName(), u.getId());
 			choices.add(u.getName());
 		}
 
