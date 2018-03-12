@@ -18,6 +18,8 @@ import teach2000.model.User;
 import teach2000.model.UserList;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
+import teach2000.view.login.LoginPresenter;
+import teach2000.view.login.LoginView;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
 import teach2000.view.writeTest.WritePresenter;
@@ -33,12 +35,13 @@ import java.util.Optional;
  * @project teach20002
  */
 public class MainMenuPresenter {
-	private UserList userList;
+	private Login loginmodel;
     private User user;
     private MainMenuView view;
     private ObservableList<List> lists = FXCollections.observableArrayList();
 
-    public MainMenuPresenter(User user, MainMenuView view) {
+    public MainMenuPresenter(Login loginmodel, User user, MainMenuView view) {
+    	this.loginmodel = loginmodel;
         this.user = user;
         this.view = view;
         this.addEventHandlers();
@@ -50,7 +53,13 @@ public class MainMenuPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				//delete user account
-				userList.removeUser(user);
+				loginmodel.getUsers().removeUser(user);
+				// go back to login view
+				Login model = new Login();
+				LoginView loginview = new LoginView();
+				LoginPresenter presenter = new LoginPresenter(model, loginview);
+
+				view.getScene().setRoot(loginview);
 			}
 		});
 

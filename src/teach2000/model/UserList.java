@@ -57,6 +57,16 @@ public class UserList {
 		// Create a new user and write it to file
 		this.users.add(newuser);
 
+		this.writeUsersToFile();
+	}
+
+	public void removeUser(User user){
+		//remove existing user currently logged in
+		this.users.remove(user);
+		this.writeUsersToFile();
+	}
+
+	private void writeUsersToFile() {
 		// Write user information to file
 		// UserIO should be extracted to separate utility class
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(FILE)))) {
@@ -67,11 +77,6 @@ public class UserList {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	public void removeUser(User user){
-		//remove existing user currently logged in
-		this.users.remove(user);
 	}
 
 	private void readUsers() {

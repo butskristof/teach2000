@@ -48,7 +48,7 @@ public class LoginPresenter {
 
 				try {
 					MainMenuView mainMenuView = new MainMenuView();
-					MainMenuPresenter presenter = new MainMenuPresenter(u, mainMenuView);
+					MainMenuPresenter presenter = new MainMenuPresenter(model, u, mainMenuView);
 					view.getScene().setRoot(mainMenuView);
 
 				} catch (IndexOutOfBoundsException ex) {
