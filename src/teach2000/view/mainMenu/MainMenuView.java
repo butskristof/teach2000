@@ -46,7 +46,15 @@ public class MainMenuView extends VBox {
         return deleteUser;
     }
 
-	///////////////////Initializer/////////////////////
+    public MenuItem getAdd() {
+        return add;
+    }
+
+    public MenuItem getEdit() {
+        return edit;
+    }
+
+    ///////////////////Initializer/////////////////////
     private void initializeNodes() {
         label = new Label("Lijsten");
         label.setFont(new Font("Arial", 20));

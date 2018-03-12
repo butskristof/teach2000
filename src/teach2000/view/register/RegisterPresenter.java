@@ -41,7 +41,7 @@ public class RegisterPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// add user
-				//User cannot be added if name field is empty
+				//User cannot be added if name field is empty.
 				if (view.getAddName().getText().isEmpty()) {
 					final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 					alert.setHeaderText("No Name");

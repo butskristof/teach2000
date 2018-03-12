@@ -18,6 +18,8 @@ import teach2000.model.User;
 import teach2000.model.UserList;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
+import teach2000.view.add.AddPresenter;
+import teach2000.view.add.AddView;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
 import teach2000.view.writeTest.WritePresenter;
@@ -46,6 +48,27 @@ public class MainMenuPresenter {
     }
 
     private void addEventHandlers() {
+    	view.getAdd().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				//open new window to create new wordlist
+				// make selector view and presenter
+				AddView addView = new AddView();
+				AddPresenter addPresenter = new AddPresenter(user,view);
+
+				// create new windows for selection of type and the test itself
+				Stage stage = new Stage();
+				stage.initOwner(view.getScene().getWindow());
+				stage.setScene(new Scene(addView));
+
+				// show new window and pause current window
+				stage.showAndWait();
+
+
+			}
+		});
+
+
     	view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
