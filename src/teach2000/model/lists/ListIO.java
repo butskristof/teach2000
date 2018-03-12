@@ -21,6 +21,7 @@ public class ListIO {
 
 	/*
 	format for storing lists:
+	LISTID
 	LANG_FROM	LANG_TO		NAME
 	NO_OF_QUESTIONS
 	QUESTION	ANSWER	NO_OF_ALTERNATIVES	ALTERNATIVES
@@ -86,8 +87,9 @@ public class ListIO {
 		// open buffered input stream to file
 		try (DataInputStream is = new DataInputStream(new BufferedInputStream(new FileInputStream(file.toString())))) {
 			// create new list
+			// read list id
 			// read languages from and to
-			ret = new List(is.readUTF(), is.readUTF(), is.readUTF());
+			ret = new List(is.readUTF(), is.readUTF(), is.readUTF(), is.readUTF());
 			// read number of questions stored
 			int no_questions = is.readInt();
 			// loop over all questions
@@ -131,6 +133,7 @@ public class ListIO {
 		ArrayList<Question> vragen = list.getVragen();
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.toString())))) {
 			// write meta information
+			os.writeUTF(list.getId());
 			os.writeUTF(list.getLang_from());
 			os.writeUTF(list.getLang_to());
 			os.writeUTF(list.getName());
@@ -143,6 +146,32 @@ public class ListIO {
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	public static void removeList(String userid, String listid) {
+		// write list to file in user's folder
+		// generate path to user's folder
+		Path userfolder = Paths.get(userlistfile_prefix, userid);
+		// Check if user's folder exists and create it if necessary
+		if (!Files.exists(userfolder)) {
+			try {
+				Files.createDirectory(userfolder);
+			} catch (IOException e) {
+				// TODO
+				// should be extended
+				e.printStackTrace();
+			}
+		}
+		Path file = userfolder.resolve(listid); // path to specific file
+
+		// try to remove file
+		if (Files.exists(file)) {
+			try {
+				Files.delete(file);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 }

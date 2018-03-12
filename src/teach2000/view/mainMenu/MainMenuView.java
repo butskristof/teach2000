@@ -34,7 +34,15 @@ public class MainMenuView extends VBox {
         return table;
     }
 
-    ///////////////////Initializer/////////////////////
+	public MenuItem getImportList() {
+		return importList;
+	}
+
+	public MenuItem getRemove() {
+		return remove;
+	}
+
+	///////////////////Initializer/////////////////////
     private void initializeNodes() {
         label = new Label("Lijsten");
         label.setFont(new Font("Arial", 20));
@@ -64,6 +72,8 @@ public class MainMenuView extends VBox {
 
         table.getColumns().addAll(titlecolumn, namecolumn);
 
+        // column are divided equally and resized when necessary
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void layoutNodes() {

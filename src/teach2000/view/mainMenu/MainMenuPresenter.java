@@ -9,17 +9,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
 import teach2000.model.lists.List;
+import teach2000.model.lists.ListIO;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
 import teach2000.view.writeTest.WritePresenter;
 import teach2000.view.writeTest.WriteView;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -37,9 +41,8 @@ public class MainMenuPresenter {
     public MainMenuPresenter(User user, MainMenuView view) {
         this.user = user;
         this.view = view;
-        addEventHandlers();
-        initialiseView();
-        updateView();
+        this.addEventHandlers();
+        this.updateView();
     }
 
     private void addEventHandlers() {
@@ -47,21 +50,44 @@ public class MainMenuPresenter {
         view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Are you sure??");
-                alert.setContentText("Are you sure you want to stop Teach2000?");
-                Optional<ButtonType> choice = alert.showAndWait();
-                if (choice.get().getButtonData().isCancelButton()) {
-                    event.consume();
-                } else {
-
-                    // stop application
-                    // should be extended with closing best practices
-                    Platform.exit();
-                }
+            	// we send a close request so the same code can be re-used
+            	view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
             }
         });
 
+        // import list
+		this.view.getImportList().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				FileChooser fc = new FileChooser();
+				fc.setTitle("Select list file to import");
+				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
+
+				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
+					List importedList = ListIO.readList(listToImport);
+					user.addList(importedList);
+				}
+
+				updateView();
+			}
+		});
+
+		// remove list
+		this.view.getRemove().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// get index of selected row which is the same as the list index
+				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+
+				user.removeList(index);
+
+				updateView();
+			}
+		});
+
+        // handle click on table
+		// get selected row, make new window for tests
         view.getTable().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -86,21 +112,16 @@ public class MainMenuPresenter {
         });
 
     }
-        private void initialiseView(){
-    	/*for (List l: this.user.getLists()) {
-    		this.view.addLabel(l.getTitle());
-		}*/
 
-            ArrayList<List> userlists = this.user.getLists();
-            for (List l : userlists) {
-                this.lists.add(l);
-            }
+	private void updateView () {
+		this.view.getTable().getItems().clear();
+		this.lists.clear();
 
-            this.view.getTable().setItems(this.lists);
-        }
+		ArrayList<List> userlists = this.user.getLists();
+		for (List l : userlists) {
+			this.lists.add(l);
+		}
 
-        private void updateView () {
-    /*	this.view.updateLabels();
-    }*/
-        }
-    }
+		this.view.getTable().setItems(this.lists);
+	}
+}

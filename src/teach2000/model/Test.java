@@ -28,8 +28,11 @@ public class Test {
 		// create user and users file
 		UserList users = new UserList();
 		User buts = new User("Buts");
+		User jos = new User("Jos");
 		Test.setup(buts);
+		Test.setup(jos);
 		users.addUser(buts);
+		users.addUser(jos);
 //
 //		ListIO.writeList(buts.getId(), buts.getList(0));
 //		ArrayList<Lijst> lists = LijstIO.readAllLists(buts.getId());

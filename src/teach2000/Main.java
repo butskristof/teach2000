@@ -14,7 +14,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
 		// We start by building the login screen
         Login model = new Login();
         LoginView view = new LoginView();
@@ -25,7 +24,7 @@ public class Main extends Application {
         primaryStage.setHeight(400);
         primaryStage.setWidth(800);
         primaryStage.setResizable(true);
-		/*presenter.addWindowEventHandlers();*/
+		presenter.addWindowEventHandlers();
 		// stylesheet not found
 //        view.getStylesheets().add("css/main.css");
         primaryStage.show();

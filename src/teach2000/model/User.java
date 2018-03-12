@@ -55,6 +55,13 @@ public class User {
 		ListIO.writeList(this.getId(), l);
 	}
 
+	public void removeList(int listindex) {
+    	// remove file
+		ListIO.removeList(this.getId(), this.lists.get(listindex).getId());
+		// remove from user list
+    	this.lists.remove(listindex);
+	}
+
     public void importLists() {
     	// import user's lists from files
 		this.lists = ListIO.readAllLists(this.getId());
