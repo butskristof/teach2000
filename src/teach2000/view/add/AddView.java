@@ -20,7 +20,7 @@ public class AddView extends GridPane {
     private TextField taalFrom, taalTo;
     private MenuItem afsluiten;
 
-    AddView() {
+    public AddView() {
         initialiserNodes();
         layoutNodes();
     }
@@ -140,44 +140,44 @@ public class AddView extends GridPane {
                 BackgroundSize.DEFAULT)));*/
 
         //title
-        this.add(title, 1, 1);
-        this.title.setStyle("-fx-font-size: 30");
-        GridPane.setConstraints(title, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
-
-        //Taal From Label
-        this.add(taalFrom, 1, 3);
-        this.taalFrom.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(taalFrom, 1, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //Word Label
-        this.add(word, 1, 4);
-        this.word.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //Taal To Label
-        this.add(taalTo, 1, 5);
-        this.taalTo.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(taalTo, 1, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //Input Field
-        this.add(inputField, 1, 6);
-        this.inputField.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(inputField, 1, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //OK Button
-        this.add(okButton, 2, 6);
-        this.okButton.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(okButton, 2, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //Extra Text Label
-        this.add(extraText, 1, 8);
-        this.extraText.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(extraText, 1, 8, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-
-        //Score Label
-        this.add(score, 1, 9);
-        this.score.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(score, 1, 9, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//        this.add(title, 1, 1);
+//        this.title.setStyle("-fx-font-size: 30");
+//        GridPane.setConstraints(title, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
+//
+//        //Taal From Label
+//        this.add(taalFrom, 1, 3);
+//        this.taalFrom.setStyle("-fx-font-size: 20");
+//        GridPane.setConstraints(taalFrom, 1, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //Word Label
+//        this.add(word, 1, 4);
+//        this.word.setStyle("-fx-font-size: 15");
+//        GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //Taal To Label
+//        this.add(taalTo, 1, 5);
+//        this.taalTo.setStyle("-fx-font-size: 20");
+//        GridPane.setConstraints(taalTo, 1, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //Input Field
+//        this.add(inputField, 1, 6);
+//        this.inputField.setStyle("-fx-font-size: 15");
+//        GridPane.setConstraints(inputField, 1, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //OK Button
+//        this.add(okButton, 2, 6);
+//        this.okButton.setStyle("-fx-font-size: 15");
+//        GridPane.setConstraints(okButton, 2, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //Extra Text Label
+//        this.add(extraText, 1, 8);
+//        this.extraText.setStyle("-fx-font-size: 12");
+//        GridPane.setConstraints(extraText, 1, 8, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+//
+//        //Score Label
+//        this.add(score, 1, 9);
+//        this.score.setStyle("-fx-font-size: 12");
+//        GridPane.setConstraints(score, 1, 9, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
     }
 }
