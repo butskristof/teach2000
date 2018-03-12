@@ -78,7 +78,7 @@ public class UserList {
 		// Users are imported from binary file
 		// try to open users file
 
-		// if users file doesn't exist, skip
+		// if users file doesn't exist, stop
 		if (!Files.exists(Paths.get(FILE))) {
 			return;
 		}
@@ -92,10 +92,5 @@ public class UserList {
 			ex.printStackTrace();
 		}
 
-		// print imported users for testing purposes
-//		System.out.println("Added users");
-//		for (User u: this.getUsers()) {
-//			System.out.printf("%s\t%s%n", u.getId(), u.getName());
-//		}
 	}
 }
