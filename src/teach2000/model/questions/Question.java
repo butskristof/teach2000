@@ -119,6 +119,10 @@ public class Question {
 		--this.score;
 	}
 
+	public void resetScore() {
+		this.score = 0;
+	}
+
 	// PRESENTATION
 
 	@Override

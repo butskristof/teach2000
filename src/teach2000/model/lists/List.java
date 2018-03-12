@@ -91,6 +91,12 @@ public class List {
 		return null;
 	}
 
+	public void resetQuestionScores() {
+		for (Question q: this.vragen) {
+			// reset
+			q.resetScore();
+		}
+	}
 
 	// PRESENTATION
 

@@ -62,6 +62,7 @@ public abstract class Overhoring {
 		this.currentQuestion = this.list.getQuestion();
 		if (this.currentQuestion == null) {
 			this.test_done = true;
+			this.list.resetQuestionScores();
 		}
 
 		return this.getCurrentQuestion();
