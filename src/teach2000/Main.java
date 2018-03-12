@@ -7,6 +7,8 @@ import teach2000.model.Login;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 import teach2000.view.mainMenu.MainMenuView;
+import teach2000.view.mcTest.McView;
+import teach2000.view.writeTest.WriteView;
 
 public class Main extends Application {
 

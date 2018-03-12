@@ -61,7 +61,7 @@ public class Question {
 	 */
 	public ArrayList<String> getPossibilities() {
 		// build list starting from alternative answers
-		ArrayList<String> possibilities = new ArrayList<String>(Arrays.asList(this.getAlternatives()));
+		ArrayList<String> possibilities = new ArrayList<>(Arrays.asList(this.getAlternatives()));
 		// add correct answer
 		possibilities.add(this.getAnswer());
 		// shuffle to make sure answer can't be guessed

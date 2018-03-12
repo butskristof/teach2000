@@ -1,15 +1,11 @@
 package teach2000.view.mainMenu;
 
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import teach2000.model.DataSource;
 import teach2000.model.lists.List;
 
 /**
@@ -18,10 +14,10 @@ import teach2000.model.lists.List;
  */
 public class MainMenuView extends VBox {
     ///////////////////Attributes/////////////////////
-    private Label lijsten;
-    private Button toevoegen, verweideren, bewerken;
     private TableView<List> table;
     private Label label;
+    private MenuItem afsluiten, add, remove, edit, importList, exportList;
+
 
     ///////////////////Constructor/////////////////////
     public MainMenuView() {
@@ -30,54 +26,67 @@ public class MainMenuView extends VBox {
     }
 
     ///////////////////Getters/////////////////////
-//    public ObservableList<DataSource> getList () {
-//        ObservableList<DataSource> lists = FXCollections.observableArrayList();
-//        lists.add(new DataSource("example1",251.51,55));
-//        return lists;
-//    }
+    public MenuItem getAfsluiten() {
+        return afsluiten;
+    }
 
-	public TableView<List> getTable() {
-		return table;
-	}
+    public TableView<List> getTable() {
+        return table;
+    }
 
-	///////////////////Initializer/////////////////////
+    ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-
-        table = new TableView<>();
         label = new Label("Lijsten");
-
         label.setFont(new Font("Arial", 20));
 
+        //Menu Settings
+        this.afsluiten = new MenuItem("Exit");
+        this.edit = new MenuItem("Edit");
+        this.add = new MenuItem("Add");
+        this.remove = new MenuItem("Remove");
+        this.importList = new MenuItem("Import List");
+        this.exportList = new MenuItem("Export list");
+
+        //Table Items
+        table = new TableView<>();
         table.setEditable(true);
 
-//        TableColumn<DataSource, String> talenColumn = new TableColumn<>("Talen");
-//
-//        TableColumn titleColumn = new TableColumn("Titel");
-//        TableColumn scoreColumn = new TableColumn("Score");
-//
-//        table.getColumns().addAll(talenColumn, titleColumn, scoreColumn);
+        //Table Settings
+        TableColumn titlecolumn = new TableColumn("Title");
+        titlecolumn.setCellValueFactory(
+                new PropertyValueFactory<List, String>("title")
+        );
 
-		TableColumn titlecolumn = new TableColumn("Title");
-		titlecolumn.setCellValueFactory(
-				new PropertyValueFactory<List, String>("title")
-		);
-		TableColumn namecolumn = new TableColumn("Title");
-		namecolumn.setCellValueFactory(
-				new PropertyValueFactory<List, String>("name")
-		);
+        TableColumn namecolumn = new TableColumn("Name");
+        namecolumn.setCellValueFactory(
+                new PropertyValueFactory<List, String>("name")
+        );
 
-		table.getColumns().addAll(titlecolumn, namecolumn);
+        table.getColumns().addAll(titlecolumn, namecolumn);
 
     }
 
-
     private void layoutNodes() {
-        this.setSpacing(5);
-        this.setPadding(new Insets(10, 0, 0, 10));
+        //Menu
+        final Menu bestandMenu = new
+                Menu("File");
+
+        final Menu editMenu = new
+                Menu("Edit");
+
+        final Menu aboutMenu = new
+                Menu("About");
+
+        bestandMenu.getItems().addAll(importList, exportList, afsluiten);
+        editMenu.getItems().addAll(edit, add, remove);
+
+        //MenuBar
+        final MenuBar menuBar = new
+                MenuBar(bestandMenu, editMenu, aboutMenu);
+
+        //Vbox Settings
+        this.getChildren().addAll(menuBar, label, table);
+        label.setPadding(new Insets(10, 0, 0, 20));
         setMargin(table, new Insets(10));
-        this.getChildren().addAll(label, table);
-        setMargin(label, new Insets(0, 0, 0, 10));
-
-
     }
 }
