@@ -76,21 +76,24 @@ public class SelectorPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// start write
-					AntwoordInvullen ai = new AntwoordInvullen(selectedUser.getList(selectedList));
+				// create model with passed in user and list index
+				AntwoordInvullen ai = new AntwoordInvullen(selectedUser.getList(selectedList));
 
-					WriteView writeView = new WriteView();
-					WritePresenter presenter = new WritePresenter(ai, writeView);
-					view.getScene().setRoot(writeView);
-					writeView.getScene().getWindow().sizeToScene();
+				// create view and presenter
+				WriteView writeView = new WriteView();
+				WritePresenter presenter = new WritePresenter(ai, writeView);
+				// replace the current view with the test window
+				view.getScene().setRoot(writeView);
+				writeView.getScene().getWindow().sizeToScene();
 			}
 		});
     }
 
-    private void callbackMainMenu() {
-        MainMenuView mainMenuView = new MainMenuView();
-        view.getScene().setRoot(mainMenuView);
-//		loginview.getScene().getWindow().sizeToScene();
-    }
+//    private void callbackMainMenu() {
+//        MainMenuView mainMenuView = new MainMenuView();
+//        view.getScene().setRoot(mainMenuView);
+////		loginview.getScene().getWindow().sizeToScene();
+//    }
 
     private void updateView() {
         // not applicable here

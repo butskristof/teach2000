@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import teach2000.model.AntwoordInvullen;
+import teach2000.view.mainMenu.MainMenuView;
 
 import java.util.Optional;
 
@@ -93,7 +94,8 @@ public class WritePresenter {
 			alert.showAndWait();
 
 			// return to main menu
-			Platform.exit();
+			// close this window after the alert so we return to the main menu
+			this.view.getScene().getWindow().hide();
 		} else {
 			this.model.setNewQuestion();
 

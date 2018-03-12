@@ -5,9 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
@@ -64,16 +66,21 @@ public class MainMenuPresenter {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2){
-                	// get index of selected row
+                	// get index of selected row which is the same as the list index
 					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-					System.out.println(index);
 
-					// make selector view
+					// make selector view and presenter
                     SelectorView selectorView = new SelectorView();
 					SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
-                    view.getScene().setRoot(selectorView);
 
+					// create new windows for selection of type and the test itself
+					Stage stage = new Stage();
+					stage.initOwner(view.getScene().getWindow());
+					stage.setScene(new Scene(selectorView));
+
+					// show new window and pause current window
+					stage.showAndWait();
                 }
             }
         });
