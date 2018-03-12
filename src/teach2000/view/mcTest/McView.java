@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class McView extends GridPane {
     ///////////////////Attributes/////////////////////
     private Label title, taalFrom, taalTo, word, extraText, score;
-//    private RadioButton alternative, alternative2, alternative3, antwoord;
 	ArrayList<RadioButton> radioButtons = new ArrayList<>();
 	private Button okButton;
     private MenuItem afsluiten;
@@ -70,8 +69,6 @@ public class McView extends GridPane {
 
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-//        ToggleGroup group = new ToggleGroup();
-
         title = new Label();
         taalFrom = new Label();
         taalTo = new Label();

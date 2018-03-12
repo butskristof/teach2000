@@ -1,12 +1,10 @@
 package teach2000.view.writeTest;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
 /**
  * @author demacryx on 25.02.2018 6:32 PM.
@@ -163,12 +161,6 @@ public class WriteView extends GridPane {
 
 
         ///////////////////Elements Layout/////////////////////
-        //Background Image
-        /*setBackground(new Background(new BackgroundImage(new Image("images/writeview.jpg"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));*/
 
         //title
         this.add(title, 1, 1);

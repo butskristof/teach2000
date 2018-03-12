@@ -1,34 +1,24 @@
 package teach2000.view.mainMenu;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import teach2000.model.AntwoordInvullen;
 import teach2000.model.Login;
 import teach2000.model.User;
-import teach2000.model.UserList;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
-import teach2000.view.writeTest.WritePresenter;
-import teach2000.view.writeTest.WriteView;
-
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 7:12 PM.

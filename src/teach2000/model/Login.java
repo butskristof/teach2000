@@ -2,9 +2,6 @@ package teach2000.model;
 
 import teach2000.view.login.LoginView;
 
-import java.io.*;
-import java.util.ArrayList;
-
 /**
  * @author demacryx on 25.02.2018 5:41 PM.
  * @project teach20002
