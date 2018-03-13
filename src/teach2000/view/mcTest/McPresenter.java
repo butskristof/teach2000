@@ -52,7 +52,10 @@ public class McPresenter {
 		this.view.getOkButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				handleAnswer();
+				// check if there's a toggle selected
+				if (view.getToggleGroup().getSelectedToggle() != null) {
+					handleAnswer();
+				}
 			}
 		});
 

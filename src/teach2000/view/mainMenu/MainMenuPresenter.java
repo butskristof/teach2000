@@ -150,8 +150,11 @@ public class MainMenuPresenter {
 					Stage stage = new Stage();
 					stage.initOwner(view.getScene().getWindow());
 					stage.setScene(new Scene(selectorView));
-					stage.setHeight(200);
+//					selectorView.getScene().getWindow().setWidth(400);
+//					selectorView.getScene().getWindow().setHeight(200);
 					stage.setWidth(400);
+					stage.setHeight(200);
+					stage.setResizable(false);
 
 					// show new window and pause current window
 					stage.showAndWait();

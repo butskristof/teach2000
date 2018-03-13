@@ -45,6 +45,8 @@ public class LoginPresenter {
 					MainMenuView mainMenuView = new MainMenuView();
 					MainMenuPresenter presenter = new MainMenuPresenter(model, u, mainMenuView);
 					view.getScene().setRoot(mainMenuView);
+					mainMenuView.getScene().getWindow().setHeight(400);
+					mainMenuView.getScene().getWindow().setWidth(800);
 
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("No lists found.");
@@ -60,6 +62,8 @@ public class LoginPresenter {
 				RegisterView registerView = new RegisterView();
 				RegisterPresenter registerPresenter = new RegisterPresenter(model, registerView);
 				view.getScene().setRoot(registerView);
+				registerView.getScene().getWindow().setWidth(400);
+				registerView.getScene().getWindow().setHeight(200);
 			}
 		});
     }

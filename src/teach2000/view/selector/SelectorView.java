@@ -15,17 +15,17 @@ import javafx.scene.text.Font;
  * @project teach20002
  */
 public class SelectorView extends GridPane{
-    private Label question;
-    private Button multiplechoice, write;
+	private Label question;
+	private Button multiplechoice, write;
 
-    // CONSTRUCTOR
+	// CONSTRUCTOR
 
-    public SelectorView() {
-        this.initializeNodes();
-        this.layoutNodes();
-    }
+	public SelectorView() {
+		this.initializeNodes();
+		this.layoutNodes();
+	}
 
-    // GETTERS
+	// GETTERS
 
 
 	public Button getMultiplechoice() {
@@ -37,43 +37,43 @@ public class SelectorView extends GridPane{
 	}
 
 	private void initializeNodes() {
-        this.question= new Label("What type of test do you want to do?");
-        question.setFont(new Font("Arial",20));
+		this.question= new Label("What type of test do you want to do?");
+		question.setFont(new Font("Arial",20));
 
 		this.multiplechoice = new Button("Multiple choice");
 		this.write = new Button("Fill in the answer");
-    }
+	}
 
-    private void layoutNodes() {
-        ///////////////////Grid Settings/////////////////////
-        this.setGridLinesVisible(true);
-        this.setAlignment(Pos.CENTER);
+	private void layoutNodes() {
+		///////////////////Grid Settings/////////////////////
+		this.setGridLinesVisible(false);
+		this.setAlignment(Pos.CENTER);
 
-        //Horizontal Gap
-        this.setHgap(10);
+		//Horizontal Gap
+		this.setHgap(10);
 
-        //Vertical Gap
-        this.setVgap(10);
+		//Vertical Gap
+		this.setVgap(10);
 
-        //Column Constraints
-        ColumnConstraints column1 = new ColumnConstraints(300);
-        ColumnConstraints column2 = new ColumnConstraints(300);
-        this.getColumnConstraints().addAll(column1,column2);
+		//Column Constraints
+		ColumnConstraints column1 = new ColumnConstraints(300);
+		ColumnConstraints column2 = new ColumnConstraints(300);
+		this.getColumnConstraints().addAll(column1,column2);
 
-        //Row Constraints
-        RowConstraints rowConstraints = new RowConstraints(150);
+		//Row Constraints
+		RowConstraints rowConstraints = new RowConstraints(150);
 
-        ///////////////////Elements Layout/////////////////////
+		///////////////////Elements Layout/////////////////////
 
-        //Label
-        this.add(question, 0, 0);
-        GridPane.setConstraints(question, 0, 0, 2, 1,
-                HPos.CENTER, VPos.CENTER,
-                Priority.NEVER, Priority.NEVER);
+		//Label
+		this.add(question, 0, 0);
+		GridPane.setConstraints(question, 0, 0, 2, 1,
+				HPos.CENTER, VPos.CENTER,
+				Priority.NEVER, Priority.NEVER);
 
 		this.add(multiplechoice, 0, 1);
 		GridPane.setConstraints(multiplechoice, 0, 1, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 		this.add(write, 1, 1);
 		GridPane.setConstraints(write, 1, 1, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-    }
+	}
 }

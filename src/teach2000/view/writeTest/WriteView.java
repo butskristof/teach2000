@@ -1,6 +1,7 @@
 package teach2000.view.writeTest;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
@@ -115,11 +116,11 @@ public class WriteView extends GridPane {
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(5);
         ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(43);
+        column2.setPercentWidth(42);
         ColumnConstraints column3 = new ColumnConstraints();
-        column3.setPercentWidth(6);
+        column3.setPercentWidth(8);
         ColumnConstraints column4 = new ColumnConstraints();
-        column4.setPercentWidth(46);
+        column4.setPercentWidth(45);
         /*ColumnConstraints column5 = new ColumnConstraints();
         column5.setPercentWidth(1);*/
 
@@ -129,9 +130,10 @@ public class WriteView extends GridPane {
         //Menu
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(8);
+        row1.setValignment(VPos.TOP);
         //Title
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(10);
+        row2.setPercentHeight(15);
         //Empty
         RowConstraints row3 = new RowConstraints();
         row3.setPercentHeight(7);
@@ -176,6 +178,7 @@ public class WriteView extends GridPane {
         this.add(word, 1, 4);
         this.word.setStyle("-fx-font-size: 15");
         GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        word.setPadding(new Insets(0,0,0,15));
 
         //Taal To Label
         this.add(taalTo, 1, 5);

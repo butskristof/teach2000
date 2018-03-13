@@ -61,6 +61,8 @@ public class RegisterPresenter {
 		LoginView loginview = new LoginView();
 		LoginPresenter presenter = new LoginPresenter(model, loginview);
 		view.getScene().setRoot(loginview);
+		loginview.getScene().getWindow().setHeight(300);
+		loginview.getScene().getWindow().setWidth(500);
 	}
 
 	private void updateView() {
