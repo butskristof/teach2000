@@ -234,6 +234,9 @@ public class McView extends GridPane {
             this.add(r, 1, i + 6);
             GridPane.setConstraints(r, 1, i + 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
         }
+
+        // place submit button in the row after last radio button
+		GridPane.setConstraints(okButton, 1, possibilities.size() + 6, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
     }
 
 }
