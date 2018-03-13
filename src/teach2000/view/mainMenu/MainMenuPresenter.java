@@ -60,10 +60,13 @@ public class MainMenuPresenter {
 				AddView addView = new AddView();
 				AddPresenter addPresenter = new AddPresenter(user, addView);
 
+
 				// create new windows for selection of type and the test itself
 				Stage stage = new Stage();
 				stage.initOwner(view.getScene().getWindow());
 				stage.setScene(new Scene(addView));
+				stage.setHeight(600);
+				stage.setWidth(800);
 
 				// show new window and pause current window
 				stage.showAndWait();
