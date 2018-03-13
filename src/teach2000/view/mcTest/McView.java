@@ -23,6 +23,8 @@ public class McView extends GridPane {
     private Button okButton;
     private MenuItem afsluiten;
 
+    private Label lblResult;
+
     private ToggleGroup toggleGroup;
 
     ///////////////////Getters/////////////////////
@@ -62,7 +64,11 @@ public class McView extends GridPane {
         return toggleGroup;
     }
 
-    ///////////////////Constructor/////////////////////
+	public Label getLblResult() {
+		return lblResult;
+	}
+
+	///////////////////Constructor/////////////////////
     public McView() {
         this.initializeNodes();
         this.layoutNodes();
@@ -76,6 +82,9 @@ public class McView extends GridPane {
         word = new Label();
         extraText = new Label("Extra");
         score = new Label("Score");
+
+        this.lblResult = new Label("");
+
         this.afsluiten = new MenuItem("Exit");
 
         this.okButton = new Button("SUMBIT");
@@ -184,6 +193,10 @@ public class McView extends GridPane {
         this.add(taalTo, 1, 5);
         this.taalTo.setStyle("-fx-font-size: 20");
         GridPane.setConstraints(taalTo, 1, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+
+        // Result label
+		this.add(this.lblResult, 2, 4);
+		GridPane.setConstraints(this.lblResult, 2, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //OK Button
         this.add(okButton, 1, 10);

@@ -39,7 +39,7 @@ public class SelectorPresenter {
 				// replace current view with test window
 				view.getScene().setRoot(mcView);
 				mcView.getScene().getWindow().setHeight(400);
-				mcView.getScene().getWindow().setWidth(600);
+				mcView.getScene().getWindow().setWidth(800);
 			}
 		});
 
@@ -56,7 +56,7 @@ public class SelectorPresenter {
 				// replace the current view with the test window
 				view.getScene().setRoot(writeView);
 				writeView.getScene().getWindow().setHeight(400);
-				writeView.getScene().getWindow().setWidth(600);
+				writeView.getScene().getWindow().setWidth(800);
 			}
 		});
 	}

@@ -23,7 +23,7 @@ public class AddView extends GridPane {
     private TextField txtLangFrom, txtLangTo;
 
     private Label lblQuestion, lblAnswer, lblAlternatives;
-    private int numberOfInputs = 5; // default five input fields
+    private int numberOfInputs = 5; // default five input fields, also used
 	private int firstFreeRow = 5; // row where new input fields can be added
 
     private MenuItem afsluiten;
@@ -240,6 +240,7 @@ public class AddView extends GridPane {
     }
 
     public void addInputRow() {
+    	++numberOfInputs;
     	// create new input fields
 		ArrayList<TextField> inputRow = new ArrayList<>();
 		for (int j = 0; j < 6; ++j) {

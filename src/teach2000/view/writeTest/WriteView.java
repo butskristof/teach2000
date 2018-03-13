@@ -21,6 +21,7 @@ public class WriteView extends GridPane {
     private Button okButton;
     private Label extraText;
     private Label score;
+    private Label lblResult;
 
     private MenuItem afsluiten;
 
@@ -62,6 +63,10 @@ public class WriteView extends GridPane {
         return afsluiten;
     }
 
+    public Label getLblResult() {
+        return lblResult;
+    }
+
     ///////////////////Constructor/////////////////////
     public WriteView() {
         this.initializeNodes();
@@ -78,6 +83,7 @@ public class WriteView extends GridPane {
         okButton = new Button("OK");
         extraText = new Label("Extra");
         score = new Label("Score");
+        this.lblResult = new Label("");
 
         this.afsluiten = new MenuItem("Exit");
     }
@@ -189,6 +195,10 @@ public class WriteView extends GridPane {
         this.add(inputField, 1, 6);
         this.inputField.setStyle("-fx-font-size: 15");
         GridPane.setConstraints(inputField, 1, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+
+        // Result label
+        this.add(this.lblResult, 2, 4);
+        GridPane.setConstraints(this.lblResult, 2, 4, 2, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //OK Button
         this.add(okButton, 2, 6);

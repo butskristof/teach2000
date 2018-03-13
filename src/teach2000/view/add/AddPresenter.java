@@ -43,7 +43,6 @@ public class AddPresenter {
 				List newlist = new List(langfrom, langto, name);
 
 				// loop over fields and create new questions
-//				ArrayList<Question> questions = new ArrayList<>();
 				ArrayList<ArrayList<TextField>> questioninputs = view.getQuestioninputs();
 
 				for (ArrayList<TextField> inputRow: questioninputs) {

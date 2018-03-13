@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
+import javafx.scene.paint.Color;
 import teach2000.model.MultipleChoice;
 
 import java.util.ArrayList;
@@ -64,8 +65,18 @@ public class McPresenter {
 		// we take the user's input and pass it down to the model
 		// afterwards, the view is updated
 		// get toggle group and pass value
+		String correctAnswer = this.model.getCurrentQuestion().getAnswer();
+
 		RadioButton r = (RadioButton)this.view.getToggleGroup().getSelectedToggle();
 		boolean result = this.model.handleAnswer(r.getText());
+
+		if (result) {
+			this.view.getLblResult().setText("Correct!");
+			this.view.getLblResult().setTextFill(Color.GREEN);
+		} else {
+			this.view.getLblResult().setText("Wrong... The correct answer was " + correctAnswer);
+			this.view.getLblResult().setTextFill(Color.RED);
+		}
 
 		updateView();
 	}

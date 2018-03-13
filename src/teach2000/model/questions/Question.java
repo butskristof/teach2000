@@ -70,7 +70,7 @@ public class Question {
 
 	// outsiders shouldn't have access to correct answer, use getPossibilities and processAnswer instead
 	// access is package-private so QuestionIO works
-	String getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
 

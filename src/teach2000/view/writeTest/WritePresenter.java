@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.paint.Color;
 import teach2000.model.AntwoordInvullen;
 
 import java.util.Optional;
@@ -66,7 +67,16 @@ public class WritePresenter {
 	private void handleAnswer() {
 		// we take the user's input and pass it down to the model
 		// afterwards, the view is updated
+		String correctAnswer = this.model.getCurrentQuestion().getAnswer();
 		boolean result = model.handleAnswer(view.getInputField().getText());
+
+		if (result) {
+			this.view.getLblResult().setText("Correct!");
+			this.view.getLblResult().setTextFill(Color.GREEN);
+		} else {
+			this.view.getLblResult().setText("Wrong... The correct answer was " + correctAnswer);
+			this.view.getLblResult().setTextFill(Color.RED);
+		}
 
 		updateView();
 	}
