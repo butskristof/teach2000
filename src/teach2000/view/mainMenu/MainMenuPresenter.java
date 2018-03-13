@@ -75,12 +75,23 @@ public class MainMenuPresenter {
 			}
 		});
 
-
     	view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//delete user account
 				loginmodel.getUsers().removeUser(user);
+				// go back to login view
+				Login model = new Login();
+				LoginView loginview = new LoginView();
+				LoginPresenter presenter = new LoginPresenter(model, loginview);
+
+				view.getScene().setRoot(loginview);
+			}
+		});
+
+    	view.getLogoutUser().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
 				// go back to login view
 				Login model = new Login();
 				LoginView loginview = new LoginView();

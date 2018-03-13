@@ -36,7 +36,6 @@ public class AddPresenter {
 				// loop over fields and create new questions
 				ArrayList<Question> questions = new ArrayList<>();
 				if (!view.getLeft1().getText().equals("") && !view.getRight1().getText().equals("")) {
-					System.out.println(view.getLeft1().getText());
 					questions.add(new Question(view.getLeft1().getText(), view.getRight1().getText(), new String[0]));
 				}
 				if (!view.getLeft2().getText().equals("") && !view.getRight2().getText().equals("")) {

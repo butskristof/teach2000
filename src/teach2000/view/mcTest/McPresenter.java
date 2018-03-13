@@ -16,7 +16,6 @@ import java.util.Optional;
  * @project teach20002
  */
 
-//TODO aanvullen zodat het de juiste tekst laat zien waar het moet staan, en MC ook juiste woorden uit list geeft.
 public class McPresenter {
 	private MultipleChoice model;
 	private McView view;
