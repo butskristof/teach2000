@@ -60,8 +60,7 @@ public class MainMenuPresenter {
 				AddView addView = new AddView();
 				AddPresenter addPresenter = new AddPresenter(user, addView);
 
-
-				// create new windows for selection of type and the test itself
+				// create new window for adding lists
 				Stage stage = new Stage();
 				stage.initOwner(view.getScene().getWindow());
 				stage.setScene(new Scene(addView));
@@ -71,7 +70,8 @@ public class MainMenuPresenter {
 				// show new window and pause current window
 				stage.showAndWait();
 
-
+				// refresh list after returning from add window
+				updateView();
 			}
 		});
 
@@ -150,6 +150,8 @@ public class MainMenuPresenter {
 					Stage stage = new Stage();
 					stage.initOwner(view.getScene().getWindow());
 					stage.setScene(new Scene(selectorView));
+					stage.setHeight(200);
+					stage.setWidth(400);
 
 					// show new window and pause current window
 					stage.showAndWait();
