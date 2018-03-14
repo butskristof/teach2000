@@ -10,7 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import teach2000.model.Login;
-import teach2000.model.User;
+import teach2000.model.users.User;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.view.add.AddPresenter;

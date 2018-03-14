@@ -3,7 +3,7 @@ package teach2000.view.add;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
-import teach2000.model.User;
+import teach2000.model.users.User;
 import teach2000.model.lists.List;
 import teach2000.model.questions.Question;
 

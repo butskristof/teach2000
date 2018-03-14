@@ -1,5 +1,7 @@
 package teach2000.model;
 
+import teach2000.model.users.User;
+import teach2000.model.users.UserList;
 import teach2000.view.login.LoginView;
 
 /**

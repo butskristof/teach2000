@@ -3,7 +3,7 @@ package teach2000.view.add;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import teach2000.model.User;
+import teach2000.model.users.User;
 
 /**
  * @author Kristof Buts

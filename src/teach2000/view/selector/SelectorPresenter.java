@@ -3,6 +3,7 @@ package teach2000.view.selector;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import teach2000.model.*;
+import teach2000.model.users.User;
 import teach2000.view.mcTest.McPresenter;
 import teach2000.view.mcTest.McView;
 import teach2000.view.writeTest.WritePresenter;

@@ -1,4 +1,4 @@
-package teach2000.model;
+package teach2000.model.users;
 
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class User {
     private String id;
     private String name;
+    private String stopword;
+    private int minimumRequiredScoreToStop = 0;
     private ArrayList<List> lists = new ArrayList<>();
 
     // CONSTRUCTORS
@@ -48,7 +50,38 @@ public class User {
         return this.lists.get(index);
     }
 
-    // BUSINESS LOGIC
+	public String getStopword() {
+		return stopword;
+	}
+
+	public int getMinimumRequiredScoreToStop() {
+		return minimumRequiredScoreToStop;
+	}
+
+	public boolean getHasStopword() {
+    	// if the stopword is empty or isn't set, there isn't one
+    	if (this.stopword == null || this.stopword.equals("")) {
+    		return false;
+		} else {
+    		return true;
+		}
+	}
+
+	// SETTERS
+
+	public void setStopword(String newstopword) {
+    	this.stopword = newstopword;
+	}
+
+	public void disableStopword() {
+    	this.stopword = null;
+	}
+
+	public void setMinimumRequiredScoreToStop(int newMinScore) {
+    	this.minimumRequiredScoreToStop = newMinScore;
+	}
+
+	// BUSINESS LOGIC
 
 	public void addList(List l) {
     	// add new list to user and write it to a file in the user's folder

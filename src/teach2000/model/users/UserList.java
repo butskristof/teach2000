@@ -1,5 +1,7 @@
-package teach2000.model;
+package teach2000.model.users;
 
+
+import teach2000.model.users.User;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -13,13 +15,13 @@ import java.util.ArrayList;
 public class UserList {
 	// this class will initialise a list for the users and read the already existing ones from the users file
 
-	private static final String FILE = "resources/users.bin";
     private ArrayList<User> users = new ArrayList<>();
 
     // CONSTRUCTORS
 
 	public UserList() {
-		this.readUsers();
+		// Ask IO class to read all users in the file
+		this.users = UserIO.readUsers();
 	}
 
 	// GETTERS
@@ -57,45 +59,13 @@ public class UserList {
 		// Create a new user and write it to file
 		this.users.add(newuser);
 
-		this.writeUsersToFile();
+		UserIO.writeUsersToFile(this.users);
 	}
 
 	public void removeUser(User user){
 		//remove existing user currently logged in
 		this.users.remove(user);
-		this.writeUsersToFile();
+		UserIO.writeUsersToFile(this.users);
 	}
 
-	private void writeUsersToFile() {
-		// Write user information to file
-		// UserIO should be extracted to separate utility class
-		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(FILE)))) {
-			for (User u: users) {
-				os.writeUTF(u.getId());
-				os.writeUTF(u.getName());
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	private void readUsers() {
-		// Users are imported from binary file
-		// try to open users file
-
-		// if users file doesn't exist, stop
-		if (!Files.exists(Paths.get(FILE))) {
-			return;
-		}
-
-		try (DataInputStream is = new DataInputStream(new BufferedInputStream(new FileInputStream(FILE)))) {
-			// loop over all entries
-			while (is.available() > 0) {
-				this.importUser(new User(is.readUTF(), is.readUTF())); // user ID and name are read in
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
-	}
 }

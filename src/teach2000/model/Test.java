@@ -1,15 +1,10 @@
 package teach2000.model;
 
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import teach2000.model.lists.List;
-import teach2000.model.lists.ListIO;
 import teach2000.model.questions.Question;
-
-import java.io.File;
-import java.util.Scanner;
+import teach2000.model.users.User;
+import teach2000.model.users.UserList;
 
 /**
  * @author Kristof Buts
@@ -28,6 +23,8 @@ public class Test {
 		// create user and users file
 		UserList users = new UserList();
 		User buts = new User("Buts");
+		buts.setMinimumRequiredScoreToStop(10);
+		buts.setStopword("STOP");
 		User jos = new User("Jos");
 		Test.setup(buts);
 		Test.setup(jos);

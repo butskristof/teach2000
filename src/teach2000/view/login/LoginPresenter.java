@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
 import teach2000.model.Login;
-import teach2000.model.User;
+import teach2000.model.users.User;
 import teach2000.view.mainMenu.MainMenuPresenter;
 import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.register.RegisterPresenter;
