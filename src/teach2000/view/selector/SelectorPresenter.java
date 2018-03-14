@@ -50,6 +50,10 @@ public class SelectorPresenter {
 				// start write
 				// create model with passed in user and list index
 				AntwoordInvullen ai = new AntwoordInvullen(selectedUser.getList(selectedList));
+				// check if user has stopword
+				if (selectedUser.getHasStopword()) {
+					ai.enableStopword(selectedUser.getStopword(), selectedUser.getMinimumRequiredScoreToStop());
+				}
 
 				// create view and presenter
 				WriteView writeView = new WriteView();

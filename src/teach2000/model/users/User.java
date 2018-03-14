@@ -68,17 +68,14 @@ public class User {
 	}
 
 	// SETTERS
-
-	public void setStopword(String newstopword) {
-    	this.stopword = newstopword;
-	}
-
 	public void disableStopword() {
     	this.stopword = null;
+    	this.minimumRequiredScoreToStop = 0;
 	}
 
-	public void setMinimumRequiredScoreToStop(int newMinScore) {
-    	this.minimumRequiredScoreToStop = newMinScore;
+	public void enableStopword(String stopword, int minimumRequiredScoreToStop) {
+    	this.stopword = stopword;
+    	this.minimumRequiredScoreToStop = minimumRequiredScoreToStop;
 	}
 
 	// BUSINESS LOGIC

@@ -68,7 +68,25 @@ public class WritePresenter {
 		// we take the user's input and pass it down to the model
 		// afterwards, the view is updated
 		String correctAnswer = this.model.getCurrentQuestion().getAnswer();
-		boolean result = model.handleAnswer(view.getInputField().getText());
+		String userInput = view.getInputField().getText();
+
+		// check for stop word
+		if (model.hasStopword()) {
+			if (userInput.equals(model.getStopword())) {
+				if (model.getScore() >= model.getMinScoreToStop()) {
+					// steps to exit test
+					this.stopTest();
+				} else {
+					// alert that min required score isn't reached yet
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Not possible to exit test");
+					alert.setContentText("You haven't reached the minimum required score to exit the test yet.");
+					alert.showAndWait();
+				}
+			}
+		}
+
+		boolean result = model.handleAnswer(userInput);
 
 		if (result) {
 			this.view.getLblResult().setText("Correct!");
@@ -91,21 +109,25 @@ public class WritePresenter {
 		this.view.getTitle().setText(this.model.getListName());
 	}
 
+	private void stopTest() {
+		// handle end of test
+		final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setHeaderText("Done!");
+		alert.setContentText(String.format("Score: %d", this.model.getScore()));
+		alert.showAndWait();
+
+		// return to main menu
+		// close this window after the alert so we return to the main menu
+		this.view.getScene().getWindow().hide();
+	}
+
 	private void updateView() {
 		// depending on whether we get a new question
 		// we either update the view with a new question
 		// or go into completing procedures
 
 		if (this.model.isTest_done()) {
-			// handle end of test
-			final Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setHeaderText("Done!");
-			alert.setContentText(String.format("Score: %d", this.model.getScore()));
-			alert.showAndWait();
-
-			// return to main menu
-			// close this window after the alert so we return to the main menu
-			this.view.getScene().getWindow().hide();
+			this.stopTest();
 		} else {
 			this.model.setNewQuestion();
 

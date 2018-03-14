@@ -23,8 +23,7 @@ public class Test {
 		// create user and users file
 		UserList users = new UserList();
 		User buts = new User("Buts");
-		buts.setMinimumRequiredScoreToStop(10);
-		buts.setStopword("STOP");
+		buts.enableStopword("STOP", 10);
 		User jos = new User("Jos");
 		Test.setup(buts);
 		Test.setup(jos);

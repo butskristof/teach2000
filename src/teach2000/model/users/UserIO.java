@@ -36,8 +36,7 @@ public class UserIO {
 					User newuser = new User(is.readUTF(), is.readUTF()); // user ID and name are read from stream
 					boolean hasStopword = is.readBoolean();
 					if (hasStopword) {
-						newuser.setStopword(is.readUTF());
-						newuser.setMinimumRequiredScoreToStop(is.readInt());
+						newuser.enableStopword(is.readUTF(), is.readInt()); // stopword and min. req. score are passed in
 					}
 
 					ret.add(newuser);
