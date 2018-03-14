@@ -39,7 +39,7 @@ public class ListIO {
 		// Check if user's folder exists and create it if necessary
 		if (!Files.exists(userfolder)) {
 			try {
-				Files.createDirectory(userfolder);
+				Files.createDirectories(userfolder);
 			} catch (IOException e) {
 				// should be extended
 //				e.printStackTrace();
@@ -114,20 +114,28 @@ public class ListIO {
 	}
 
 	public static void writeList(String userid, List list) {
-		// write list to file in user's folder
-		// generate path to user's folder
+		// Generate path to file and pass on to overloaded function
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
-		// Check if user's folder exists and create it if necessary
-		if (!Files.exists(userfolder)) {
+		Path file = userfolder.resolve(list.getId());
+
+		writeList(file.toFile(), list);
+	}
+
+	public static void writeList(File file, List list) {
+		// export a list to a file
+
+		// Check if parent folder exists and create if necessary
+		// Check if path exists and create if necessary
+		Path pathToFile = file.toPath();
+		if (!Files.exists(pathToFile.getParent())) {
 			try {
-				Files.createDirectory(userfolder);
+				Files.createDirectories(pathToFile.getParent());
 			} catch (IOException e) {
 				// TODO
 				// should be extended
 				e.printStackTrace();
 			}
 		}
-		Path file = userfolder.resolve(list.getId()); // path to specific file
 
 		// Get questions
 		ArrayList<Question> vragen = list.getVragen();

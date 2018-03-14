@@ -65,7 +65,23 @@ public class MainMenuPresenter {
 		this.view.getExportList().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				event.consume();
+				// open file chooser
+				FileChooser fileChooser = new FileChooser();
+				File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
+				if ((toSave == null) || (toSave.getName().equals(""))) {
+					// break if canceled
+					event.consume();
+				} else {
+					// get selected table entry
+					// TODO ignore if nothing selected
+					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+					// get list from user
+					List listToSave = user.getList(index);
+
+					// call ListIO and let it write to file
+					ListIO.writeList(toSave, listToSave);
+				}
 			}
 		});
 
