@@ -10,7 +10,6 @@ import teach2000.model.lists.List;
 
 /**
  * @author demacryx on 25.02.2018 7:11 PM.
- * @project teach20002
  */
 public class MainMenuView extends VBox {
     ///////////////////Attributes/////////////////////

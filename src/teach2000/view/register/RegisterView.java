@@ -12,7 +12,6 @@ import javafx.scene.layout.RowConstraints;
 
 /**
  * @author demacryx on 25.02.2018 6:09 PM.
- * @project teach20002
  */
 public class RegisterView extends GridPane {
     private Button confirm, cancel;

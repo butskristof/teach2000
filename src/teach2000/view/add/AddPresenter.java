@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 /**
  * @author demacryx on 12.03.2018 11:10 PM.
- * @project teach20002
  */
 public class AddPresenter {
     private User model;

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 /**
  * @author demacryx on 25.02.2018 7:12 PM.
- * @project teach20002
  */
 public class MainMenuPresenter {
 	private Login loginmodel;

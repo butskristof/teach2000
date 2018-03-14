@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ *
+ * The List class embodies one list. It holds a list of Question elements
+ * and provides the necessary functions for the management.
+ *
  * @author Kristof Buts
  * @version 1.0 22/02/18 01:30
  */
@@ -51,10 +55,18 @@ public class List {
 	}
 
 	// Formatted title for uniform presentation
+	/**
+	 * The title consists of the two languages (to and from), separated by a hyphen.
+	 * @return String containing the title of the List
+	 */
 	public String getTitle() {
 		return String.format("%s - %s", this.lang_from, this.lang_to);
 	}
 
+	/**
+	 * Name of the List, e.g. the chapter.
+	 * @return String containing the name of the List
+	 */
 	public String getName() {
 		return name;
 	}
@@ -74,8 +86,13 @@ public class List {
 
 	// BUSINESS LOGIC
 
-	// Get a question from the list
-	// When all questions in the list have reached their maximum score, null will be returned
+	/**
+	 *
+	 * This method is used to get a new question from the list. The questions will come in random order, until all
+	 * questions have reached their maximum score. When that happens, null is returned
+	 *
+	 * @return next random question, null if all questions have reached their maximum score
+	 */
 	public Question getQuestion() {
 		// Shuffle questions to make sure they're in random order
 		Collections.shuffle(vragen);
@@ -91,7 +108,11 @@ public class List {
 		return null;
 	}
 
+	/**
+	 * Resets the score of all questions in the list. To do when a test is fully completed.
+	 */
 	public void resetQuestionScores() {
+		// loop over all questions in List
 		for (Question q: this.vragen) {
 			// reset
 			q.resetScore();

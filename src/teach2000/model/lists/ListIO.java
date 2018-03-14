@@ -11,25 +11,32 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
+ * This is a dedicated IO class for List with only static methods.
+ * Everything IO-related is separated from the main List class.
+ * By default, the location is a folder per user in the resources/lists/ directory.
+ *
+ * Lists are always written as a binary file in the following format:
+ * LISTID
+ * LANG_FROM	LANG_TO		NAME
+ * NO_OF_QUESTIONS
+ * QUESTION		ANSWER		NO_OF_ALTERNATIVES		ALTERNATIVES
+ *
+ * For the reading and writing of the questions themselves, QuestionIO must be used.
+ *
  * @author Kristof Buts
  */
+
 public class ListIO {
-	/*
-	This class handles the importing and exporting of the user's lists
-	In the resources, there's a folder which contains a directory for each user
-	 */
-
-	/*
-	format for storing lists:
-	LISTID
-	LANG_FROM	LANG_TO		NAME
-	NO_OF_QUESTIONS
-	QUESTION	ANSWER	NO_OF_ALTERNATIVES	ALTERNATIVES
-	 */
-
 	// each user has a folder with its id as name that contains all his lists
 	private static final String userlistfile_prefix = "resources/lists";
 
+	/**
+	 * This method reads all lists stored in the passed in user's folder.
+	 * It loops through all the files and compiles one ArrayList that can be assigned to the user.
+	 *
+	 * @param userid ID of the user we want to read the lists for
+	 * @return an ArrayList of List elements that contains all the lists stored for the user
+	 */
 	public static ArrayList<List> readAllLists(String userid) {
 		// function to read all the lists in the user's folder and return them as an ArrayList
 
@@ -65,6 +72,13 @@ public class ListIO {
 		return ret;
 	}
 
+	/**
+	 * Reads in one list when given a User ID and List ID.
+	 *
+	 * @param userid ID of the user
+	 * @param listid ID of the list
+	 * @return List object that was read from disk
+	 */
 	public static List readList(String userid, String listid) {
 		// Read in a list and return it to the calling function
 		// TODO exception handling
@@ -79,6 +93,14 @@ public class ListIO {
 	}
 
 	// pass in the result of a FileChooser
+
+	/**
+	 *
+	 * Reads in one list when given a File object, e.g. returned from a FileChooser.
+	 *
+	 * @param file File object representing the List file
+	 * @return List object that was read from disk.
+	 */
 	public static List readList(File file) {
 		// Read in a list and return it to the calling function
 		// TODO exception handling
@@ -113,6 +135,13 @@ public class ListIO {
 		return ret;
 	}
 
+	/**
+	 *
+	 * Writes one List to disk in the default user folder.
+	 *
+	 * @param userid ID of the user
+	 * @param list List item to be written to disk
+	 */
 	public static void writeList(String userid, List list) {
 		// Generate path to file and pass on to overloaded function
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
@@ -121,6 +150,12 @@ public class ListIO {
 		writeList(file.toFile(), list);
 	}
 
+	/**
+	 * Writes one List to disk in the specified location. Can be used for exporting.
+	 *
+	 * @param file File object represented the path to the desired location.
+	 * @param list List object to be written to disk.
+	 */
 	public static void writeList(File file, List list) {
 		// export a list to a file
 
@@ -157,6 +192,12 @@ public class ListIO {
 		}
 	}
 
+	/**
+	 * Delete a List that's in the user's default folder.
+	 *
+	 * @param userid User ID
+	 * @param listid List ID
+	 */
 	public static void removeList(String userid, String listid) {
 		// write list to file in user's folder
 		// generate path to user's folder

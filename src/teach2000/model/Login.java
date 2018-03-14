@@ -5,16 +5,16 @@ import teach2000.model.users.UserList;
 import teach2000.view.login.LoginView;
 
 /**
+ * This class administrates the Login. Upon creation, it will create a UserList (that will read in existing users)
+ * and offer everything in an accessible format to the presenter.
+ *
  * @author demacryx on 25.02.2018 5:41 PM.
- * @project teach20002
  */
 public class Login {
 
     private Login model;
     private LoginView view;
 
-	// the login model will read the users from the correct files and store them in memory
-	// offering them in an accessible format for the presenter
 	private UserList users = new UserList();
 
 	public UserList getUsers() {

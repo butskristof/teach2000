@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 /**
  * @author demacryx on 12.03.2018 11:09 PM.
- * @project teach20002
  */
 public class AddView extends GridPane {
 	private Label lblTitle;

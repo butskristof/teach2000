@@ -13,7 +13,6 @@ import javafx.scene.layout.RowConstraints;
 
 /**
  * @author demacryx on 25.02.2018.
- * @project teach2000
  */
 public class LoginView extends GridPane {
     ///////////////////Attributes/////////////////////

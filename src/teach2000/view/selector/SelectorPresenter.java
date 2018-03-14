@@ -11,7 +11,6 @@ import teach2000.view.writeTest.WriteView;
 
 /**
  * @author demacryx on 12.03.2018 12:14 AM.
- * @project teach20002
  */
 public class SelectorPresenter {
 	private SelectorView view;

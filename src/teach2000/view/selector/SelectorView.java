@@ -12,7 +12,6 @@ import javafx.scene.text.Font;
 
 /**
  * @author demacryx on 12.03.2018 12:14 AM.
- * @project teach20002
  */
 public class SelectorView extends GridPane{
 	private Label question;

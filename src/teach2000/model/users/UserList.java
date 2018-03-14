@@ -9,16 +9,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
+ * This class functions as a wrapper around an ArrayList to contain and store all User objects in memory.
+ * When created, it will automatically import all users from disk.
+ *
  * @author demacryx on 25.02.2018 9:28 PM.
- * @project teach20002
  */
 public class UserList {
-	// this class will initialise a list for the users and read the already existing ones from the users file
-
     private ArrayList<User> users = new ArrayList<>();
 
     // CONSTRUCTORS
 
+	/**
+	 * Upon creation, all users will automatically be read from disk.
+	 */
 	public UserList() {
 		// Ask IO class to read all users in the file
 		this.users = UserIO.readUsers();
@@ -26,11 +29,21 @@ public class UserList {
 
 	// GETTERS
 
+	/**
+	 * Returns an ArrayList containing all User objects.
+	 * @return ArrayList containing all User objects
+	 */
 	public ArrayList<User> getUsers() {
 		// return all users
 		return this.users;
 	}
 
+	/**
+	 * Returns a User object when given an index from the ArrayList of getUsers()
+	 *
+	 * @param id index of the User object wanted in the ArrayList
+	 * @return User object
+	 */
 	public User getUser(String id) {
 		// return a specific user
 		// passed in value is the user's ID
@@ -50,18 +63,30 @@ public class UserList {
 
 	// BUSINESS LOGIC
 
+	/**
+	 * Imports a user that was read in from file by adding it to the users list
+	 * @param u User object to be added
+	 */
 	public void importUser(User u) {
 		// Add user to list that is imported from file
         this.users.add(u);
     }
 
-    public void addUser(User newuser) {
+	/**
+	 * Takes a new user, adds it to the users list and writes it to disk.
+	 * @param newuser User object to be added and written to disk
+	 */
+	public void addUser(User newuser) {
 		// Create a new user and write it to file
 		this.users.add(newuser);
 
 		UserIO.writeUsersToFile(this.users);
 	}
 
+	/**
+	 * Removes a user from the list and deletes it on disk.
+	 * @param user User object to be deleted
+	 */
 	public void removeUser(User user){
 		//remove existing user currently logged in
 		this.users.remove(user);

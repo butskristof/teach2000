@@ -19,7 +19,6 @@ import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018.
- * @project teach20002
  */
 public class LoginPresenter {
     private Login model;

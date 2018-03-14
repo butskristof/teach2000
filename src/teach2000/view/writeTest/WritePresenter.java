@@ -13,7 +13,6 @@ import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 6:32 PM.
- * @project teach20002
  */
 
 //TODO Bug Spotted, Exit Menu Item Creates EXCEPTION
