@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import teach2000.model.Test;
 
 import java.util.ArrayList;
 
@@ -15,19 +14,21 @@ import java.util.ArrayList;
  * @project teach20002
  */
 public class AddView extends GridPane {
-//    private TextField left1, left2, left3, left4, left5, left6, left7, left8, left9, left10;
-//    private TextField right1, right2, right3, right4, right5, right6, right7, right8, right9, right10;
 	private Label lblTitle;
     private TextField txtTitle;
     private Label lblLangFrom, lblLangTo;
     private TextField txtLangFrom, txtLangTo;
 
     private Label lblQuestion, lblAnswer, lblAlternatives;
-    private int numberOfInputs = 5; // default five input fields, also used
+
+    // the input field are stored in an ArrayList per row, with the question and answer being first and second
+	// from the third item on the alternatives are given
+	// all rows are stored in an ArrayList so we get a 2D matrix
+    private int numberOfInputs = 5; // default five input fields
 	private int firstFreeRow = 5; // row where new input fields can be added
+	private ArrayList<ArrayList<TextField>> questioninputs = new ArrayList<>();
 
     private MenuItem afsluiten;
-	private ArrayList<ArrayList<TextField>> questioninputs = new ArrayList<>();
     private Button sumbitButton, btnAddRow;
     
     // CONSTRUCTOR
@@ -73,15 +74,12 @@ public class AddView extends GridPane {
     	// Title section
     	this.lblTitle = new Label("Title");
         this.txtTitle = new TextField();
-//        this.txtTitle.setPromptText("Title");
 
         // Languages section
 		this.lblLangFrom = new Label("From");
 		this.txtLangFrom = new TextField();
-//        taalFrom.setPromptText("From");
 		this.lblLangTo = new Label("To");
 		this.txtLangTo = new TextField();
-//        taalTo.setPromptText("To");
 
 		// labels above inputs
 		this.lblQuestion = new Label("Question");
@@ -89,13 +87,17 @@ public class AddView extends GridPane {
 		this.lblAlternatives = new Label("Alternatives");
 
 		// input fields
+		// are generated dynamically depending on the number set as an attribute
 		for (int i = 0; i < this.numberOfInputs; ++i) {
+			// create arraylist to store the row
 			ArrayList<TextField> inputRow = new ArrayList<>();
+			// six input field are generated for question, answer and max 4 alternatives
 			for (int j = 0; j < 6; ++j) {
 				TextField textField = new TextField();
 				inputRow.add(textField);
 			}
 
+			// add row to arraylist of input rows
 			this.questioninputs.add(inputRow);
 		}
 
@@ -108,6 +110,7 @@ public class AddView extends GridPane {
 
     private void layoutNodes() {
 
+//    	for testing
 //    	this.setGridLinesVisible(true);
 
         //Menu
@@ -127,8 +130,6 @@ public class AddView extends GridPane {
                 MenuBar(bestandMenu, aboutMenu);
         this.add(menuBar, 0, 0, 5, 1);
         menuBar.setPadding(new Insets(0));
-
-
 
         ///////////////////Grid Settings/////////////////////
 //        this.setGridLinesVisible(false);
@@ -220,12 +221,15 @@ public class AddView extends GridPane {
 		GridPane.setConstraints(lblAlternatives, 3, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
 		// input fields
+		// placed in the first free row, which is then incremented
 		for (int i = 0; i < this.numberOfInputs; ++i) {
 			for (int j = 0; j < 6; ++j) {
+				// starting in column 1, so j+1
 				this.add(this.questioninputs.get(i).get(j), j+1, firstFreeRow);
 				GridPane.setConstraints(this.questioninputs.get(i).get(j), j+1, firstFreeRow, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
 			}
+			// increment first free row since this one is taken now
 			++firstFreeRow;
 		}
 
@@ -237,11 +241,14 @@ public class AddView extends GridPane {
         this.add(sumbitButton,3,firstFreeRow);
         GridPane.setConstraints(sumbitButton,3,firstFreeRow,1,1,HPos.CENTER,VPos.CENTER,Priority.NEVER,Priority.NEVER);
         sumbitButton.setMinWidth(200);
+
+        // first free row is not incremented here since the input fields that will be added will come in the row
+		// where the button are now. They will be moved to the first row after the new input fields
     }
 
     public void addInputRow() {
     	++numberOfInputs;
-    	// create new input fields
+    	// create new input fields row
 		ArrayList<TextField> inputRow = new ArrayList<>();
 		for (int j = 0; j < 6; ++j) {
 			TextField textField = new TextField();
@@ -249,16 +256,17 @@ public class AddView extends GridPane {
 		}
 
 		this.questioninputs.add(inputRow);
-		// layout new input field
+		// layout new input fields
 		int inputRowIndex = this.questioninputs.size() - 1; // get the last item in the array list, which is the newly added row
 		for (int j = 0; j < 6; ++j) {
 			this.add(this.questioninputs.get(inputRowIndex).get(j), j+1, firstFreeRow);
 			GridPane.setConstraints(this.questioninputs.get(inputRowIndex).get(j), j+1, firstFreeRow, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
 		}
+		// first free row moves one down now
 		++firstFreeRow;
-		// move submit and add row buttons
 
+		// move submit and add row buttons
 		GridPane.setConstraints(this.btnAddRow,1,firstFreeRow,1,1,HPos.LEFT,VPos.CENTER,Priority.NEVER,Priority.NEVER);
 		GridPane.setConstraints(sumbitButton,3,firstFreeRow,1,1,HPos.CENTER,VPos.CENTER,Priority.NEVER,Priority.NEVER);
 	}
