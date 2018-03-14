@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
+import javafx.stage.WindowEvent;
 import teach2000.model.AntwoordInvullen;
 
 import java.util.Optional;
@@ -29,23 +30,19 @@ public class WritePresenter {
 	}
 
 	private void addEventHandlers() {
-		// exit from menu
+		// when a close request is sent from window button or menu item
+		// closeDialog function is called which displays a dialog to the user
+		// and stops the test if necessary
+
+		// close from menu
 		view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-				alert.setHeaderText("Are you sure?");
-				alert.setContentText("Are you sure you want to stop Teach2000?");
-				Optional<ButtonType> choice = alert.showAndWait();
-				if (choice.get().getButtonData().isCancelButton()) {
-					event.consume();
-				} else {
-					// stop application
-					// should be extended with closing best practices
-					Platform.exit();
-				}
+				closeDialog();
 			}
 		});
+
+		// handle answer
 
 		// okay button is clicked
 		this.view.getOkButton().setOnAction(new EventHandler<ActionEvent>() {
@@ -62,6 +59,30 @@ public class WritePresenter {
 				handleAnswer();
 			}
 		});
+	}
+
+	public void addWindowEventHandlers() {
+		// when a close request is sent from window button or menu item
+		// closeDialog function is called which displays a dialog to the user
+		// and stops the test if necessary
+		// close request
+		view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				closeDialog();
+			}
+		});
+	}
+
+	private void closeDialog() {
+		final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setHeaderText("Are you sure?");
+		alert.setContentText("Are you sure you want to stop this test?");
+		Optional<ButtonType> choice = alert.showAndWait();
+		if (!choice.get().getButtonData().isCancelButton()) {
+			// stop test
+			stopTest();
+		}
 	}
 
 	private void handleAnswer() {

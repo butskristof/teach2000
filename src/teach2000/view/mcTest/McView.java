@@ -85,7 +85,7 @@ public class McView extends GridPane {
 
         this.lblResult = new Label("");
 
-        this.afsluiten = new MenuItem("Exit");
+        this.afsluiten = new MenuItem("Close");
 
         this.okButton = new Button("SUMBIT");
     }
@@ -95,12 +95,12 @@ public class McView extends GridPane {
         //Menu
         final Menu bestandMenu = new
                 Menu("File");
-        final Menu aboutMenu = new
-                Menu("About");
+//        final Menu aboutMenu = new
+//                Menu("About");
         bestandMenu.getItems().add(this.afsluiten);
 
         //MenuBar
-        final MenuBar menuBar = new MenuBar(bestandMenu, aboutMenu);
+        final MenuBar menuBar = new MenuBar(bestandMenu);
         this.add(menuBar, 0, 0, 5, 1);
 
         ///////////////////Grid Settings/////////////////////

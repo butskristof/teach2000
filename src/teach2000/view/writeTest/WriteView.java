@@ -85,7 +85,7 @@ public class WriteView extends GridPane {
         score = new Label("Score");
         this.lblResult = new Label("");
 
-        this.afsluiten = new MenuItem("Exit");
+        this.afsluiten = new MenuItem("Close");
     }
 
     ///////////////////Layout/////////////////////
@@ -97,14 +97,14 @@ public class WriteView extends GridPane {
 //                Menu("Edit");
 //        final Menu helpMenu = new
 //                Menu("Help");
-        final Menu aboutMenu = new
-                Menu("About");
+//        final Menu aboutMenu = new
+//                Menu("About");
         bestandMenu.getItems().add(this.afsluiten);
 
         //MenuBar
         final MenuBar menuBar = new
 //                MenuBar(bestandMenu, editMenu, helpMenu, aboutMenu);
-                MenuBar(bestandMenu, aboutMenu);
+                MenuBar(bestandMenu);
         this.add(menuBar, 0, 0, 5, 1);
 
 

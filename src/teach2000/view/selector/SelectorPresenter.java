@@ -39,6 +39,7 @@ public class SelectorPresenter {
 				McPresenter presenter = new McPresenter(mc, mcView);
 				// replace current view with test window
 				view.getScene().setRoot(mcView);
+				presenter.addWindowEventHandlers();
 				mcView.getScene().getWindow().setHeight(400);
 				mcView.getScene().getWindow().setWidth(800);
 			}
@@ -60,6 +61,7 @@ public class SelectorPresenter {
 				WritePresenter presenter = new WritePresenter(ai, writeView);
 				// replace the current view with the test window
 				view.getScene().setRoot(writeView);
+				presenter.addWindowEventHandlers();
 				writeView.getScene().getWindow().setHeight(400);
 				writeView.getScene().getWindow().setWidth(800);
 			}

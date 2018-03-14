@@ -41,7 +41,55 @@ public class MainMenuPresenter {
     }
 
     private void addEventHandlers() {
-    	view.getAdd().setOnAction(new EventHandler<ActionEvent>() {
+
+    	// FILE MENU
+
+		// import list
+		this.view.getImportList().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				FileChooser fc = new FileChooser();
+				fc.setTitle("Select list file to import");
+				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
+
+				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
+					List importedList = ListIO.readList(listToImport);
+					user.addList(importedList);
+				}
+
+				updateView();
+			}
+		});
+
+		// export list
+		this.view.getExportList().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				event.consume();
+			}
+		});
+
+		// exit from menu item
+		this.view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// we send a close request so the same code can be re-used
+				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
+			}
+		});
+
+		// EDIT MENU
+
+		// edit currently selected list
+		this.view.getEdit().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				event.consume();
+			}
+		});
+
+    	// add new list
+    	this.view.getAdd().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//open new window to create new wordlist
@@ -64,7 +112,25 @@ public class MainMenuPresenter {
 			}
 		});
 
-    	view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
+		// remove selected list
+		this.view.getRemove().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// get index of selected row which is the same as the list index
+				// TODO ignore when no list is selected
+				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+
+				user.removeList(index);
+
+				updateView();
+			}
+		});
+
+		// USER MENU
+
+    	// delete current logged in user
+    	this.view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//delete user account
@@ -78,7 +144,8 @@ public class MainMenuPresenter {
 			}
 		});
 
-    	view.getLogoutUser().setOnAction(new EventHandler<ActionEvent>() {
+    	// log out current user and go back to login view
+    	this.view.getLogoutUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// go back to login view
@@ -90,44 +157,11 @@ public class MainMenuPresenter {
 			}
 		});
 
-
-        // exit from menu
-        view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	// we send a close request so the same code can be re-used
-            	view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
-            }
-        });
-
-        // import list
-		this.view.getImportList().setOnAction(new EventHandler<ActionEvent>() {
+    	// configuration
+		this.view.getUserConfiguration().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				FileChooser fc = new FileChooser();
-				fc.setTitle("Select list file to import");
-				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
-
-				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
-					List importedList = ListIO.readList(listToImport);
-					user.addList(importedList);
-				}
-
-				updateView();
-			}
-		});
-
-		// remove list
-		this.view.getRemove().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// get index of selected row which is the same as the list index
-				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
-				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-
-				user.removeList(index);
-
-				updateView();
+				event.consume();
 			}
 		});
 
