@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.stage.WindowEvent;
 import teach2000.model.users.User;
 import teach2000.model.users.UserIO;
@@ -38,14 +39,60 @@ public class UserPresenter {
         view.getSaveButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	// change username if necessary
+				String newusername = view.getNameText().getText();
+				if (!newusername.equals("") && !newusername.equals(user.getName())) {
+					user.setName(newusername);
+				}
 
+				// check if stopword should be used
+				if (view.getCheckbox().isSelected() && !view.getStopWordField().getText().equals("")) {
+					// enable stopword
+					String stopword = view.getStopWordField().getText();
+					user.enableStopword(stopword, (int)Math.round(view.getSlider().getValue()));
+				} else {
+					// disable stopword
+					user.disableStopword();
+				}
+
+				updateView();
+				UserIO.writeUsersToFile();
+
+				// close window and return to main menu
+				view.getScene().getWindow().hide();
             }
         });
+
+        // checkbox toggled, disable textfield and slider
+        view.getCheckbox().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// see if it's currently active and flip it
+				view.getStopWordField().setDisable(
+						!(view.getStopWordField().isDisabled())
+				);
+				view.getSlider().setDisable(
+						!(view.getSlider().isDisabled())
+				);
+			}
+		});
 
     }
 
     private void updateView() {
+    	// fill in username
+		view.getNameText().setText(user.getName());
 
+		if (user.getHasStopword()) {
+			// check if the user has a stopword currently enabled
+			view.getCheckbox().setSelected(true);
+
+			view.getStopWordField().setText(user.getStopword());
+			view.getSlider().setValue(user.getMinimumRequiredScoreToStop());
+		} else {
+			view.getStopWordField().setDisable(true);
+			view.getSlider().setDisable(true);
+		}
     }
 
     public void addWindowEventHandlers() {

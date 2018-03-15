@@ -12,10 +12,13 @@ import java.util.ArrayList;
  * This class functions as a wrapper around an ArrayList to contain and store all User objects in memory.
  * When created, it will automatically import all users from disk.
  *
+ * The UserList is kept as a static variable since it will always contain the information stored in the file. There aren't
+ * any variations possible.
+ *
  * @author demacryx on 25.02.2018 9:28 PM.
  */
 public class UserList {
-    private ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<User> users = new ArrayList<>();
 
     // CONSTRUCTORS
 
@@ -24,7 +27,7 @@ public class UserList {
 	 */
 	public UserList() {
 		// Ask IO class to read all users in the file
-		this.users = UserIO.readUsers();
+		users = UserIO.readUsers();
 	}
 
 	// GETTERS
@@ -33,9 +36,9 @@ public class UserList {
 	 * Returns an ArrayList containing all User objects.
 	 * @return ArrayList containing all User objects
 	 */
-	public ArrayList<User> getUsers() {
+	public static ArrayList<User> getUsers() {
 		// return all users
-		return this.users;
+		return users;
 	}
 
 	/**
@@ -69,7 +72,7 @@ public class UserList {
 	 */
 	public void importUser(User u) {
 		// Add user to list that is imported from file
-        this.users.add(u);
+        users.add(u);
     }
 
 	/**
@@ -78,9 +81,9 @@ public class UserList {
 	 */
 	public void addUser(User newuser) {
 		// Create a new user and write it to file
-		this.users.add(newuser);
+		users.add(newuser);
 
-		UserIO.writeUsersToFile(this.users);
+		UserIO.writeUsersToFile();
 	}
 
 	/**
@@ -89,8 +92,8 @@ public class UserList {
 	 */
 	public void removeUser(User user){
 		//remove existing user currently logged in
-		this.users.remove(user);
-		UserIO.writeUsersToFile(this.users);
+		users.remove(user);
+		UserIO.writeUsersToFile();
 	}
 
 }

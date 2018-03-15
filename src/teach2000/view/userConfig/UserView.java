@@ -75,7 +75,13 @@ public class UserView extends GridPane {
         stopWordField.setPromptText("Stopword");
         this.checkbox = new CheckBox("Stopwoord?");
         this.minReq = new Label("Min. Req.\n \tScore:");
-        this.slider = new Slider(0, 100, 50);
+        this.slider = new Slider(0, 100, 10);
+        this.slider.setMajorTickUnit(10);
+        this.slider.setMinorTickCount(0);
+        this.slider.setSnapToTicks(true);
+		this.slider.setShowTickLabels(true);
+		this.slider.setShowTickMarks(true);
+//        this.slider.setBlockIncrement(10);
 
         this.saveButton = new Button("Save");
         this.cancelButtton = new Button("Cancel");

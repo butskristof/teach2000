@@ -112,7 +112,14 @@ public class User {
     	this.minimumRequiredScoreToStop = minimumRequiredScoreToStop;
 	}
 
-	// BUSINESS LOGIC
+	/**
+	 * Set username
+	 * @param name String with the new username
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+// BUSINESS LOGIC
 
 	public void addList(List l) {
     	// add new list to user and write it to a file in the user's folder

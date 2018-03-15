@@ -102,6 +102,7 @@ public class WritePresenter {
 					final Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setHeaderText("Not possible to exit test");
 					alert.setContentText("You haven't reached the minimum required score to exit the test yet.");
+					alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE); // Make sure height is resized to fit text on Linux
 					alert.showAndWait();
 				}
 			}

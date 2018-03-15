@@ -63,13 +63,12 @@ public class UserIO {
 	/**
 	 * This method writes all users to disk.
 	 *
-	 * @param users ArrayList containing all User objects to be saved
 	 */
-	public static void writeUsersToFile(ArrayList<User> users) {
+	public static void writeUsersToFile() {
 		// Write user information to file
 		// UserIO should be extracted to separate utility class
 		try (DataOutputStream os = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(FILE)))) {
-			for (User u: users) {
+			for (User u: UserList.getUsers()) {
 				os.writeUTF(u.getId());
 				os.writeUTF(u.getName());
 
