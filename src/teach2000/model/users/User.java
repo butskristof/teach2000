@@ -119,6 +119,14 @@ public class User {
     	this.lists.remove(listindex);
 	}
 
+	public void removeList(List l) {
+		// find index and call overloaded method if exists
+		int listindex = this.lists.indexOf(l);
+		if (listindex != -1) {
+			this.removeList(listindex);
+		}
+	}
+
 	/**
 	 * Import all lists in the user's default folder.
 	 */

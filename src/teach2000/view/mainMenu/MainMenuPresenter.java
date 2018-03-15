@@ -15,6 +15,7 @@ import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.view.add.AddPresenter;
 import teach2000.view.add.AddView;
+import teach2000.view.add.EditPresenter;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 import teach2000.view.selector.SelectorPresenter;
@@ -99,7 +100,31 @@ public class MainMenuPresenter {
 		this.view.getEdit().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				event.consume();
+				// TODO ignore if nothing selected
+				// get selected list
+				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+
+				List listToEdit = user.getList(index);
+
+				//open new window to create new wordlist
+				// make selector view and presenter
+				AddView addView = new AddView();
+				EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
+
+				// create new window for adding lists
+				Stage stage = new Stage();
+				stage.initOwner(view.getScene().getWindow());
+				stage.setScene(new Scene(addView));
+				stage.setHeight(600);
+				stage.setWidth(800);
+				presenter.addWindowEventHandlers();
+
+				// show new window and pause current window
+				stage.showAndWait();
+
+				// refresh list after returning from add window
+				updateView();
 			}
 		});
 

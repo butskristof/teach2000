@@ -86,12 +86,13 @@ public class Question {
 	}
 
 	/**
-	 * Package-private method to get the alternative answers. Outsiders shouldn't have access and should use
+	 * Method to get the alternative answers. Outsiders shouldn't have access and should use
 	 * getPossibilities and processAnswer instead.
-	 * Access is provided to QuestionIO through package-private.
+	 *
+	 *
 	 * @return String array containing all alternative answers.
 	 */
-	String[] getAlternatives() {
+	public String[] getAlternatives() {
 		return alternatives;
 	}
 
