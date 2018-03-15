@@ -2,12 +2,17 @@ package teach2000.view.add;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import javafx.stage.WindowEvent;
 import teach2000.model.users.User;
 import teach2000.model.lists.List;
 import teach2000.model.questions.Question;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author demacryx on 12.03.2018 11:10 PM.
@@ -32,6 +37,7 @@ public class AddPresenter {
 			}
 		});
 
+    	// submit
     	this.view.getSumbitButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -75,6 +81,35 @@ public class AddPresenter {
 
 				// close window and return to main menu
 				view.getScene().getWindow().hide();
+			}
+		});
+
+    	// close from menu item
+		this.view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// fire close request for uniformity
+				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
+			}
+		});
+	}
+
+	public void addWindowEventHandlers() {
+    	this.view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				// show close dialog
+				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Are you sure?");
+				alert.setContentText("Are you sure you want to close this window? All progress will be lost.");
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE); // Make sure height is resized to fit text on Linux
+				Optional<ButtonType> choice = alert.showAndWait();
+				if (!choice.get().getButtonData().isCancelButton()) {
+					// stop test
+					view.getScene().getWindow().hide();
+				} else {
+					event.consume();
+				}
 			}
 		});
 	}

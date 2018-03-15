@@ -39,16 +39,16 @@ public class RegisterPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// add user
-				//User cannot be added if name field is empty.
+				// User cannot be added if name field is empty.
 				if (view.getAddName().getText().isEmpty()) {
-					final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-					alert.setHeaderText("No Name");
-					alert.setContentText("Please fill in a name!");
+					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setHeaderText("No name");
+					alert.setContentText("Please fill in a name.");
 					Optional<ButtonType> choice = alert.showAndWait();
 					if (choice.get().getButtonData().isCancelButton()) {
 						event.consume();
 					}
-				}else {
+				} else {
 					model.addUser(view.getAddName().getText());
 					callbackLogin();
 				}

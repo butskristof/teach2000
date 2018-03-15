@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.WindowEvent;
 import teach2000.model.MultipleChoice;
@@ -38,7 +39,8 @@ public class McPresenter {
 		view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				closeDialog();
+				// fire close request for uniformity
+				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
 			}
 		});
 
@@ -64,20 +66,20 @@ public class McPresenter {
 		view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
-				closeDialog();
+				// show close dialog
+				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				alert.setHeaderText("Are you sure?");
+				alert.setContentText("Are you sure you want to stop this test?");
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE); // Make sure height is resized to fit text on Linux
+				Optional<ButtonType> choice = alert.showAndWait();
+				if (!choice.get().getButtonData().isCancelButton()) {
+					// stop test
+					stopTest();
+				} else {
+					event.consume();
+				}
 			}
 		});
-	}
-
-	private void closeDialog() {
-		final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setHeaderText("Are you sure?");
-		alert.setContentText("Are you sure you want to stop this test?");
-		Optional<ButtonType> choice = alert.showAndWait();
-		if (!choice.get().getButtonData().isCancelButton()) {
-			// stop test
-			stopTest();
-		}
 	}
 
 	private void stopTest() {

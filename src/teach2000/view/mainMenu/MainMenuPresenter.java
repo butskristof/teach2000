@@ -143,6 +143,7 @@ public class MainMenuPresenter {
 				stage.setScene(new Scene(addView));
 				stage.setHeight(600);
 				stage.setWidth(800);
+				addPresenter.addWindowEventHandlers();
 
 				// show new window and pause current window
 				stage.showAndWait();
