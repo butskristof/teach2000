@@ -72,14 +72,14 @@ public class RegisterView extends GridPane {
 
         //OK Button
         this.add(confirm, 0, 1);
-        confirm.setPrefWidth(120);
+        this.confirm.setPrefWidth(120);
         GridPane.setConstraints(confirm, 0, 1, 1, 1,
                 HPos.RIGHT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
 
         //Cancel Button
         this.add(cancel, 1, 1);
-        cancel.setPrefWidth(120);
+        this.cancel.setPrefWidth(120);
         GridPane.setConstraints(cancel, 1, 1, 1, 1,
                 HPos.LEFT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);

@@ -6,12 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import teach2000.Teach2000Exception;
 import teach2000.model.Login;
 import teach2000.model.users.User;
 import teach2000.model.lists.List;
@@ -29,6 +30,7 @@ import teach2000.view.userConfig.UserView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 7:12 PM.
@@ -60,16 +62,8 @@ public class MainMenuPresenter {
 				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
 
 				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
-					try {
-						List importedList = ListIO.readList(listToImport);
-						user.addList(importedList);
-					} catch (Teach2000Exception ex) {
-						final Alert alert = new Alert(Alert.AlertType.ERROR);
-						alert.setTitle("Import failed");
-						alert.setHeaderText("Unable to import list");
-						alert.setContentText(ex.getMessage());
-						alert.showAndWait();
-					}
+					List importedList = ListIO.readList(listToImport);
+					user.addList(importedList);
 				}
 
 				updateView();
@@ -80,39 +74,23 @@ public class MainMenuPresenter {
 		this.view.getExportList().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// get selected table entry
-				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
-				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-				if (index == -1) {
-					// ignore if nothing selected in table
-					final Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText("Geen lijst geselecteerd");
-					alert.showAndWait();
+				// open file chooser
+				FileChooser fileChooser = new FileChooser();
+				File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
+				if ((toSave == null) || (toSave.getName().equals(""))) {
+					// break if canceled
 					event.consume();
 				} else {
-					// open file chooser
-					FileChooser fileChooser = new FileChooser();
-					File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
-					if ((toSave == null) || (toSave.getName().equals(""))) {
-						// break if canceled
-						event.consume();
-					} else {
-						// get list from user
-						List listToSave = user.getList(index);
+					// get selected table entry
+					// TODO ignore if nothing selected
+					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+					// get list from user
+					List listToSave = user.getList(index);
 
-						// call ListIO and let it write to file
-						try {
-							ListIO.writeList(toSave, listToSave);
-						} catch (Teach2000Exception ex) {
-							final Alert alert = new Alert(Alert.AlertType.ERROR);
-							alert.setTitle("Import failed");
-							alert.setHeaderText("Unable to import list");
-							alert.setContentText(ex.getMessage());
-							alert.showAndWait();
-						}
-					}
+					// call ListIO and let it write to file
+					ListIO.writeList(toSave, listToSave);
 				}
-
 			}
 		});
 
@@ -131,39 +109,31 @@ public class MainMenuPresenter {
 		this.view.getEdit().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// TODO ignore if nothing selected
 				// get selected list
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-				if (index == -1) {
-					// ignore if nothing selected in table
-					final Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText("Geen lijst geselecteerd");
-					alert.showAndWait();
-					event.consume();
-					event.consume();
-				} else {
-					List listToEdit = user.getList(index);
 
-					//open new window to create new wordlist
-					// make selector view and presenter
-					AddView addView = new AddView();
-					EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
+				List listToEdit = user.getList(index);
 
-					// create new window for adding lists
-					Stage stage = new Stage();
-					stage.initOwner(view.getScene().getWindow());
-					stage.setScene(new Scene(addView));
-					stage.setHeight(600);
-					stage.setWidth(800);
-					presenter.addWindowEventHandlers();
+				//open new window to create new wordlist
+				// make selector view and presenter
+				AddView addView = new AddView();
+				EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
 
-					// show new window and pause current window
-					stage.showAndWait();
+				// create new window for adding lists
+				Stage stage = new Stage();
+				stage.initOwner(view.getScene().getWindow());
+				stage.setScene(new Scene(addView));
+				stage.setHeight(600);
+				stage.setWidth(800);
+				presenter.addWindowEventHandlers();
 
-					// refresh list after returning from add window
-					updateView();
-				}
+				// show new window and pause current window
+				stage.showAndWait();
 
+				// refresh list after returning from add window
+				updateView();
 			}
 		});
 
@@ -199,30 +169,13 @@ public class MainMenuPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// get index of selected row which is the same as the list index
+				// TODO ignore when no list is selected
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-				if (index == -1) {
-					// ignore if nothing selected in table
-					final Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText("Geen lijst geselecteerd");
-					alert.showAndWait();
-					event.consume();
-					event.consume();
-				} else {
-					try {
-						user.removeList(index);
-					} catch (Teach2000Exception ex) {
-						final Alert alert = new Alert(Alert.AlertType.ERROR);
-						alert.setTitle("Import failed");
-						alert.setHeaderText("Unable to import list");
-						alert.setContentText(ex.getMessage());
-						alert.showAndWait();
-					}
+				user.removeList(index);
 
-					updateView();
-				}
-
+				updateView();
 			}
 		});
 
@@ -260,8 +213,9 @@ public class MainMenuPresenter {
 		this.view.getUserConfiguration().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+                UserIO userIO = new UserIO();
                 UserView userView = new UserView();
-                UserPresenter userPresenter = new UserPresenter(user, userView);
+                UserPresenter userPresenter = new UserPresenter(userIO,userView);
 
                 // create new window for adding lists
 
@@ -275,6 +229,9 @@ public class MainMenuPresenter {
 
                 // show new window and pause current window
                 stage.showAndWait();
+
+                // refresh list after returning from add window
+                updateView();
 			}
 		});
 
@@ -284,37 +241,37 @@ public class MainMenuPresenter {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2){
+                	// TODO ignore if no item is selected
                 	// get index of selected row which is the same as the list index
 					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-					if (index == -1) {
-						// ignore if nothing selected
-						final Alert alert = new Alert(Alert.AlertType.ERROR);
-						alert.setHeaderText("Geen lijst geselecteerd");
-						alert.showAndWait();
-						event.consume();
-						event.consume();
-					} else {
-						// make selector view and presenter
-						SelectorView selectorView = new SelectorView();
-						SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
+					// make selector view and presenter
+                    SelectorView selectorView = new SelectorView();
+					SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
 
-						// create new windows for selection of type and the test itself
-						Stage stage = new Stage();
-						stage.initOwner(view.getScene().getWindow());
-						stage.setScene(new Scene(selectorView));
-//					selectorView.getScene().getWindow().setWidth(400);
-//					selectorView.getScene().getWindow().setHeight(200);
-						stage.setWidth(400);
-						stage.setHeight(200);
-						stage.setResizable(false);
+					// create new windows for selection of type and the test itself
+					Stage stage = new Stage();
+					stage.initOwner(view.getScene().getWindow());
+					stage.setScene(new Scene(selectorView));
+					stage.setWidth(400);
+					stage.setHeight(200);
+					stage.setResizable(false);
 
-						// show new window and pause current window
-						stage.showAndWait();
-					}
-
+					// show new window and pause current window
+					stage.showAndWait();
                 }
+            }
+        });
+
+        //about
+        view.getAbout().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Made By");
+                alert.setContentText("Kristof Buts & Aleksey Zelenskiy");
+                Optional<ButtonType> choice = alert.showAndWait();
             }
         });
 
@@ -326,7 +283,6 @@ public class MainMenuPresenter {
 
 		ArrayList<List> userlists = this.user.getLists();
 		for (List l : userlists) {
-			// convert to Observable ArrayList for View
 			this.lists.add(l);
 		}
 

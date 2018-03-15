@@ -17,15 +17,12 @@ public class SelectorView extends GridPane{
 	private Label question;
 	private Button multiplechoice, write;
 
-	// CONSTRUCTOR
-
 	public SelectorView() {
 		this.initializeNodes();
 		this.layoutNodes();
 	}
 
 	// GETTERS
-
 
 	public Button getMultiplechoice() {
 		return multiplechoice;
@@ -37,8 +34,7 @@ public class SelectorView extends GridPane{
 
 	private void initializeNodes() {
 		this.question= new Label("What type of test do you want to do?");
-		question.setFont(new Font("Arial",20));
-
+		this.question.setFont(new Font("Arial",20));
 		this.multiplechoice = new Button("Multiple choice");
 		this.write = new Button("Fill in the answer");
 	}
@@ -59,9 +55,6 @@ public class SelectorView extends GridPane{
 		ColumnConstraints column2 = new ColumnConstraints(300);
 		this.getColumnConstraints().addAll(column1,column2);
 
-		//Row Constraints
-		RowConstraints rowConstraints = new RowConstraints(150);
-
 		///////////////////Elements Layout/////////////////////
 
 		//Label
@@ -71,8 +64,13 @@ public class SelectorView extends GridPane{
 				Priority.NEVER, Priority.NEVER);
 
 		this.add(multiplechoice, 0, 1);
-		GridPane.setConstraints(multiplechoice, 0, 1, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(multiplechoice, 0, 1, 1, 1,
+				HPos.RIGHT, VPos.CENTER,
+				Priority.NEVER, Priority.NEVER);
+
 		this.add(write, 1, 1);
-		GridPane.setConstraints(write, 1, 1, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(write, 1, 1, 1, 1,
+				HPos.LEFT, VPos.CENTER,
+				Priority.NEVER, Priority.NEVER);
 	}
 }

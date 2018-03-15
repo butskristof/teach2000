@@ -15,12 +15,9 @@ import javafx.scene.layout.RowConstraints;
  * @author demacryx on 25.02.2018.
  */
 public class LoginView extends GridPane {
-    ///////////////////Attributes/////////////////////
     private ComboBox<String> users;
     private Button loginButton, registerButton;
     private Label explanationLabel, titleLabel;
-
-	///////////////////Constructor/////////////////////
 	public LoginView() {
 		this.initializeNodes();
 		this.layoutNodes();
@@ -65,15 +62,14 @@ public class LoginView extends GridPane {
         ColumnConstraints column2 = new ColumnConstraints(200);
         this.getColumnConstraints().addAll(column1, column2);
 
-        //Row Constraints
-        RowConstraints rowConstraints = new RowConstraints(200);
-
         ///////////////////Elements Layout/////////////////////
 
 		// TITLE
 		this.add(this.titleLabel, 0, 0);
 		this.titleLabel.setStyle("-fx-font-size: 50");
-		GridPane.setConstraints(this.titleLabel, 0, 0, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(this.titleLabel, 0, 0, 2, 1,
+                HPos.CENTER, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Label at Top
         this.add(explanationLabel, 0, 1);
@@ -83,21 +79,21 @@ public class LoginView extends GridPane {
 
         //BoxList
         this.add(users, 0, 2);
-        users.setPrefWidth(250);
+        this.users.setPrefWidth(250);
         GridPane.setConstraints(users, 0, 2, 2, 1,
                 HPos.CENTER, VPos.CENTER,
                 Priority.ALWAYS, Priority.NEVER);
 
         //Login Button
         this.add(loginButton, 0, 3);
-        loginButton.setPrefWidth(120);
+        this.loginButton.setPrefWidth(120);
         GridPane.setConstraints(loginButton, 0, 3, 1, 1,
                 HPos.RIGHT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);
 
         //Register Button
         this.add(registerButton, 1, 3);
-        registerButton.setPrefWidth(120);
+        this.registerButton.setPrefWidth(120);
         GridPane.setConstraints(registerButton, 1, 3, 1, 1,
                 HPos.LEFT, VPos.CENTER,
                 Priority.NEVER, Priority.NEVER);

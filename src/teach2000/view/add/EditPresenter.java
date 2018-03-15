@@ -96,15 +96,6 @@ public class EditPresenter {
 				view.getScene().getWindow().hide();
 			}
 		});
-
-		// close from menu item
-		this.view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// fire close request for uniformity
-				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
-			}
-		});
 	}
 
 	private void updateView() {
