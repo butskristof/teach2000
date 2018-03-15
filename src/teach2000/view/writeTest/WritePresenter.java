@@ -1,6 +1,5 @@
 package teach2000.view.writeTest;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;

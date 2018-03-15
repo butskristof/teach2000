@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
 import javafx.stage.WindowEvent;
 import teach2000.model.users.User;
 import teach2000.model.users.UserIO;
@@ -13,7 +12,6 @@ import java.util.Optional;
 
 /**
  * @author demacryx on 15.03.2018 8:35 PM.
- * @project teach20002
  */
 public class UserPresenter {
     private User user;
@@ -45,7 +43,7 @@ public class UserPresenter {
 					user.setName(newusername);
 				}
 
-				// check if stopword should be used
+				// check if stopword should be used and that the input field isn't empty
 				if (view.getCheckbox().isSelected() && !view.getStopWordField().getText().equals("")) {
 					// enable stopword
 					String stopword = view.getStopWordField().getText();

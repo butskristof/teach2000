@@ -11,7 +11,6 @@ import javafx.scene.layout.Priority;
 
 /**
  * @author demacryx on 15.03.2018 8:36 PM.
- * @project teach20002
  */
 public class UserView extends GridPane {
     private Label userName;
@@ -73,7 +72,7 @@ public class UserView extends GridPane {
         this.stopWord = new Label("Stopword:");
         this.stopWordField = new TextField();
         this.stopWordField.setPromptText("Stopword");
-        this.checkbox = new CheckBox("Stopwoord?");
+        this.checkbox = new CheckBox("Use a stopword");
         this.minReq = new Label("Min. Req.\n \tScore:");
         this.slider = new Slider(0, 100, 10);
         this.slider.setMajorTickUnit(10);

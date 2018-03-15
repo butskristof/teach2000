@@ -2,7 +2,6 @@ package teach2000.model;
 
 import teach2000.model.users.User;
 import teach2000.model.users.UserList;
-import teach2000.view.login.LoginView;
 
 /**
  * This class administrates the Login. Upon creation, it will create a UserList (that will read in existing users)

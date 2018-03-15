@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- *
  * This is a dedicated IO class for User object that only has static methods. It is used to separate all IO-related operations
  * from the main business logic and will take care of everything for importing and exporting users.
  *

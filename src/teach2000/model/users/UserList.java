@@ -1,11 +1,6 @@
 package teach2000.model.users;
 
 
-import teach2000.model.users.User;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**

@@ -15,7 +15,7 @@ public class MainMenuView extends VBox {
     ///////////////////Attributes/////////////////////
     private TableView<List> table;
     private Label label;
-    private MenuItem afsluiten, add, remove, edit, importList, exportList, deleteUser, logoutUser, userConfiguration, about;
+    private MenuItem afsluiten, add, remove, edit, importList, exportList, deleteUser, logoutUser, userConfiguration;
 
     ///////////////////Constructor/////////////////////
     public MainMenuView() {
@@ -64,10 +64,6 @@ public class MainMenuView extends VBox {
         return userConfiguration;
     }
 
-    public MenuItem getAbout() {
-        return about;
-    }
-
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
         this.label = new Label("Lijsten");
@@ -83,7 +79,6 @@ public class MainMenuView extends VBox {
         this.deleteUser = new MenuItem("Delete user");
         this.logoutUser = new MenuItem("Log out user");
         this.userConfiguration = new MenuItem("Configure");
-        this.about = new MenuItem("About");
 
         //Table Items
         this.table = new TableView<>();
@@ -117,7 +112,7 @@ public class MainMenuView extends VBox {
         final Menu userMenu = new
                 Menu("User");
 
-        bestandMenu.getItems().addAll(importList, exportList, about, afsluiten);
+        bestandMenu.getItems().addAll(importList, exportList, afsluiten);
         editMenu.getItems().addAll(edit, add, remove);
         userMenu.getItems().addAll(deleteUser, logoutUser, userConfiguration);
 
