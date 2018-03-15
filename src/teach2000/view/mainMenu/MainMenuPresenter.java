@@ -5,11 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.Alert;
-=======
 import javafx.scene.control.ScrollPane;
->>>>>>> de603c05cf3d5bc6b25163d5988e399dcc8ce611
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

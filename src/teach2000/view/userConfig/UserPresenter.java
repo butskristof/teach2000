@@ -29,7 +29,9 @@ public class UserPresenter {
         view.getCancelButtton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                event.consume();
+//                event.consume();
+				// send close request
+				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
             }
         });
 
