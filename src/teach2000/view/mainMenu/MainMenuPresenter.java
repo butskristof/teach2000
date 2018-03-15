@@ -5,7 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.Alert;
+=======
+import javafx.scene.control.ScrollPane;
+>>>>>>> de603c05cf3d5bc6b25163d5988e399dcc8ce611
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -15,6 +19,7 @@ import teach2000.model.Login;
 import teach2000.model.users.User;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
+import teach2000.model.users.UserIO;
 import teach2000.view.add.AddPresenter;
 import teach2000.view.add.AddView;
 import teach2000.view.add.EditPresenter;
@@ -22,6 +27,9 @@ import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 import teach2000.view.selector.SelectorPresenter;
 import teach2000.view.selector.SelectorView;
+import teach2000.view.userConfig.UserPresenter;
+import teach2000.view.userConfig.UserView;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -172,11 +180,13 @@ public class MainMenuPresenter {
 				AddPresenter addPresenter = new AddPresenter(user, addView);
 
 				// create new window for adding lists
+
 				Stage stage = new Stage();
 				stage.initOwner(view.getScene().getWindow());
 				stage.setScene(new Scene(addView));
 				stage.setHeight(600);
 				stage.setWidth(800);
+
 				addPresenter.addWindowEventHandlers();
 
 				// show new window and pause current window
@@ -253,22 +263,21 @@ public class MainMenuPresenter {
 		this.view.getUserConfiguration().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO
-				event.consume();
+                UserView userView = new UserView();
+                UserPresenter userPresenter = new UserPresenter(user, userView);
 
-//				// open new user configuration window
-//				UserConfigView userConfigView = new UserConfigView();
-//				UserConfigPresenter userConfigPresenter = new UserConfigPresenter(user, userConfigView);
-//
-//				Stage stage = new Stage();
-//				stage.initOwner(view.getScene().getWindow());
-//				stage.setScene(new Scene(userConfigView));
-//				// set size
-//				userConfigPresenter.addWindowEventHandlers();
-//
-//				// show new window and pause current
-//				stage.showAndWait();
+                // create new window for adding lists
 
+                Stage stage = new Stage();
+                stage.initOwner(view.getScene().getWindow());
+                stage.setScene(new Scene(userView));
+                stage.setHeight(300);
+                stage.setWidth(500);
+
+                userPresenter.addWindowEventHandlers();
+
+                // show new window and pause current window
+                stage.showAndWait();
 			}
 		});
 

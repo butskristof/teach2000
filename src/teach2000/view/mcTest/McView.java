@@ -94,8 +94,6 @@ public class McView extends GridPane {
         //Menu
         final Menu bestandMenu = new
                 Menu("File");
-//        final Menu aboutMenu = new
-//                Menu("About");
         bestandMenu.getItems().add(this.afsluiten);
 
         //MenuBar
@@ -117,14 +115,12 @@ public class McView extends GridPane {
         column0.setPercentWidth(10);
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(40);
-       /* ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(5);*/
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(40);
         ColumnConstraints column3 = new ColumnConstraints();
-        column3.setPercentWidth(40);
-        ColumnConstraints column4 = new ColumnConstraints();
-        column4.setPercentWidth(10);
+        column3.setPercentWidth(10);
 
-        this.getColumnConstraints().addAll(column0, column1, column3, column4);
+        this.getColumnConstraints().addAll(column0, column1, column2, column3);
 
         //Row Constraints
         //Menu
@@ -133,7 +129,7 @@ public class McView extends GridPane {
         row0.setValignment(VPos.TOP);
         //Title
         RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(15);
+        row1.setPercentHeight(13);
         //Empty
         RowConstraints row2 = new RowConstraints();
         row2.setPercentHeight(7);
@@ -148,33 +144,26 @@ public class McView extends GridPane {
         row5.setPercentHeight(8);
         //Text Field
         RowConstraints row6 = new RowConstraints();
-        row6.setPercentHeight(10);
+        row6.setPercentHeight(8);
         //Empty
         RowConstraints row7 = new RowConstraints();
         row7.setPercentHeight(8);
         //Extra Text
         RowConstraints row8 = new RowConstraints();
-        row8.setPercentHeight(7);
+        row8.setPercentHeight(8);
         //Score
         RowConstraints row9 = new RowConstraints();
-        row9.setPercentHeight(7);
+        row9.setPercentHeight(8);
 
         this.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5, row6, row7, row8, row9);
 
 
         ///////////////////Elements Layout/////////////////////
-        //Background Image
-        /*setBackground(new Background(new BackgroundImage(new Image("images/writeview.jpg"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));*/
-
         //title
         this.add(title, 1, 1);
         this.title.setStyle("-fx-font-size: 30");
-        GridPane.setConstraints(title, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
         title.setPadding(new Insets(20,0,0,0));
+        GridPane.setConstraints(title, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
 
         //Taal From Label
         this.add(taalFrom, 1, 3);
@@ -183,10 +172,9 @@ public class McView extends GridPane {
 
         //Word Label
         this.add(word, 1, 4);
-        this.word.setStyle("-fx-font-size: 15");
-        this.word.setStyle("-fx-font-weight: bold");
-        GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.word.setStyle("-fx-font-size: 18");
         word.setPadding(new Insets(0,0,0,15));
+        GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //Taal To Label
         this.add(taalTo, 1, 5);
@@ -200,8 +188,8 @@ public class McView extends GridPane {
         //OK Button
         this.add(okButton, 1, 10);
         this.okButton.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(okButton, 1, 10, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
         okButton.setMinWidth(200);
+        GridPane.setConstraints(okButton, 1, 10, 2, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
 
         //Extra Text Label
         this.add(extraText, 2, 1);
@@ -235,7 +223,7 @@ public class McView extends GridPane {
         }
 
         // place submit button in the row after last radio button
-		GridPane.setConstraints(okButton, 1, possibilities.size() + 6, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(okButton, 2, possibilities.size() + 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
     }
 
 }

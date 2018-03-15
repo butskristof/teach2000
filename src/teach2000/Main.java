@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import teach2000.model.Login;
+import teach2000.view.add.AddView;
 import teach2000.view.login.LoginPresenter;
 import teach2000.view.login.LoginView;
 
