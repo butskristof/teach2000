@@ -6,18 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import teach2000.Teach2000Exception;
 import teach2000.model.Login;
 import teach2000.model.users.User;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
-import teach2000.model.users.UserIO;
 import teach2000.view.add.AddPresenter;
 import teach2000.view.add.AddView;
 import teach2000.view.add.EditPresenter;
@@ -30,28 +27,27 @@ import teach2000.view.userConfig.UserView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 7:12 PM.
  */
 public class MainMenuPresenter {
 	private Login loginmodel;
-    private User user;
-    private MainMenuView view;
-    private ObservableList<List> lists = FXCollections.observableArrayList();
+	private User user;
+	private MainMenuView view;
+	private ObservableList<List> lists = FXCollections.observableArrayList();
 
-    public MainMenuPresenter(Login loginmodel, User user, MainMenuView view) {
-    	this.loginmodel = loginmodel;
-        this.user = user;
-        this.view = view;
-        this.addEventHandlers();
-        this.updateView();
-    }
+	public MainMenuPresenter(Login loginmodel, User user, MainMenuView view) {
+		this.loginmodel = loginmodel;
+		this.user = user;
+		this.view = view;
+		this.addEventHandlers();
+		this.updateView();
+	}
 
-    private void addEventHandlers() {
+	private void addEventHandlers() {
 
-    	// FILE MENU
+		// FILE MENU
 
 		// import list
 		this.view.getImportList().setOnAction(new EventHandler<ActionEvent>() {
@@ -62,8 +58,16 @@ public class MainMenuPresenter {
 				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
 
 				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
-					List importedList = ListIO.readList(listToImport);
-					user.addList(importedList);
+					try {
+						List importedList = ListIO.readList(listToImport);
+						user.addList(importedList);
+					} catch (Teach2000Exception ex) {
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setTitle("Import failed");
+						alert.setHeaderText("Unable to import list");
+						alert.setContentText(ex.getMessage());
+						alert.showAndWait();
+					}
 				}
 
 				updateView();
@@ -74,23 +78,39 @@ public class MainMenuPresenter {
 		this.view.getExportList().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// open file chooser
-				FileChooser fileChooser = new FileChooser();
-				File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
-				if ((toSave == null) || (toSave.getName().equals(""))) {
-					// break if canceled
+				// get selected table entry
+				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+				if (index == -1) {
+					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
 					event.consume();
 				} else {
-					// get selected table entry
-					// TODO ignore if nothing selected
-					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
-					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-					// get list from user
-					List listToSave = user.getList(index);
+					// open file chooser
+					FileChooser fileChooser = new FileChooser();
+					File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
+					if ((toSave == null) || (toSave.getName().equals(""))) {
+						// break if canceled
+						event.consume();
+					} else {
+						// get list from user
+						List listToSave = user.getList(index);
 
-					// call ListIO and let it write to file
-					ListIO.writeList(toSave, listToSave);
+						// call ListIO and let it write to file
+						try {
+							ListIO.writeList(toSave, listToSave);
+						} catch (Teach2000Exception ex) {
+							final Alert alert = new Alert(Alert.AlertType.ERROR);
+							alert.setTitle("Import failed");
+							alert.setHeaderText("Unable to import list");
+							alert.setContentText(ex.getMessage());
+							alert.showAndWait();
+						}
+					}
 				}
+
 			}
 		});
 
@@ -109,36 +129,44 @@ public class MainMenuPresenter {
 		this.view.getEdit().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO ignore if nothing selected
 				// get selected list
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+				if (index == -1) {
+					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
+					event.consume();
+					event.consume();
+				} else {
+					List listToEdit = user.getList(index);
 
-				List listToEdit = user.getList(index);
+					//open new window to create new wordlist
+					// make selector view and presenter
+					AddView addView = new AddView();
+					EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
 
-				//open new window to create new wordlist
-				// make selector view and presenter
-				AddView addView = new AddView();
-				EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
+					// create new window for adding lists
+					Stage stage = new Stage();
+					stage.initOwner(view.getScene().getWindow());
+					stage.setScene(new Scene(addView));
+					stage.setHeight(600);
+					stage.setWidth(800);
+					presenter.addWindowEventHandlers();
 
-				// create new window for adding lists
-				Stage stage = new Stage();
-				stage.initOwner(view.getScene().getWindow());
-				stage.setScene(new Scene(addView));
-				stage.setHeight(600);
-				stage.setWidth(800);
-				presenter.addWindowEventHandlers();
+					// show new window and pause current window
+					stage.showAndWait();
 
-				// show new window and pause current window
-				stage.showAndWait();
+					// refresh list after returning from add window
+					updateView();
+				}
 
-				// refresh list after returning from add window
-				updateView();
 			}
 		});
 
-    	// add new list
-    	this.view.getAdd().setOnAction(new EventHandler<ActionEvent>() {
+		// add new list
+		this.view.getAdd().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//open new window to create new wordlist
@@ -169,20 +197,37 @@ public class MainMenuPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// get index of selected row which is the same as the list index
-				// TODO ignore when no list is selected
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-				user.removeList(index);
+				if (index == -1) {
+					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
+					event.consume();
+					event.consume();
+				} else {
+					try {
+						user.removeList(index);
+					} catch (Teach2000Exception ex) {
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setTitle("Import failed");
+						alert.setHeaderText("Unable to import list");
+						alert.setContentText(ex.getMessage());
+						alert.showAndWait();
+					}
 
-				updateView();
+					updateView();
+				}
+
 			}
 		});
 
 		// USER MENU
 
-    	// delete current logged in user
-    	this.view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
+		// delete current logged in user
+		this.view.getDeleteUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//delete user account
@@ -196,8 +241,8 @@ public class MainMenuPresenter {
 			}
 		});
 
-    	// log out current user and go back to login view
-    	this.view.getLogoutUser().setOnAction(new EventHandler<ActionEvent>() {
+		// log out current user and go back to login view
+		this.view.getLogoutUser().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// go back to login view
@@ -209,73 +254,69 @@ public class MainMenuPresenter {
 			}
 		});
 
-    	// configuration
+		// configuration
 		this.view.getUserConfiguration().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-                UserIO userIO = new UserIO();
-                UserView userView = new UserView();
-                UserPresenter userPresenter = new UserPresenter(userIO,userView);
+				UserView userView = new UserView();
+				UserPresenter userPresenter = new UserPresenter(user, userView);
 
-                // create new window for adding lists
+				// create new window for adding lists
 
-                Stage stage = new Stage();
-                stage.initOwner(view.getScene().getWindow());
-                stage.setScene(new Scene(userView));
-                stage.setHeight(300);
-                stage.setWidth(500);
+				Stage stage = new Stage();
+				stage.initOwner(view.getScene().getWindow());
+				stage.setScene(new Scene(userView));
+				stage.setHeight(300);
+				stage.setWidth(500);
 
-                userPresenter.addWindowEventHandlers();
+				userPresenter.addWindowEventHandlers();
 
-                // show new window and pause current window
-                stage.showAndWait();
-
-                // refresh list after returning from add window
-                updateView();
+				// show new window and pause current window
+				stage.showAndWait();
 			}
 		});
 
-        // handle click on table
+		// handle click on table
 		// get selected row, make new window for tests
-        view.getTable().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() == 2){
-                	// TODO ignore if no item is selected
-                	// get index of selected row which is the same as the list index
+		view.getTable().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() == 2){
+					// get index of selected row which is the same as the list index
 					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-					// make selector view and presenter
-                    SelectorView selectorView = new SelectorView();
-					SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
+					if (index == -1) {
+						// ignore if nothing selected
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setHeaderText("Geen lijst geselecteerd");
+						alert.showAndWait();
+						event.consume();
+						event.consume();
+					} else {
+						// make selector view and presenter
+						SelectorView selectorView = new SelectorView();
+						SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
 
-					// create new windows for selection of type and the test itself
-					Stage stage = new Stage();
-					stage.initOwner(view.getScene().getWindow());
-					stage.setScene(new Scene(selectorView));
-					stage.setWidth(400);
-					stage.setHeight(200);
-					stage.setResizable(false);
+						// create new windows for selection of type and the test itself
+						Stage stage = new Stage();
+						stage.initOwner(view.getScene().getWindow());
+						stage.setScene(new Scene(selectorView));
+//					selectorView.getScene().getWindow().setWidth(400);
+//					selectorView.getScene().getWindow().setHeight(200);
+						stage.setWidth(400);
+						stage.setHeight(200);
+						stage.setResizable(false);
 
-					// show new window and pause current window
-					stage.showAndWait();
-                }
-            }
-        });
+						// show new window and pause current window
+						stage.showAndWait();
+					}
 
-        //about
-        view.getAbout().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Made By");
-                alert.setContentText("Kristof Buts & Aleksey Zelenskiy");
-                Optional<ButtonType> choice = alert.showAndWait();
-            }
-        });
+				}
+			}
+		});
 
-    }
+	}
 
 	private void updateView () {
 		this.view.getTable().getItems().clear();
@@ -283,6 +324,7 @@ public class MainMenuPresenter {
 
 		ArrayList<List> userlists = this.user.getLists();
 		for (List l : userlists) {
+			// convert to Observable ArrayList for View
 			this.lists.add(l);
 		}
 

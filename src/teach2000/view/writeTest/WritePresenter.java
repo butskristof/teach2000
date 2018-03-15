@@ -29,19 +29,6 @@ public class WritePresenter {
 	}
 
 	private void addEventHandlers() {
-		// when a close request is sent from window button or menu item
-		// closeDialog function is called which displays a dialog to the user
-		// and stops the test if necessary
-
-		// close from menu
-		view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// fire close request for uniformity
-				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
-			}
-		});
-
 		// handle answer
 
 		// okay button is clicked

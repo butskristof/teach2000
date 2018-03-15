@@ -11,10 +11,6 @@ import teach2000.view.login.LoginView;
  * @author demacryx on 25.02.2018 5:41 PM.
  */
 public class Login {
-
-    private Login model;
-    private LoginView view;
-
 	private UserList users = new UserList();
 
 	public UserList getUsers() {

@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
 import teach2000.model.Login;
 import teach2000.model.users.User;
+import teach2000.model.users.UserList;
 import teach2000.view.mainMenu.MainMenuPresenter;
 import teach2000.view.mainMenu.MainMenuView;
 import teach2000.view.register.RegisterPresenter;
@@ -38,7 +39,7 @@ public class LoginPresenter {
             public void handle(ActionEvent event) {
             	// get index of user selected
 				int userChosen = view.getUsers().getSelectionModel().getSelectedIndex();
-				User u = model.getUsers().getUsers().get(userChosen);
+				User u = UserList.getUsers().get(userChosen);
 
 				try {
 					MainMenuView mainMenuView = new MainMenuView();
@@ -46,7 +47,6 @@ public class LoginPresenter {
 					view.getScene().setRoot(mainMenuView);
 					mainMenuView.getScene().getWindow().setHeight(400);
 					mainMenuView.getScene().getWindow().setWidth(800);
-
 				} catch (IndexOutOfBoundsException ex) {
 					System.out.println("No lists found.");
 				}
@@ -69,7 +69,7 @@ public class LoginPresenter {
 
     private void updateView() {
     	// fill list in login view with users in model
-		ArrayList<User> users = this.model.getUsers().getUsers();
+		ArrayList<User> users = UserList.getUsers();
 		// build list to display
 		ObservableList<String> choices = FXCollections.observableArrayList();
 		for (User u: users) {

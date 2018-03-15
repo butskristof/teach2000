@@ -31,11 +31,6 @@ public class McPresenter {
     }
 
     private void addEventHandlers() {
-        // when a close request is sent from window button or menu item
-        // closeDialog function is called which displays a dialog to the user
-        // and stops the test if necessary
-
-
         // handle answer
 
         // okay button is clicked

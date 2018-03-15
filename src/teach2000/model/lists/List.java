@@ -8,7 +8,7 @@ import java.util.Collections;
 
 /**
  *
- * The List class embodies one list. It holds a list of Question elements
+ * The List class embodies one list. It holds a list of Question objects
  * and provides the necessary functions for the management.
  *
  * @author Kristof Buts

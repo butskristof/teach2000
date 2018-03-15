@@ -36,7 +36,7 @@ public class User {
 
 	/**
 	 * Use this when importing a user that already has an ID.
-	 * The user's lists are also read from file automatically.
+	 * The user's lists are also read from disk automatically.
 	 *
 	 * @param id ID of the user to be created, imported
 	 * @param name username

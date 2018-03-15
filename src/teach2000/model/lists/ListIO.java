@@ -60,12 +60,13 @@ public class ListIO {
 		ArrayList<List> ret = new ArrayList<>();
 
 		// loop over all files and read them
-		// TODO add exception handling
-		for (File f: files) {
-			// check if it's a file
-			if (f.isFile()) {
-				// read list and add to return var
-				ret.add(readList(userid, f.getName()));
+		if (!(files == null)) {
+			for (File f: files) {
+				// check if it's a file
+				if (f.isFile()) {
+					// read list and add to return var
+					ret.add(readList(userid, f.getName()));
+				}
 			}
 		}
 
@@ -81,7 +82,6 @@ public class ListIO {
 	 */
 	public static List readList(String userid, String listid) throws Teach2000Exception {
 		// Read in a list and return it to the calling function
-		// TODO exception handling
 		List ret = null; // initialise return variable
 		// Generate path to file
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
@@ -103,7 +103,6 @@ public class ListIO {
 	 */
 	public static List readList(File file) throws Teach2000Exception {
 		// Read in a list and return it to the calling function
-		// TODO exception handling
 		List ret = null; // initialise return variable
 
 		// open buffered input stream to file
@@ -167,9 +166,9 @@ public class ListIO {
 			try {
 				Files.createDirectories(pathToFile.getParent());
 			} catch (IOException e) {
-				// TODO
 				// should be extended
 				e.printStackTrace();
+				throw new Teach2000Exception(e);
 			}
 		}
 

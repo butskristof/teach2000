@@ -88,7 +88,6 @@ public class Question {
 	 * Method to get the alternative answers. Outsiders shouldn't have access and should use
 	 * getPossibilities and processAnswer instead.
 	 *
-	 *
 	 * @return String array containing all alternative answers.
 	 */
 	public String[] getAlternatives() {
@@ -96,11 +95,6 @@ public class Question {
 	}
 
 	// BUSINESS LOGIC
-
-	/*
-	The user's guess can be passed in to this function, which will take care of all the administration regarding scores etc.
-	The return value tells the calling function whether the answer was correct or not.
-	 */
 
 	/**
 	 *
