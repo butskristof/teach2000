@@ -39,18 +39,21 @@ public class LoginPresenter {
             public void handle(ActionEvent event) {
             	// get index of user selected
 				int userChosen = view.getUsers().getSelectionModel().getSelectedIndex();
-				User u = UserList.getUsers().get(userChosen);
+				if (userChosen == -1) {
+					event.consume();
+				} else {
+					User u = UserList.getUsers().get(userChosen);
 
-				try {
-					MainMenuView mainMenuView = new MainMenuView();
-					MainMenuPresenter presenter = new MainMenuPresenter(model, u, mainMenuView);
-					view.getScene().setRoot(mainMenuView);
-					mainMenuView.getScene().getWindow().setHeight(400);
-					mainMenuView.getScene().getWindow().setWidth(800);
-				} catch (IndexOutOfBoundsException ex) {
-					System.out.println("No lists found.");
+					try {
+						MainMenuView mainMenuView = new MainMenuView();
+						MainMenuPresenter presenter = new MainMenuPresenter(model, u, mainMenuView);
+						view.getScene().setRoot(mainMenuView);
+						mainMenuView.getScene().getWindow().setHeight(400);
+						mainMenuView.getScene().getWindow().setWidth(800);
+					} catch (IndexOutOfBoundsException ex) {
+						System.out.println("No lists found.");
+					}
 				}
-
             }
         });
 
