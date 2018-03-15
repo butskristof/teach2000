@@ -5,10 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import teach2000.Teach2000Exception;
 import teach2000.model.Login;
 import teach2000.model.users.User;
 import teach2000.model.lists.List;
@@ -53,8 +55,16 @@ public class MainMenuPresenter {
 				File listToImport = fc.showOpenDialog(view.getScene().getWindow());
 
 				if ((listToImport != null) && (!listToImport.getName().equals("")) && (listToImport.isFile())) {
-					List importedList = ListIO.readList(listToImport);
-					user.addList(importedList);
+					try {
+						List importedList = ListIO.readList(listToImport);
+						user.addList(importedList);
+					} catch (Teach2000Exception ex) {
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setTitle("Import failed");
+						alert.setHeaderText("Unable to import list");
+						alert.setContentText(ex.getMessage());
+						alert.showAndWait();
+					}
 				}
 
 				updateView();
@@ -70,6 +80,9 @@ public class MainMenuPresenter {
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 				if (index == -1) {
 					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
 					event.consume();
 				} else {
 					// open file chooser
@@ -83,7 +96,15 @@ public class MainMenuPresenter {
 						List listToSave = user.getList(index);
 
 						// call ListIO and let it write to file
-						ListIO.writeList(toSave, listToSave);
+						try {
+							ListIO.writeList(toSave, listToSave);
+						} catch (Teach2000Exception ex) {
+							final Alert alert = new Alert(Alert.AlertType.ERROR);
+							alert.setTitle("Import failed");
+							alert.setHeaderText("Unable to import list");
+							alert.setContentText(ex.getMessage());
+							alert.showAndWait();
+						}
 					}
 				}
 
@@ -110,6 +131,10 @@ public class MainMenuPresenter {
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 				if (index == -1) {
 					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
+					event.consume();
 					event.consume();
 				} else {
 					List listToEdit = user.getList(index);
@@ -172,9 +197,21 @@ public class MainMenuPresenter {
 
 				if (index == -1) {
 					// ignore if nothing selected in table
+					final Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText("Geen lijst geselecteerd");
+					alert.showAndWait();
+					event.consume();
 					event.consume();
 				} else {
-					user.removeList(index);
+					try {
+						user.removeList(index);
+					} catch (Teach2000Exception ex) {
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setTitle("Import failed");
+						alert.setHeaderText("Unable to import list");
+						alert.setContentText(ex.getMessage());
+						alert.showAndWait();
+					}
 
 					updateView();
 				}
@@ -216,7 +253,22 @@ public class MainMenuPresenter {
 		this.view.getUserConfiguration().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// TODO
 				event.consume();
+
+//				// open new user configuration window
+//				UserConfigView userConfigView = new UserConfigView();
+//				UserConfigPresenter userConfigPresenter = new UserConfigPresenter(user, userConfigView);
+//
+//				Stage stage = new Stage();
+//				stage.initOwner(view.getScene().getWindow());
+//				stage.setScene(new Scene(userConfigView));
+//				// set size
+//				userConfigPresenter.addWindowEventHandlers();
+//
+//				// show new window and pause current
+//				stage.showAndWait();
+
 			}
 		});
 
@@ -232,6 +284,10 @@ public class MainMenuPresenter {
 
 					if (index == -1) {
 						// ignore if nothing selected
+						final Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setHeaderText("Geen lijst geselecteerd");
+						alert.showAndWait();
+						event.consume();
 						event.consume();
 					} else {
 						// make selector view and presenter
@@ -264,6 +320,7 @@ public class MainMenuPresenter {
 
 		ArrayList<List> userlists = this.user.getLists();
 		for (List l : userlists) {
+			// convert to Observable ArrayList for View
 			this.lists.add(l);
 		}
 

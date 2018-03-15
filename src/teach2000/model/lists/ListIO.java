@@ -37,7 +37,7 @@ public class ListIO {
 	 * @param userid ID of the user we want to read the lists for
 	 * @return an ArrayList of List elements that contains all the lists stored for the user
 	 */
-	public static ArrayList<List> readAllLists(String userid) {
+	public static ArrayList<List> readAllLists(String userid) throws Teach2000Exception {
 		// function to read all the lists in the user's folder and return them as an ArrayList
 
 		// generate path to user's folder
@@ -79,7 +79,7 @@ public class ListIO {
 	 * @param listid ID of the list
 	 * @return List object that was read from disk
 	 */
-	public static List readList(String userid, String listid) {
+	public static List readList(String userid, String listid) throws Teach2000Exception {
 		// Read in a list and return it to the calling function
 		// TODO exception handling
 		List ret = null; // initialise return variable
@@ -101,7 +101,7 @@ public class ListIO {
 	 * @param file File object representing the List file
 	 * @return List object that was read from disk.
 	 */
-	public static List readList(File file) {
+	public static List readList(File file) throws Teach2000Exception {
 		// Read in a list and return it to the calling function
 		// TODO exception handling
 		List ret = null; // initialise return variable
@@ -130,6 +130,7 @@ public class ListIO {
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
+			throw new Teach2000Exception(ex);
 		}
 
 		return ret;
@@ -156,7 +157,7 @@ public class ListIO {
 	 * @param file File object represented the path to the desired location.
 	 * @param list List object to be written to disk.
 	 */
-	public static void writeList(File file, List list) {
+	public static void writeList(File file, List list) throws Teach2000Exception {
 		// export a list to a file
 
 		// Check if parent folder exists and create if necessary
@@ -189,6 +190,7 @@ public class ListIO {
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
+			throw new Teach2000Exception(ex);
 		}
 	}
 
@@ -198,7 +200,7 @@ public class ListIO {
 	 * @param userid User ID
 	 * @param listid List ID
 	 */
-	public static void removeList(String userid, String listid) {
+	public static void removeList(String userid, String listid) throws Teach2000Exception {
 		// write list to file in user's folder
 		// generate path to user's folder
 		Path userfolder = Paths.get(userlistfile_prefix, userid);
@@ -207,9 +209,8 @@ public class ListIO {
 			try {
 				Files.createDirectory(userfolder);
 			} catch (IOException e) {
-				// TODO
-				// should be extended
 				e.printStackTrace();
+				throw new Teach2000Exception(e);
 			}
 		}
 		Path file = userfolder.resolve(listid); // path to specific file
@@ -220,6 +221,7 @@ public class ListIO {
 				Files.delete(file);
 			} catch (IOException ex) {
 				ex.printStackTrace();
+				throw new Teach2000Exception(ex);
 			}
 		}
 	}

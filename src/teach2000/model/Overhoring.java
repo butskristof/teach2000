@@ -4,7 +4,7 @@ import teach2000.model.lists.List;
 import teach2000.model.questions.Question;
 
 /**
- * Super method for tests. Contains all functionality to administrate a test. It closes off the access to the model members,
+ * Super class for tests. Contains all functionality to administrate a test. It closes off the access to the model members,
  * but provides the necessary information to classes using it.
  *
  * A test is based around a List object.

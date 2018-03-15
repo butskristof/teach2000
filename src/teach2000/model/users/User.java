@@ -1,5 +1,6 @@
 package teach2000.model.users;
 
+import teach2000.Teach2000Exception;
 import teach2000.model.lists.List;
 import teach2000.model.lists.ListIO;
 import teach2000.model.utilities.RandomGenerator;
@@ -7,7 +8,6 @@ import teach2000.model.utilities.RandomGenerator;
 import java.util.ArrayList;
 
 /**
- *
  * This class represents a user. Users have a unique ID which is generated randomly and stays with them throughout runs
  * of the programme. It will be written to disk.
  *
@@ -64,7 +64,15 @@ public class User {
     }
 
     public List getList(int index) {
-        return this.lists.get(index);
+		List ret = null;
+
+		if ( index >= 0 && (index < (this.lists.size() - 1)) ) {
+			throw new IllegalArgumentException("List index out of bounds");
+		} else {
+			ret = this.lists.get(index);
+		}
+
+		return ret;
     }
 
 	public String getStopword() {
@@ -112,7 +120,7 @@ public class User {
 		ListIO.writeList(this.getId(), l);
 	}
 
-	public void removeList(int listindex) {
+	public void removeList(int listindex) throws Teach2000Exception {
     	// remove file
 		ListIO.removeList(this.getId(), this.lists.get(listindex).getId());
 		// remove from user list
