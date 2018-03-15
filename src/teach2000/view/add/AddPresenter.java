@@ -52,7 +52,7 @@ public class AddPresenter {
 
 				// loop over each row
 				for (ArrayList<TextField> inputRow: questioninputs) {
-					// question and answer are the first input fields in the row
+					// question and answer are the first input fields in the row.
 					String question = inputRow.get(0).getText();
 					String answer = inputRow.get(1).getText();
 					// do nothing if one of both is empty
@@ -81,15 +81,6 @@ public class AddPresenter {
 
 				// close window and return to main menu
 				view.getScene().getWindow().hide();
-			}
-		});
-
-    	// close from menu item
-		this.view.getAfsluiten().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// fire close request for uniformity
-				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
 			}
 		});
 	}

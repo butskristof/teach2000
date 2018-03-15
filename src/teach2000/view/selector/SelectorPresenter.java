@@ -22,7 +22,6 @@ public class SelectorPresenter {
 		this.selectedUser = u;
 		this.selectedList = listindex;
 		this.addEventHandlers();
-		this.updateView();
 	}
 
 	private void addEventHandlers() {
@@ -67,7 +66,4 @@ public class SelectorPresenter {
 		});
 	}
 
-	private void updateView() {
-		// not applicable here
-	}
 }

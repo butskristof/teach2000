@@ -18,12 +18,9 @@ import java.util.ArrayList;
 public class McView extends GridPane {
     ///////////////////Attributes/////////////////////
     private Label title, taalFrom, taalTo, word, extraText, score;
-    ArrayList<RadioButton> radioButtons = new ArrayList<>();
+    private ArrayList<RadioButton> radioButtons = new ArrayList<>();
     private Button okButton;
-    private MenuItem afsluiten;
-
     private Label lblResult;
-
     private ToggleGroup toggleGroup;
 
     ///////////////////Getters/////////////////////
@@ -51,10 +48,6 @@ public class McView extends GridPane {
         return score;
     }
 
-    public MenuItem getAfsluiten() {
-        return afsluiten;
-    }
-
     public Button getOkButton() {
         return okButton;
     }
@@ -75,30 +68,19 @@ public class McView extends GridPane {
 
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-        title = new Label();
-        taalFrom = new Label();
-        taalTo = new Label();
-        word = new Label();
-        extraText = new Label("Extra");
-        score = new Label("Score");
-
+        this.title = new Label();
+        this.taalFrom = new Label();
+        this.taalTo = new Label();
+        this.word = new Label();
+        this.extraText = new Label("Extra");
+        this.score = new Label("Score");
         this.lblResult = new Label("");
-
-        this.afsluiten = new MenuItem("Close");
-
+/*        this.afsluiten = new MenuItem("Close");*/
         this.okButton = new Button("SUMBIT");
     }
 
     ///////////////////Layout/////////////////////
     private void layoutNodes() {
-        //Menu
-        final Menu bestandMenu = new
-                Menu("File");
-        bestandMenu.getItems().add(this.afsluiten);
-
-        //MenuBar
-        final MenuBar menuBar = new MenuBar(bestandMenu);
-        this.add(menuBar, 0, 0, 5, 1);
 
         ///////////////////Grid Settings/////////////////////
         this.setGridLinesVisible(false);
@@ -126,7 +108,6 @@ public class McView extends GridPane {
         //Menu
         RowConstraints row0 = new RowConstraints();
         row0.setPercentHeight(8);
-        row0.setValignment(VPos.TOP);
         //Title
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(13);
@@ -162,44 +143,60 @@ public class McView extends GridPane {
         //title
         this.add(title, 1, 1);
         this.title.setStyle("-fx-font-size: 30");
-        title.setPadding(new Insets(20,0,0,0));
-        GridPane.setConstraints(title, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
+        this.title.setPadding(new Insets(20,0,0,0));
+        GridPane.setConstraints(title, 1, 1, 1, 1,
+                HPos.LEFT, VPos.BOTTOM,
+                Priority.NEVER, Priority.NEVER);
 
         //Taal From Label
         this.add(taalFrom, 1, 3);
         this.taalFrom.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(taalFrom, 1, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(taalFrom, 1, 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Word Label
         this.add(word, 1, 4);
         this.word.setStyle("-fx-font-size: 18");
-        word.setPadding(new Insets(0,0,0,15));
-        GridPane.setConstraints(word, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.word.setPadding(new Insets(0,0,0,15));
+        GridPane.setConstraints(word, 1, 4, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Taal To Label
         this.add(taalTo, 1, 5);
         this.taalTo.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(taalTo, 1, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(taalTo, 1, 5, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         // Result label
 		this.add(this.lblResult, 2, 4);
-		GridPane.setConstraints(this.lblResult, 2, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(this.lblResult, 2, 4, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //OK Button
         this.add(okButton, 1, 10);
         this.okButton.setStyle("-fx-font-size: 15");
-        okButton.setMinWidth(200);
-        GridPane.setConstraints(okButton, 1, 10, 2, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.okButton.setMinWidth(200);
+        GridPane.setConstraints(okButton, 1, 10, 2, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Extra Text Label
         this.add(extraText, 2, 1);
         this.extraText.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(extraText, 2, 1, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(extraText, 2, 1, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Score Label
         this.add(score, 2, 2);
         this.score.setStyle("-fx-font-size: 12");
-        GridPane.setConstraints(score, 2, 2, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(score, 2, 2, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
     }
 
     public void setRadioButtons(ArrayList<String> possibilities) {
@@ -219,11 +216,15 @@ public class McView extends GridPane {
             r.setToggleGroup(this.toggleGroup);
             // add to pane
             this.add(r, 1, i + 6);
-            GridPane.setConstraints(r, 1, i + 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+            GridPane.setConstraints(r, 1, i + 6, 1, 1,
+                    HPos.LEFT, VPos.CENTER,
+                    Priority.NEVER, Priority.NEVER);
         }
 
         // place submit button in the row after last radio button
-		GridPane.setConstraints(okButton, 2, possibilities.size() + 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+		GridPane.setConstraints(okButton, 2, possibilities.size() + 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
     }
 
 }

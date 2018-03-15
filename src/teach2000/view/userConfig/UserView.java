@@ -69,14 +69,13 @@ public class UserView extends GridPane {
     private void initialiseNodes() {
         this.userName = new Label("Username:");
         this.nameText = new TextField();
-        nameText.setPromptText("username");
+        this.nameText.setPromptText("username");
         this.stopWord = new Label("Stopword:");
         this.stopWordField = new TextField();
-        stopWordField.setPromptText("Stopword");
+        this.stopWordField.setPromptText("Stopword");
         this.checkbox = new CheckBox("Stopwoord?");
         this.minReq = new Label("Min. Req.\n \tScore:");
         this.slider = new Slider(0, 100, 50);
-
         this.saveButton = new Button("Save");
         this.cancelButtton = new Button("Cancel");
     }
@@ -95,44 +94,62 @@ public class UserView extends GridPane {
         ///////////////////Elements Layout/////////////////////
         this.add(userName, 1, 1);
         this.userName.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(userName, 1, 1, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(userName, 1, 1, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(nameText, 2, 1);
-        nameText.setPadding(new Insets(0, 10, 0, 0));
+        this.nameText.setPadding(new Insets(0, 10, 0, 0));
         this.nameText.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(nameText, 2, 1, 1, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(nameText, 2, 1, 1, 1,
+                HPos.CENTER, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(checkbox, 1, 2);
         this.checkbox.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(checkbox, 1, 2, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(checkbox, 1, 2, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(stopWord, 1, 3);
-        stopWord.setPadding(new Insets(0, 0, 0, 38));
+        this.stopWord.setPadding(new Insets(0, 0, 0, 38));
         this.stopWord.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(stopWord, 1, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(stopWord, 1, 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(stopWordField, 2, 3);
-        stopWordField.setPadding(new Insets(0, 10, 0, 0));
+        this.stopWordField.setPadding(new Insets(0, 10, 0, 0));
         this.stopWordField.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(stopWordField, 2, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(stopWordField, 2, 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(minReq, 1, 4);
-        minReq.setPadding(new Insets(0, 0, 0, 38));
+        this.minReq.setPadding(new Insets(0, 0, 0, 38));
         this.minReq.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(minReq, 1, 4, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(minReq, 1, 4, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(slider, 2, 4);
-        slider.setPadding(new Insets(0, 10, 0, 0));
-        GridPane.setConstraints(slider, 2, 4, 1, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.slider.setPadding(new Insets(0, 10, 0, 0));
+        GridPane.setConstraints(slider, 2, 4, 1, 1,
+                HPos.CENTER, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(saveButton, 1, 5);
-        saveButton.setPrefWidth(120);
-        saveButton.setPadding(new Insets(10));
-        GridPane.setConstraints(saveButton, 2, 5, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.saveButton.setPrefWidth(120);
+        this.saveButton.setPadding(new Insets(10));
+        GridPane.setConstraints(saveButton, 2, 5, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(cancelButtton, 2, 5);
-        cancelButtton.setPrefWidth(120);
-        cancelButtton.setPadding(new Insets(10));
-        GridPane.setConstraints(cancelButtton, 2, 5, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        this.cancelButtton.setPrefWidth(120);
+        this.cancelButtton.setPadding(new Insets(10));
+        GridPane.setConstraints(cancelButtton, 2, 5, 1, 1,
+                HPos.RIGHT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
     }
 }

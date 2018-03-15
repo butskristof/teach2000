@@ -70,8 +70,8 @@ public class MainMenuView extends VBox {
 
     ///////////////////Initializer/////////////////////
     private void initializeNodes() {
-        label = new Label("Lijsten");
-        label.setFont(new Font("Arial", 20));
+        this.label = new Label("Lijsten");
+        this.label.setFont(new Font("Arial", 20));
 
         //Menu Settings
         this.afsluiten = new MenuItem("Exit");
@@ -86,8 +86,8 @@ public class MainMenuView extends VBox {
         this.about = new MenuItem("About");
 
         //Table Items
-        table = new TableView<>();
-        table.setEditable(true);
+        this.table = new TableView<>();
+        this.table.setEditable(true);
 
         //Table Settings
         TableColumn titlecolumn = new TableColumn("Title");
@@ -100,10 +100,10 @@ public class MainMenuView extends VBox {
                 new PropertyValueFactory<List, String>("name")
         );
 
-        table.getColumns().addAll(titlecolumn, namecolumn);
+        this.table.getColumns().addAll(titlecolumn, namecolumn);
 
         // column are divided equally and resized when necessary
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     private void layoutNodes() {
@@ -126,7 +126,7 @@ public class MainMenuView extends VBox {
 
         //Vbox Settings
         this.getChildren().addAll(menuBar, label, table);
-        label.setPadding(new Insets(10, 0, 0, 20));
+        this.label.setPadding(new Insets(10, 0, 0, 20));
         setMargin(table, new Insets(10));
     }
 }

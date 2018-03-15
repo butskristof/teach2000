@@ -5,6 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -27,6 +30,7 @@ import teach2000.view.userConfig.UserView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author demacryx on 25.02.2018 7:12 PM.
@@ -250,8 +254,6 @@ public class MainMenuPresenter {
 					Stage stage = new Stage();
 					stage.initOwner(view.getScene().getWindow());
 					stage.setScene(new Scene(selectorView));
-//					selectorView.getScene().getWindow().setWidth(400);
-//					selectorView.getScene().getWindow().setHeight(200);
 					stage.setWidth(400);
 					stage.setHeight(200);
 					stage.setResizable(false);
@@ -259,6 +261,17 @@ public class MainMenuPresenter {
 					// show new window and pause current window
 					stage.showAndWait();
                 }
+            }
+        });
+
+        //about
+        view.getAbout().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Made By");
+                alert.setContentText("Kristof Buts & Aleksey Zelenskiy");
+                Optional<ButtonType> choice = alert.showAndWait();
             }
         });
 

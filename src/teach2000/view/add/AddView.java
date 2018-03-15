@@ -10,12 +10,10 @@ import java.util.ArrayList;
  * @author demacryx on 12.03.2018 11:09 PM.
  */
 public class AddView extends GridPane {
-
     private Label lblTitle;
     private TextField txtTitle;
     private Label lblLangFrom, lblLangTo;
     private TextField txtLangFrom, txtLangTo;
-
     private Label lblQuestion, lblAnswer, lblAlternatives;
 
     // the input field are stored in an ArrayList per row, with the question and answer being first and second
@@ -24,11 +22,7 @@ public class AddView extends GridPane {
     private int numberOfInputs = 5; // default five input fields
     private int firstFreeRow = 5; // row where new input fields can be added
     private ArrayList<ArrayList<TextField>> questioninputs = new ArrayList<>();
-
-    private MenuItem afsluiten;
     private Button sumbitButton, btnAddRow;
-
-    // CONSTRUCTOR
 
     public AddView() {
         initialiseNodes();
@@ -47,10 +41,6 @@ public class AddView extends GridPane {
 
     public TextField getLangTo() {
         return txtLangTo;
-    }
-
-    public MenuItem getAfsluiten() {
-        return afsluiten;
     }
 
     public Button getSumbitButton() {
@@ -98,33 +88,11 @@ public class AddView extends GridPane {
             this.questioninputs.add(inputRow);
         }
 
-        this.afsluiten = new MenuItem("Close");
         this.btnAddRow = new Button("+");
-        sumbitButton = new Button("SUMBIT");
+        this.sumbitButton = new Button("SUMBIT");
     }
 
     private void layoutNodes() {
-
-//    	for testing
-//    	this.setGridLinesVisible(true);
-
-        //Menu
-        final Menu bestandMenu = new
-                Menu("File");
-//        final Menu editMenu = new
-//                Menu("Edit");
-//        final Menu helpMenu = new
-//                Menu("Help");
-//        final Menu aboutMenu = new
-//                Menu("About");
-        bestandMenu.getItems().add(this.afsluiten);
-
-        //MenuBar
-        final MenuBar menuBar = new
-//                MenuBar(bestandMenu, editMenu, helpMenu, aboutMenu);
-                MenuBar(bestandMenu);
-        this.add(menuBar, 0, 0, 8, 1);
-        menuBar.setPadding(new Insets(0));
 
         ///////////////////Grid Settings/////////////////////
         this.setGridLinesVisible(false);
@@ -136,7 +104,7 @@ public class AddView extends GridPane {
         //Horizontal Gap
         this.setHgap(5);
 
-//        //Column Constraints
+        //Column Constraints
         ColumnConstraints column0 = new ColumnConstraints();
         column0.setPercentWidth(5);
 
@@ -167,7 +135,6 @@ public class AddView extends GridPane {
         //Menu
         RowConstraints row0 = new RowConstraints();
         row0.setPercentHeight(5);
-        row0.setValignment(VPos.TOP);
         //Title
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(5);
@@ -191,55 +158,68 @@ public class AddView extends GridPane {
 
 
         ///////////////////Elements Layout/////////////////////
-        //Background Image
-        /*setBackground(new Background(new BackgroundImage(new Image("images/writeview.jpg"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT)));*/
-
 
         //title
         this.add(lblTitle, 1, 1);
-        GridPane.setConstraints(lblTitle, 1, 1, 1, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(lblTitle, 1, 1, 1, 1,
+                HPos.LEFT, VPos.BOTTOM,
+                Priority.NEVER, Priority.NEVER);
 
         //textfield Title
         this.add(txtTitle, 1, 2);
         this.txtTitle.setStyle("-fx-font-size: 20");
-        GridPane.setConstraints(txtTitle, 1, 2, 2, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(txtTitle, 1, 2, 2, 1,
+                HPos.LEFT, VPos.BOTTOM,
+                Priority.NEVER, Priority.NEVER);
 
         //Taal From Label
         this.add(lblLangFrom, 1, 3);
-        GridPane.setConstraints(lblLangFrom, 1, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(lblLangFrom, 1, 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Textfield FROM
         this.add(txtLangFrom, 1, 4);
         this.txtLangFrom.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(txtLangFrom, 1, 4, 1, 1, HPos.LEFT, VPos.TOP, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(txtLangFrom, 1, 4, 1, 1,
+                HPos.LEFT, VPos.TOP,
+                Priority.NEVER, Priority.NEVER);
 
         //Taal To Label
         this.add(lblLangTo, 2, 3);
-        GridPane.setConstraints(txtLangTo, 2, 3, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(txtLangTo, 2, 3, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         //Textfield TO
         this.add(txtLangTo, 2, 4);
         this.txtLangTo.setStyle("-fx-font-size: 15");
-        GridPane.setConstraints(txtLangTo, 2, 4, 1, 1, HPos.LEFT, VPos.TOP, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(txtLangTo, 2, 4, 1, 1,
+                HPos.LEFT, VPos.TOP,
+                Priority.NEVER, Priority.NEVER);
 
         //Separator
         Separator separator1 = new Separator();
         this.add(separator1, 0, 4);
-        GridPane.setConstraints(separator1, 0, 4, 8, 1, HPos.LEFT, VPos.BOTTOM, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(separator1, 0, 4, 8, 1,
+                HPos.LEFT, VPos.BOTTOM,
+                Priority.NEVER, Priority.NEVER);
 
         // Labels above inputs
         this.add(lblQuestion, 1, 6);
-        GridPane.setConstraints(lblQuestion, 1, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(lblQuestion, 1, 6, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(lblAnswer, 2, 6);
-        GridPane.setConstraints(lblAnswer, 2, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(lblAnswer, 2, 6, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
         this.add(lblAlternatives, 3, 6);
-        GridPane.setConstraints(lblAlternatives, 3, 6, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(lblAlternatives, 3, 6, 1, 1,
+                HPos.LEFT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
 
 
         // input fields
@@ -248,7 +228,9 @@ public class AddView extends GridPane {
             for (int j = 0; j < 6; ++j) {
                 // starting in column 1, so j+1
                 this.add(this.questioninputs.get(i).get(j), j + 1, firstFreeRow);
-                GridPane.setConstraints(this.questioninputs.get(i).get(j), j + 1, firstFreeRow, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+                GridPane.setConstraints(this.questioninputs.get(i).get(j), j + 1, firstFreeRow, 1, 1,
+                        HPos.LEFT, VPos.CENTER,
+                        Priority.NEVER, Priority.NEVER);
 
             }
             // increment first free row since this one is taken now
@@ -258,12 +240,16 @@ public class AddView extends GridPane {
         // place submit and add row button after input fields
         // add row
         this.add(this.btnAddRow, 6, firstFreeRow);
-        GridPane.setConstraints(this.btnAddRow, 6, firstFreeRow, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(this.btnAddRow, 6, firstFreeRow, 1, 1,
+                HPos.RIGHT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
         btnAddRow.setMinWidth(35.5);
 
         // submit
         this.add(sumbitButton, 3, firstFreeRow);
-        GridPane.setConstraints(sumbitButton, 3, firstFreeRow, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(sumbitButton, 3, firstFreeRow, 2, 1,
+                HPos.CENTER, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
         sumbitButton.setMinWidth(150);
 
         // first free row is not incremented here since the input fields that will be added will come in the row
@@ -284,15 +270,21 @@ public class AddView extends GridPane {
         int inputRowIndex = this.questioninputs.size() - 1; // get the last item in the array list, which is the newly added row
         for (int j = 0; j < 6; ++j) {
             this.add(this.questioninputs.get(inputRowIndex).get(j), j + 1, firstFreeRow);
-            GridPane.setConstraints(this.questioninputs.get(inputRowIndex).get(j), j + 1, firstFreeRow, 1, 1, HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+            GridPane.setConstraints(this.questioninputs.get(inputRowIndex).get(j), j + 1, firstFreeRow, 1, 1,
+                    HPos.LEFT, VPos.CENTER,
+                    Priority.NEVER, Priority.NEVER);
 
         }
         // first free row moves one down now
         ++firstFreeRow;
 
         // move submit and add row buttons
-        GridPane.setConstraints(this.btnAddRow, 6, firstFreeRow, 1, 1, HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-        GridPane.setConstraints(sumbitButton, 3, firstFreeRow, 2, 1, HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(this.btnAddRow, 6, firstFreeRow, 1, 1,
+                HPos.RIGHT, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
+        GridPane.setConstraints(sumbitButton, 3, firstFreeRow, 2, 1,
+                HPos.CENTER, VPos.CENTER,
+                Priority.NEVER, Priority.NEVER);
     }
 
 }

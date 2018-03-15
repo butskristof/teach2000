@@ -21,7 +21,6 @@ public class RegisterPresenter {
 		this.model = model;
 		this.view = view;
 		this.addEventHandlers();
-		this.updateView();
 	}
 
 	private void addEventHandlers() {
@@ -62,9 +61,5 @@ public class RegisterPresenter {
 		view.getScene().setRoot(loginview);
 		loginview.getScene().getWindow().setHeight(300);
 		loginview.getScene().getWindow().setWidth(500);
-	}
-
-	private void updateView() {
-		// not applicable here
 	}
 }
