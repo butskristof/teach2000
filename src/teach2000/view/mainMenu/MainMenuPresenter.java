@@ -65,23 +65,28 @@ public class MainMenuPresenter {
 		this.view.getExportList().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// open file chooser
-				FileChooser fileChooser = new FileChooser();
-				File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
-				if ((toSave == null) || (toSave.getName().equals(""))) {
-					// break if canceled
+				// get selected table entry
+				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
+				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+				if (index == -1) {
+					// ignore if nothing selected in table
 					event.consume();
 				} else {
-					// get selected table entry
-					// TODO ignore if nothing selected
-					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
-					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
-					// get list from user
-					List listToSave = user.getList(index);
+					// open file chooser
+					FileChooser fileChooser = new FileChooser();
+					File toSave = fileChooser.showSaveDialog(view.getScene().getWindow());
+					if ((toSave == null) || (toSave.getName().equals(""))) {
+						// break if canceled
+						event.consume();
+					} else {
+						// get list from user
+						List listToSave = user.getList(index);
 
-					// call ListIO and let it write to file
-					ListIO.writeList(toSave, listToSave);
+						// call ListIO and let it write to file
+						ListIO.writeList(toSave, listToSave);
+					}
 				}
+
 			}
 		});
 
@@ -100,31 +105,35 @@ public class MainMenuPresenter {
 		this.view.getEdit().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO ignore if nothing selected
 				// get selected list
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
+				if (index == -1) {
+					// ignore if nothing selected in table
+					event.consume();
+				} else {
+					List listToEdit = user.getList(index);
 
-				List listToEdit = user.getList(index);
+					//open new window to create new wordlist
+					// make selector view and presenter
+					AddView addView = new AddView();
+					EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
 
-				//open new window to create new wordlist
-				// make selector view and presenter
-				AddView addView = new AddView();
-				EditPresenter presenter = new EditPresenter(user, listToEdit, addView);
+					// create new window for adding lists
+					Stage stage = new Stage();
+					stage.initOwner(view.getScene().getWindow());
+					stage.setScene(new Scene(addView));
+					stage.setHeight(600);
+					stage.setWidth(800);
+					presenter.addWindowEventHandlers();
 
-				// create new window for adding lists
-				Stage stage = new Stage();
-				stage.initOwner(view.getScene().getWindow());
-				stage.setScene(new Scene(addView));
-				stage.setHeight(600);
-				stage.setWidth(800);
-				presenter.addWindowEventHandlers();
+					// show new window and pause current window
+					stage.showAndWait();
 
-				// show new window and pause current window
-				stage.showAndWait();
+					// refresh list after returning from add window
+					updateView();
+				}
 
-				// refresh list after returning from add window
-				updateView();
 			}
 		});
 
@@ -158,13 +167,18 @@ public class MainMenuPresenter {
 			@Override
 			public void handle(ActionEvent event) {
 				// get index of selected row which is the same as the list index
-				// TODO ignore when no list is selected
 				Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 				int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-				user.removeList(index);
+				if (index == -1) {
+					// ignore if nothing selected in table
+					event.consume();
+				} else {
+					user.removeList(index);
 
-				updateView();
+					updateView();
+				}
+
 			}
 		});
 
@@ -212,27 +226,32 @@ public class MainMenuPresenter {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 2){
-                	// TODO ignore if no item is selected
                 	// get index of selected row which is the same as the list index
 					Object object =  view.getTable().getSelectionModel().selectedItemProperty().get();
 					int index = view.getTable().getSelectionModel().selectedIndexProperty().get();
 
-					// make selector view and presenter
-                    SelectorView selectorView = new SelectorView();
-					SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
+					if (index == -1) {
+						// ignore if nothing selected
+						event.consume();
+					} else {
+						// make selector view and presenter
+						SelectorView selectorView = new SelectorView();
+						SelectorPresenter selectorPresenter = new SelectorPresenter(selectorView, user, index);
 
-					// create new windows for selection of type and the test itself
-					Stage stage = new Stage();
-					stage.initOwner(view.getScene().getWindow());
-					stage.setScene(new Scene(selectorView));
+						// create new windows for selection of type and the test itself
+						Stage stage = new Stage();
+						stage.initOwner(view.getScene().getWindow());
+						stage.setScene(new Scene(selectorView));
 //					selectorView.getScene().getWindow().setWidth(400);
 //					selectorView.getScene().getWindow().setHeight(200);
-					stage.setWidth(400);
-					stage.setHeight(200);
-					stage.setResizable(false);
+						stage.setWidth(400);
+						stage.setHeight(200);
+						stage.setResizable(false);
 
-					// show new window and pause current window
-					stage.showAndWait();
+						// show new window and pause current window
+						stage.showAndWait();
+					}
+
                 }
             }
         });
