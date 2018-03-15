@@ -15,7 +15,7 @@ public class MainMenuView extends VBox {
     ///////////////////Attributes/////////////////////
     private TableView<List> table;
     private Label label;
-    private MenuItem afsluiten, add, remove, edit, importList, exportList, deleteUser, logoutUser, userConfiguration;
+    private MenuItem afsluiten, add, remove, edit, importList, exportList, deleteUser, logoutUser, userConfiguration, about;
 
     ///////////////////Constructor/////////////////////
     public MainMenuView() {
@@ -32,15 +32,15 @@ public class MainMenuView extends VBox {
         return table;
     }
 
-	public MenuItem getImportList() {
-		return importList;
-	}
+    public MenuItem getImportList() {
+        return importList;
+    }
 
-	public MenuItem getRemove() {
-		return remove;
-	}
+    public MenuItem getRemove() {
+        return remove;
+    }
 
-	public MenuItem getDeleteUser(){
+    public MenuItem getDeleteUser() {
         return deleteUser;
     }
 
@@ -56,15 +56,19 @@ public class MainMenuView extends VBox {
         return edit;
     }
 
-	public MenuItem getExportList() {
-		return exportList;
-	}
+    public MenuItem getExportList() {
+        return exportList;
+    }
 
-	public MenuItem getUserConfiguration() {
-		return userConfiguration;
-	}
+    public MenuItem getUserConfiguration() {
+        return userConfiguration;
+    }
 
-	///////////////////Initializer/////////////////////
+    public MenuItem getAbout() {
+        return about;
+    }
+
+    ///////////////////Initializer/////////////////////
     private void initializeNodes() {
         label = new Label("Lijsten");
         label.setFont(new Font("Arial", 20));
@@ -79,6 +83,7 @@ public class MainMenuView extends VBox {
         this.deleteUser = new MenuItem("Delete user");
         this.logoutUser = new MenuItem("Log out user");
         this.userConfiguration = new MenuItem("Configure");
+        this.about = new MenuItem("About");
 
         //Table Items
         table = new TableView<>();
@@ -109,19 +114,15 @@ public class MainMenuView extends VBox {
         final Menu editMenu = new
                 Menu("Edit");
 
-//        final Menu aboutMenu = new
-//                Menu("About");
-
         final Menu userMenu = new
                 Menu("User");
 
-        bestandMenu.getItems().addAll(importList, exportList, afsluiten);
+        bestandMenu.getItems().addAll(importList, exportList, about, afsluiten);
         editMenu.getItems().addAll(edit, add, remove);
         userMenu.getItems().addAll(deleteUser, logoutUser, userConfiguration);
 
         //MenuBar
         final MenuBar menuBar = new MenuBar(bestandMenu, editMenu, userMenu);
-//                MenuBar(bestandMenu, editMenu, userMenu, aboutMenu);
 
         //Vbox Settings
         this.getChildren().addAll(menuBar, label, table);
