@@ -57,7 +57,6 @@ public class Question {
 	}
 
 	/**
-	 *
 	 * This returns all possibilities at once, with the correct answer and alternatives mixed up.
 	 *
 	 * @return ArrayList of possible answers for multiple choice

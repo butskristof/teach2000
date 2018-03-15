@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.WindowEvent;
+import teach2000.model.users.User;
 import teach2000.model.users.UserIO;
 
 import java.util.Optional;
@@ -14,11 +15,11 @@ import java.util.Optional;
  * @project teach20002
  */
 public class UserPresenter {
-    private UserIO model;
+    private User user;
     private UserView view;
 
-    public UserPresenter(UserIO model, UserView view) {
-        this.model = model;
+    public UserPresenter(User user, UserView view) {
+        this.user = user;
         this.view = view;
         this.addEventHandlers();
         this.updateView();
@@ -28,7 +29,9 @@ public class UserPresenter {
         view.getCancelButtton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                event.consume();
+//                event.consume();
+				// send close request
+				view.getScene().getWindow().fireEvent(new WindowEvent(view.getScene().getWindow(), WindowEvent.WINDOW_CLOSE_REQUEST));
             }
         });
 

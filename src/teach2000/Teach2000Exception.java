@@ -10,4 +10,8 @@ public class Teach2000Exception extends RuntimeException {
 	public Teach2000Exception(String message) {
 		super(message);
 	}
+
+	public Teach2000Exception(Throwable cause) {
+		super(cause);
+	}
 }

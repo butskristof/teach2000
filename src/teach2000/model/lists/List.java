@@ -23,11 +23,24 @@ public class List {
 
 	// CONSTRUCTORS
 
+	/**
+	 * Used when creating a new list that hasn't got an ID yet.
+	 * @param lang_from Source language
+	 * @param lang_to Target language
+	 * @param name Name of the test
+	 */
 	public List(String lang_from, String lang_to, String name) {
 		// used when creating a new list that hasn't got an ID yet
 		this(RandomGenerator.getRandomId(), lang_from, lang_to, name);
 	}
 
+	/**
+	 * Used when importing a list that already has an ID.
+	 * @param id Existing ID of the list
+	 * @param lang_from Source language
+	 * @param lang_to Target language
+	 * @param name Name of the test
+	 */
 	public List(String id, String lang_from, String lang_to, String name) {
 		// used when importing a list from file
 		this.id = id;
@@ -87,7 +100,6 @@ public class List {
 	// BUSINESS LOGIC
 
 	/**
-	 *
 	 * This method is used to get a new question from the list. The questions will come in random order, until all
 	 * questions have reached their maximum score. When that happens, null is returned
 	 *
